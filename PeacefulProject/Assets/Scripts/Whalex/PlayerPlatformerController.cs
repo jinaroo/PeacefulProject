@@ -14,7 +14,7 @@ public class PlayerPlatformerController : PhysicsObject
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
 
     protected override void ComputeVelocity()
@@ -41,8 +41,8 @@ public class PlayerPlatformerController : PhysicsObject
             spriteRenderer.flipX = !spriteRenderer.flipX;
         }
 
-        animator.SetBool("grounded", grounded);
-        animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
+        //animator.SetBool("grounded", grounded);
+        //animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
 
         targetVelocity = move * maxSpeed;
     }
