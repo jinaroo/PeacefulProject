@@ -392,7 +392,7 @@ MonoBehaviour:
   verticalOffset: 0
   lookAheadDstX: 0
   lookSmoothTimeX: 0.5
-  verticalSmoothTime: 0.1
+  verticalSmoothTime: 0.2
   focusAreaSize: {x: 2, y: 2}
   overallSmoothing: 0.3
 --- !u!1 &1076990852
