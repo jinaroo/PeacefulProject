@@ -1,11 +1,7 @@
 fileFormatVersion: 2
-guid: 4b4f8c20139fc4f90908e87bff4d8023
+guid: 0aebd4e7eb4e743b88ebcb00e27c870a
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Rocks_Sample_0
-    21300002: Rocks_Sample_1
-    21300004: Rocks_Sample_2
-    21300006: Rocks_Sample_3
+  fileIDToRecycleName: {}
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -35,21 +31,21 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 2
+    wrapV: 2
+    wrapW: 2
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
-  spriteExtrude: 1
+  spriteMode: 1
+  spriteExtrude: 0
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 400
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,91 +93,11 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Rocks_Sample_0
-      rect:
-        serializedVersion: 2
-        x: 70
-        y: 200
-        width: 214
-        height: 118
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 2, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ca36da99eddbc4864bf964dd14c39420
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rocks_Sample_1
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 0
-        width: 373
-        height: 179
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 54, y: 0, z: 70, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 376be8fb783c140c3beb568b7dc1f762
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rocks_Sample_2
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 0
-        width: 376
-        height: 179
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5b7d1dc827f8a4de1bb0e617b71d9d54
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rocks_Sample_3
-      rect:
-        serializedVersion: 2
-        x: 404
-        y: 0
-        width: 91
-        height: 340
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 89dc4139a3aa94c5bb103d6405b85bf8
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c0c53887525a842989c4c166d0503113
+    spriteID: 6d2f14b0ea50b4b9394b78f2b6a90a17
     vertices: []
     indices: 
     edges: []
