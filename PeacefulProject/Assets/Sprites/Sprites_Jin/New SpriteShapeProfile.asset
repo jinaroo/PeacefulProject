@@ -10,37 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af7181f404f1447c0a7a17b3070b952b, type: 3}
-  m_Name: StripeShape_Example
+  m_Name: New SpriteShapeProfile
   m_EditorClassIdentifier: 
   m_Angles:
-  - m_Start: -100
-    m_End: 77
-    m_Order: 0
-    m_Sprites:
-    - {fileID: 21300002, guid: 4b4f8c20139fc4f90908e87bff4d8023, type: 3}
-  - m_Start: 77
-    m_End: 140
+  - m_Start: -180
+    m_End: 180
     m_Order: 0
     m_Sprites: []
-  - m_Start: 140
-    m_End: 256
-    m_Order: 0
-    m_Sprites:
-    - {fileID: 21300000, guid: d9f81ef7ba09546ac94f39ca9be25c86, type: 3}
   m_FillTexture: {fileID: 0}
   m_CornerSprites:
   - m_CornerType: 0
     m_Sprites:
-    - {fileID: 21300000, guid: d9f81ef7ba09546ac94f39ca9be25c86, type: 3}
+    - {fileID: 0}
   - m_CornerType: 1
     m_Sprites:
-    - {fileID: 21300000, guid: d9f81ef7ba09546ac94f39ca9be25c86, type: 3}
+    - {fileID: 0}
   - m_CornerType: 2
     m_Sprites:
-    - {fileID: 21300000, guid: d9f81ef7ba09546ac94f39ca9be25c86, type: 3}
+    - {fileID: 0}
   - m_CornerType: 3
     m_Sprites:
-    - {fileID: 21300000, guid: d9f81ef7ba09546ac94f39ca9be25c86, type: 3}
+    - {fileID: 0}
   - m_CornerType: 4
     m_Sprites:
     - {fileID: 0}
@@ -53,9 +43,9 @@ MonoBehaviour:
   - m_CornerType: 7
     m_Sprites:
     - {fileID: 0}
-  m_FillPixelPerUnit: 200
-  m_BevelSize: 0.5
-  m_BevelCutoff: 87
-  m_FillOffset: -0.5
+  m_FillPixelPerUnit: 100
+  m_BevelSize: 0
+  m_BevelCutoff: 0
+  m_FillOffset: 0
   m_WorldSpaceUV: 0
-  m_UseSpriteBorders: 0
+  m_UseSpriteBorders: 1
