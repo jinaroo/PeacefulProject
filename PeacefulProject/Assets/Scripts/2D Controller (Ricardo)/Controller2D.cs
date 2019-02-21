@@ -105,7 +105,7 @@ public class Controller2D : RaycastController {
 
 //		if (directionY > 0f)
 //		{
-//			
+//			asdf
 //		}
 		
 		for (int i = 0; i < verticalRayCount; i ++) {
