@@ -16,7 +16,6 @@ public class PhysicsObject : MonoBehaviour {
     protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
     protected List<RaycastHit2D> hitBufferList = new List<RaycastHit2D> (16);
 
-
     protected const float minMoveDistance = 0.001f;
     protected const float shellRadius = 0.01f;
 
@@ -56,6 +55,7 @@ public class PhysicsObject : MonoBehaviour {
 
         //slope won't affect your "horizontal" speed
         Vector2 move = moveAlongGround * deltaPosition.x;
+        print(Vector3.Dot(deltaPosition, moveAlongGround));
 
         Movement (move, false);
 
