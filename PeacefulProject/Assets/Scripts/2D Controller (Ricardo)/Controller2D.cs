@@ -103,6 +103,11 @@ public class Controller2D : RaycastController {
 		float directionY = Mathf.Sign (moveAmount.y);
 		float rayLength = Mathf.Abs (moveAmount.y) + skinWidth;
 
+//		if (directionY > 0f)
+//		{
+//			
+//		}
+		
 		for (int i = 0; i < verticalRayCount; i ++) {
 
 			Vector2 rayOrigin = (directionY == -1)?raycastOrigins.bottomLeft:raycastOrigins.topLeft;
