@@ -10,6 +10,8 @@ public class Player : MonoBehaviour {
 	public float accelerationTimeAirborne = .2f;
 	public float accelerationTimeGrounded = .1f;
 	public float moveSpeed = 6;
+	public float walkSpeed = 6f;
+	public float climbSpeed = 3f;
 
 	public Vector2 wallJumpClimb;
 	public Vector2 wallJumpOff;
@@ -25,7 +27,7 @@ public class Player : MonoBehaviour {
 	Vector3 velocity;
 	float velocityXSmoothing;
 
-	Controller2D controller;
+	public Controller2D controller;
 
 	Vector2 directionalInput;
 	bool wallSliding;
@@ -40,6 +42,15 @@ public class Player : MonoBehaviour {
 	}
 
 	void Update() {
+		if (controller.isClimbing)
+		{
+			moveSpeed = climbSpeed;
+		}
+		else
+		{
+			moveSpeed = walkSpeed;
+		}
+		
 		CalculateVelocity ();
 		HandleWallSliding ();
 
