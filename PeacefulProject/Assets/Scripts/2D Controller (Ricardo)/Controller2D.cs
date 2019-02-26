@@ -4,7 +4,11 @@ using System.Collections;
 
 public class Controller2D : RaycastController {
 
-	public float maxSlopeAngle = 80;
+	float maxSlopeAngle = 80;
+	public float maxSlopeAngleWalking = 45f;
+	public float maxSlopeAngleClimbing = 90f;
+
+	public bool isClimbing = false;
 
 	public CollisionInfo collisions;
 	[HideInInspector]
@@ -27,6 +31,15 @@ public class Controller2D : RaycastController {
 		collisions.moveAmountOld = moveAmount;
 		playerInput = input;
 
+		if (isClimbing)
+		{
+			maxSlopeAngle = maxSlopeAngleClimbing;
+		}
+		else
+		{
+			maxSlopeAngle = maxSlopeAngleWalking;
+		}
+
 		if (moveAmount.y < 0) {
 			DescendSlope(ref moveAmount);
 		}
@@ -47,6 +60,7 @@ public class Controller2D : RaycastController {
 		}
 	}
 
+	#region Collision Handling
 	void HorizontalCollisions(ref Vector2 moveAmount) {
 		float directionX = collisions.faceDir;
 		float rayLength = Mathf.Abs (moveAmount.x) + skinWidth;
@@ -175,6 +189,9 @@ public class Controller2D : RaycastController {
 			}
 		}
 	}
+	#endregion
+
+	#region Slope Handling
 
 	void ClimbSlope(ref Vector2 moveAmount, float slopeAngle, Vector2 slopeNormal) {
 		float moveDistance = Mathf.Abs (moveAmount.x);
@@ -237,9 +254,9 @@ public class Controller2D : RaycastController {
 				collisions.slopeNormal = hit.normal;
 			}
 		}
-
 	}
-
+	#endregion
+	
 	void ResetFallingThroughPlatform() {
 		collisions.fallingThroughPlatform = false;
 	}
