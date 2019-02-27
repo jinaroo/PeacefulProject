@@ -20,5 +20,15 @@ public class PlayerInput : MonoBehaviour {
 		if (Input.GetKeyUp (KeyCode.Space)) {
 			player.OnJumpInputUp ();
 		}
+
+		if (Input.GetKey(KeyCode.LeftShift))
+		{
+			player.controller.isClimbing = true;
+		}
+		else
+		{
+			player.controller.isClimbing = false;
+		}
+		
 	}
 }
