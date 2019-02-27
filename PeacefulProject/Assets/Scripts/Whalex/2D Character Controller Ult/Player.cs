@@ -29,7 +29,7 @@ public class Player : MonoBehaviour {
 
 	Controller2D controller;
 
-	Vector2 directionalInput;
+	[SerializeField] Vector2 directionalInput;
 	[SerializeField] bool wallSliding;
 	int wallDirX;
 

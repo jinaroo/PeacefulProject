@@ -14,7 +14,7 @@ namespace Whalex
 		public LayerMask collisionMask;
 	
 		public const float skinWidth = .015f;
-		const float dstBetweenRays = .25f;
+		const float dstBetweenRays = .05f;
 		[HideInInspector] public int horizontalRayCount;
 		[HideInInspector] public int verticalRayCount;
 		[HideInInspector] public float horizontalRaySpacing;

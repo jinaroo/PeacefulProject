@@ -3,6 +3,8 @@ using System.Collections;
 
 namespace Whalex
 {
+	// raw input -> velocity -> movement
+	// flat ground(stand, straight jump, walk) / steep slope (slide, jump along normal, shift walk) / on air (fall, no jump, no walk)
 	[RequireComponent (typeof (Player))]
 	public class PlayerInput : MonoBehaviour {
 

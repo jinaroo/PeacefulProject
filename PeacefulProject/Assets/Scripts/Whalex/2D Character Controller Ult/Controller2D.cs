@@ -74,7 +74,7 @@ namespace Whalex
             //if (moveAmount.x != 0)
                 HorizontalCollisions(ref moveAmount);
 
-            if (moveAmount.y != 0)
+            //if (moveAmount.y != 0)
             {
                 VerticalCollisions(ref moveAmount);
             }
@@ -91,7 +91,7 @@ namespace Whalex
         {
             float directionX = collisions.faceDir;
             float rayLength = Mathf.Abs(moveAmount.x) + skinWidth;
-
+            // for wall climbing since the x movement may be zero at that situation
             if (Mathf.Abs(moveAmount.x) < skinWidth)
             {
                 rayLength = 2 * skinWidth;
@@ -102,7 +102,6 @@ namespace Whalex
                 Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
                 rayOrigin += Vector2.up * (horizontalRaySpacing * i);
                 RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
-
                 Debug.DrawRay(rayOrigin, Vector2.right * directionX, Color.red);
 
                 if (hit)
@@ -126,21 +125,28 @@ namespace Whalex
                         }
 
                         float distanceToSlopeStart = 0;
+                        bool longEnough = false;
                         if (slopeAngle != collisions.slopeAngleOld)
                         {
                             distanceToSlopeStart = hit.distance - skinWidth;
-                            moveAmount.x -= distanceToSlopeStart * directionX;
+                            // bug fixed: when you facing up slope and jump on a slope, you will keep moving forwards after landing
+                            if (moveAmount.x > skinWidth)
+                            {
+                                longEnough = true;
+                                moveAmount.x -= distanceToSlopeStart * directionX;
+                            }
                         }
 
                         ClimbSlope(ref moveAmount, slopeAngle, hit.normal);
-                        moveAmount.x += distanceToSlopeStart * directionX;
+                        if (longEnough)
+                            moveAmount.x += distanceToSlopeStart * directionX;
                     }
 
                     if (!collisions.climbingSlope || slopeAngle > maxSlopeAngle)
                     {
                         moveAmount.x = (hit.distance - skinWidth) * directionX;
                         rayLength = hit.distance;
-
+                        // when you are climbing a slope and run into a wall, you need this chunk to adjust y movement to avoid jagging
                         if (collisions.climbingSlope)
                         {
                             moveAmount.y = Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(moveAmount.x);
@@ -174,12 +180,11 @@ namespace Whalex
                         {
                             continue;
                         }
-
+                        // adding a amount of time for controller to accelerate in case the platform moves faster than it
                         if (collisions.fallingThroughPlatform)
                         {
                             continue;
                         }
-
                         if (playerInput.y == -1)
                         {
                             collisions.fallingThroughPlatform = true;
@@ -196,12 +201,12 @@ namespace Whalex
                         moveAmount.x = moveAmount.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) *
                                        Mathf.Sign(moveAmount.x);
                     }
-
+                    
                     collisions.below = directionY == -1;
                     collisions.above = directionY == 1;
                 }
             }
-
+            
             if (collisions.climbingSlope)
             {
                 float directionX = Mathf.Sign(moveAmount.x);
@@ -219,6 +224,35 @@ namespace Whalex
                         moveAmount.x = (hit.distance - skinWidth) * directionX;
                         collisions.slopeAngle = slopeAngle;
                         collisions.slopeNormal = hit.normal;
+                    }
+                }
+                
+                // you can't fall off the platform when you are facing up slope (no downward ray casting)
+                for (int i = 0; i < verticalRayCount; i++)
+                {
+                    rayOrigin = raycastOrigins.bottomLeft + Vector2.right * (verticalRaySpacing * i + moveAmount.x);
+                    hit = Physics2D.Raycast(rayOrigin, -Vector2.up, Mathf.Abs(collisions.moveAmountOld.y) + skinWidth, collisionMask);
+                    Debug.DrawRay(rayOrigin, -Vector2.up, Color.red);
+                    if (hit)
+                    {
+                        if (hit.collider.tag == "Through")
+                        {
+                            // adding a amount of time for controller to accelerate in case the platform moves faster than it
+/*                            if (hit.distance == 0)
+                            {
+                                moveAmount.y = collisions.moveAmountOld.y;
+                            }*/
+                            if (collisions.fallingThroughPlatform)
+                            {
+                                moveAmount.y = collisions.moveAmountOld.y;
+                            }
+                            if (playerInput.y == -1)
+                            {
+                                collisions.fallingThroughPlatform = true;
+                                Invoke("ResetFallingThroughPlatform", .5f);
+                                moveAmount.y = collisions.moveAmountOld.y;
+                            }
+                        }
                     }
                 }
             }
