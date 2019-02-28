@@ -1,6 +1,36 @@
-﻿
+﻿using System;
 using UnityEngine;
 using System.Collections;
+
+[Serializable]
+public struct CollisionInfo {
+	public bool above, below;
+	public bool left, right;
+
+	public bool climbingSlope;
+	public bool descendingSlope;
+	public bool slidingDownMaxSlope;
+
+	public float slopeAngle, slopeAngleOld;
+	public Vector2 slopeNormal;
+	public Vector2 moveAmountOld;
+	public int faceDir;
+	public bool fallingThroughPlatform;
+
+	public Collider2D curGroundCollider; 
+		
+	public void Reset() {
+		above = below = false;
+		left = right = false;
+		climbingSlope = false;
+		descendingSlope = false;
+		slidingDownMaxSlope = false;
+		slopeNormal = Vector2.zero;
+
+		slopeAngleOld = slopeAngle;
+		slopeAngle = 0;
+	}
+}
 
 public class Controller2D : RaycastController {
 
@@ -49,9 +79,7 @@ public class Controller2D : RaycastController {
 		}
 
 		HorizontalCollisions (ref moveAmount);
-		if (moveAmount.y != 0) {
-			VerticalCollisions (ref moveAmount);
-		}
+		VerticalCollisions (ref moveAmount);
 
 		transform.Translate (moveAmount);
 
@@ -66,7 +94,7 @@ public class Controller2D : RaycastController {
 		float rayLength = Mathf.Abs (moveAmount.x) + skinWidth;
 		float directionY = Mathf.Sign (moveAmount.y);
 
-
+		// for wall climbing since the x movement may be zero at that situation
 		if (Mathf.Abs(moveAmount.x) < skinWidth) {
 			rayLength = 2*skinWidth;
 		}
@@ -108,7 +136,8 @@ public class Controller2D : RaycastController {
 					ignoreHorizontalCollider = true;
 					
 				if ((!collisions.climbingSlope || slopeAngle > maxSlopeAngle) && !ignoreHorizontalCollider) {
-					moveAmount.x = (hit.distance - skinWidth) * directionX;
+					if(moveAmount.x != 0)
+						moveAmount.x = (hit.distance - skinWidth) * directionX;
 					rayLength = hit.distance;
 
 					if (collisions.climbingSlope) {
@@ -147,6 +176,11 @@ public class Controller2D : RaycastController {
 						Invoke("ResetFallingThroughPlatform",.5f);
 						continue;
 					}
+					if ((hit.normal.x < 0f && i != verticalRayCount - 1) || (hit.normal.x > 0f && i != 0))
+					{
+						continue;
+					}
+
 				}
 
 				moveAmount.y = (hit.distance - skinWidth) * directionY;
@@ -251,34 +285,6 @@ public class Controller2D : RaycastController {
 		collisions.fallingThroughPlatform = false;
 	}
 
-	[System.Serializable]
-	public class CollisionInfo {
-		public bool above, below;
-		public bool left, right;
 
-		public bool climbingSlope;
-		public bool descendingSlope;
-		public bool slidingDownMaxSlope;
-
-		public float slopeAngle, slopeAngleOld;
-		public Vector2 slopeNormal;
-		public Vector2 moveAmountOld;
-		public int faceDir;
-		public bool fallingThroughPlatform;
-
-		public Collider2D curGroundCollider; 
-		
-		public void Reset() {
-			above = below = false;
-			left = right = false;
-			climbingSlope = false;
-			descendingSlope = false;
-			slidingDownMaxSlope = false;
-			slopeNormal = Vector2.zero;
-
-			slopeAngleOld = slopeAngle;
-			slopeAngle = 0;
-		}
-	}
 
 }
