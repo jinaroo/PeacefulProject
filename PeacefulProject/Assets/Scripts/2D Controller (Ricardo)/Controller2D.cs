@@ -4,7 +4,11 @@ using System.Collections;
 
 public class Controller2D : RaycastController {
 
-	public float maxSlopeAngle = 80;
+	float maxSlopeAngle = 80;
+	public float maxSlopeAngleWalking = 45f;
+	public float maxSlopeAngleClimbing = 90f;
+
+	public bool isClimbing = false;
 
 	public CollisionInfo collisions;
 	[HideInInspector]
@@ -27,6 +31,15 @@ public class Controller2D : RaycastController {
 		collisions.moveAmountOld = moveAmount;
 		playerInput = input;
 
+		if (isClimbing)
+		{
+			maxSlopeAngle = maxSlopeAngleClimbing;
+		}
+		else
+		{
+			maxSlopeAngle = maxSlopeAngleWalking;
+		}
+
 		if (moveAmount.y < 0) {
 			DescendSlope(ref moveAmount);
 		}
@@ -47,9 +60,12 @@ public class Controller2D : RaycastController {
 		}
 	}
 
+	#region Collision Handling
 	void HorizontalCollisions(ref Vector2 moveAmount) {
 		float directionX = collisions.faceDir;
 		float rayLength = Mathf.Abs (moveAmount.x) + skinWidth;
+		float directionY = Mathf.Sign (moveAmount.y);
+
 
 		if (Mathf.Abs(moveAmount.x) < skinWidth) {
 			rayLength = 2*skinWidth;
@@ -68,6 +84,19 @@ public class Controller2D : RaycastController {
 					continue;
 				}
 
+//				if (hit.collider.CompareTag("Through"))
+//				{
+//					if (directionY == 1 || hit.distance == 0)
+//					{
+//						continue;
+//					}
+//
+//					if (collisions.fallingThroughPlatform)
+//					{
+//						continue;
+//					}
+//				}
+
 				float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 
 				if (i == 0 && slopeAngle <= maxSlopeAngle) {
@@ -84,7 +113,11 @@ public class Controller2D : RaycastController {
 					moveAmount.x += distanceToSlopeStart * directionX;
 				}
 
-				if (!collisions.climbingSlope || slopeAngle > maxSlopeAngle) {
+				bool ignoreHorizontalCollider = false;
+				if (hit.collider.CompareTag("Through") && hit.collider != collisions.curGroundCollider)
+					ignoreHorizontalCollider = true;
+				
+				if ((!collisions.climbingSlope || slopeAngle > maxSlopeAngle) && !ignoreHorizontalCollider) {
 					moveAmount.x = (hit.distance - skinWidth) * directionX;
 					rayLength = hit.distance;
 
@@ -102,11 +135,6 @@ public class Controller2D : RaycastController {
 	void VerticalCollisions(ref Vector2 moveAmount) {
 		float directionY = Mathf.Sign (moveAmount.y);
 		float rayLength = Mathf.Abs (moveAmount.y) + skinWidth;
-
-//		if (directionY > 0f)
-//		{
-//			
-//		}
 		
 		for (int i = 0; i < verticalRayCount; i ++) {
 
@@ -117,7 +145,7 @@ public class Controller2D : RaycastController {
 			Debug.DrawRay(rayOrigin, Vector2.up * directionY,Color.red);
 
 			if (hit) {
-				if (hit.collider.tag == "Through") {
+				if (hit.collider.CompareTag("Through")) {
 					if (directionY == 1 || hit.distance == 0) {
 						continue;
 					}
@@ -140,6 +168,8 @@ public class Controller2D : RaycastController {
 
 				collisions.below = directionY == -1;
 				collisions.above = directionY == 1;
+
+				collisions.curGroundCollider = hit.collider;
 			}
 		}
 
@@ -159,6 +189,9 @@ public class Controller2D : RaycastController {
 			}
 		}
 	}
+	#endregion
+
+	#region Slope Handling
 
 	void ClimbSlope(ref Vector2 moveAmount, float slopeAngle, Vector2 slopeNormal) {
 		float moveDistance = Mathf.Abs (moveAmount.x);
@@ -221,14 +254,15 @@ public class Controller2D : RaycastController {
 				collisions.slopeNormal = hit.normal;
 			}
 		}
-
 	}
-
+	#endregion
+	
 	void ResetFallingThroughPlatform() {
 		collisions.fallingThroughPlatform = false;
 	}
 
-	public struct CollisionInfo {
+	[System.Serializable]
+	public class CollisionInfo {
 		public bool above, below;
 		public bool left, right;
 
@@ -242,6 +276,8 @@ public class Controller2D : RaycastController {
 		public int faceDir;
 		public bool fallingThroughPlatform;
 
+		public Collider2D curGroundCollider; 
+		
 		public void Reset() {
 			above = below = false;
 			left = right = false;
