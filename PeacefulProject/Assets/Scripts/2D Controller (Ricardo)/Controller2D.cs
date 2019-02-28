@@ -84,19 +84,6 @@ public class Controller2D : RaycastController {
 					continue;
 				}
 
-//				if (hit.collider.CompareTag("Through"))
-//				{
-//					if (directionY == 1 || hit.distance == 0)
-//					{
-//						continue;
-//					}
-//
-//					if (collisions.fallingThroughPlatform)
-//					{
-//						continue;
-//					}
-//				}
-
 				float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 
 				if (i == 0 && slopeAngle <= maxSlopeAngle) {
@@ -111,12 +98,15 @@ public class Controller2D : RaycastController {
 					}
 					ClimbSlope(ref moveAmount, slopeAngle, hit.normal);
 					moveAmount.x += distanceToSlopeStart * directionX;
+					
+					if(collisions.climbingSlope)
+						collisions.curGroundCollider = hit.collider;
 				}
 
 				bool ignoreHorizontalCollider = false;
 				if (hit.collider.CompareTag("Through") && hit.collider != collisions.curGroundCollider)
 					ignoreHorizontalCollider = true;
-				
+					
 				if ((!collisions.climbingSlope || slopeAngle > maxSlopeAngle) && !ignoreHorizontalCollider) {
 					moveAmount.x = (hit.distance - skinWidth) * directionX;
 					rayLength = hit.distance;
