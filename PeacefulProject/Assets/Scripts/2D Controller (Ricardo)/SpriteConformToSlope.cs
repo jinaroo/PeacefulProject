@@ -14,6 +14,8 @@ public class SpriteConformToSlope : MonoBehaviour
 
     public float rotationSmoothing = 0.5f;
     public float rotationSpeed = 10f;
+
+    public Transform spriteTransform;
     
     int layerMask = 1 << 8;
     // Start is called before the first frame update
@@ -27,8 +29,8 @@ public class SpriteConformToSlope : MonoBehaviour
     {
         if (controller.collisions.below && (controller.collisions.climbingSlope || controller.collisions.descendingSlope))
         {
-            RaycastHit2D hit = Physics2D.Raycast(controller.transform.position, -controller.collisions.slopeNormal, 3f, layerMask);
-            if (hit)
+            RaycastHit2D hit = Physics2D.Raycast(controller.transform.position, -controller.collisions.slopeNormal, 1.5f, layerMask);
+            if (hit && !hit.collider.CompareTag("PhysicsProp"))
             {
                 heightAdjustment = hit.distance - (sRend.size.y / 2f);
                 //Debug.Log(hit.distance);
@@ -44,6 +46,7 @@ public class SpriteConformToSlope : MonoBehaviour
 //                    Debug.Log("we're hitting " + hit.collider);
 //                    Debug.Log("we're looking for " + controller.collisions.curGroundCollider);
 //                }
+                
             }
             //Debug.Log("not hitting any ground collider!");
 
@@ -63,7 +66,7 @@ public class SpriteConformToSlope : MonoBehaviour
 
 
         transform.up += (tgtUp - transform.up) * rotationSmoothing * rotationSpeed * Time.deltaTime;
-        transform.localPosition += (tgtLocalPos - transform.localPosition) * rotationSmoothing * rotationSpeed * Time.deltaTime;
+        spriteTransform.localPosition += (tgtLocalPos - spriteTransform.localPosition) * rotationSmoothing * rotationSpeed * Time.deltaTime;
 
 
 
