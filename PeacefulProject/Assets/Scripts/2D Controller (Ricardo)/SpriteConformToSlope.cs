@@ -33,27 +33,10 @@ public class SpriteConformToSlope : MonoBehaviour
             if (hit && !hit.collider.CompareTag("PhysicsProp"))
             {
                 heightAdjustment = hit.distance - (sRend.size.y / 2f);
-                //Debug.Log(hit.distance);
-                //Debug.Log("height " + sRend.size.y);
-//                if (hit.collider == controller.collisions.curGroundCollider)
-//                {
-//                    heightAdjustment = hit.distance - (sRend.bounds.size.y / 2f);
-//                    Debug.Log(hit.distance);
-//                }
-//                else
-//                {
-//                    Debug.Log("not hitting the right ground collider!");
-//                    Debug.Log("we're hitting " + hit.collider);
-//                    Debug.Log("we're looking for " + controller.collisions.curGroundCollider);
-//                }
-                
             }
-            //Debug.Log("not hitting any ground collider!");
 
             tgtUp = controller.collisions.slopeNormal;
             tgtLocalPos = new Vector3(0f, -heightAdjustment, 0f);
-            //tgtLocalPos = (controller.collisions.slopeNormal.normalized * (sRend.size.y / 2f));
-            //Debug.Log(hit.point);
         }
         else
         {
@@ -62,13 +45,7 @@ public class SpriteConformToSlope : MonoBehaviour
             tgtLocalPos = Vector3.zero;
         }
             
-
-
-
         transform.up += (tgtUp - transform.up) * rotationSmoothing * rotationSpeed * Time.deltaTime;
         spriteTransform.localPosition += (tgtLocalPos - spriteTransform.localPosition) * rotationSmoothing * rotationSpeed * Time.deltaTime;
-
-
-
     }
 }
