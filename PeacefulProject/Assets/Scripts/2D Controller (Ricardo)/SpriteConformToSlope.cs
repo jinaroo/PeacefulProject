@@ -10,12 +10,17 @@ public class SpriteConformToSlope : MonoBehaviour
     public float heightAdjustment = 0f;
 
     private Vector3 tgtUp;
+    private Vector3 oldTgtUp;
     public Vector3 tgtLocalPos;
 
     public float rotationSmoothing = 0.5f;
     public float rotationSpeed = 10f;
 
     public Transform spriteTransform;
+
+    public float ignoreBumpTime = 0.05f;
+    private float timeToStopIgnoringSlope;
+    
     
     int layerMask = 1 << 8;
     // Start is called before the first frame update
@@ -26,7 +31,7 @@ public class SpriteConformToSlope : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {        
         if (controller.collisions.below && (controller.collisions.climbingSlope || controller.collisions.descendingSlope))
         {
             RaycastHit2D hit = Physics2D.Raycast(controller.transform.position, -controller.collisions.slopeNormal, 1.5f, layerMask);
@@ -45,8 +50,17 @@ public class SpriteConformToSlope : MonoBehaviour
             tgtUp = Vector3.up;
             tgtLocalPos = Vector3.zero;
         }
-            
-        transform.up += (tgtUp - transform.up) * rotationSmoothing * rotationSpeed * Time.deltaTime;
-        spriteTransform.localPosition += (tgtLocalPos - spriteTransform.localPosition) * rotationSmoothing * rotationSpeed * Time.deltaTime;
+        
+        if (oldTgtUp != tgtUp)
+        {
+            timeToStopIgnoringSlope = Time.timeSinceLevelLoad + ignoreBumpTime;
+            oldTgtUp = tgtUp;
+        }
+        
+        if (Time.timeSinceLevelLoad >= timeToStopIgnoringSlope)
+        {
+            transform.up += (tgtUp - transform.up) * rotationSmoothing * rotationSpeed * Time.deltaTime;
+            spriteTransform.localPosition += (tgtLocalPos - spriteTransform.localPosition) * rotationSmoothing * rotationSpeed * Time.deltaTime;
+        }
     }
 }
