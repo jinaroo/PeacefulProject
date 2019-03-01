@@ -143,8 +143,6 @@ namespace Whalex
                         }
 
                         ClimbSlope(ref moveAmount, slopeAngle, hit.normal);
-                        if (moveAmount.x == 0)
-                            print(longEnough);
                         if (longEnough)
                         {
                             moveAmount.x += distanceToSlopeStart * directionX;
@@ -152,10 +150,8 @@ namespace Whalex
                     }
 
                     // you should be able to walk through a one-way platform
-                    bool ignoreHorizontalCollider = false;
-                    if (hit.collider.CompareTag("Through") && hit.collider != collisions.curGroundCollider)
-                        ignoreHorizontalCollider = true;
-                    
+                    bool ignoreHorizontalCollider = hit.collider.CompareTag("Through") && hit.collider != collisions.curGroundCollider;
+
                     if ((!collisions.climbingSlope || slopeAngle > maxSlopeAngle) && !ignoreHorizontalCollider)
                     {
                         // when player starts jumping on a slope, the x movement should not be changed
@@ -208,6 +204,11 @@ namespace Whalex
                             Invoke("ResetFallingThroughPlatform", .5f);
                             continue;
                         }
+                        // bug fixed: player will be stuck when landing half way through a one-way platform
+                        if ((hit.normal.x < 0f && i != verticalRayCount - 1) || (hit.normal.x > 0f && i != 0))
+                        {
+                            continue;
+                        }
                     }
 
                     moveAmount.y = (hit.distance - skinWidth) * directionY;
@@ -246,7 +247,7 @@ namespace Whalex
                     }
                 }
                 
-                // you can't fall off the platform when you are facing up slope (no downward ray casting)
+                // bug fixed: now you can fall off the platform when you are facing up slope (no downward ray casting)
                 for (int i = 0; i < verticalRayCount; i++)
                 {
                     rayOrigin = raycastOrigins.bottomLeft + Vector2.right * (verticalRaySpacing * i + moveAmount.x);
@@ -290,10 +291,6 @@ namespace Whalex
                 collisions.climbingSlope = true;
                 collisions.slopeAngle = slopeAngle;
                 collisions.slopeNormal = slopeNormal;
-            }
-            else
-            {
-                print(moveAmount.x);
             }
         }
 
