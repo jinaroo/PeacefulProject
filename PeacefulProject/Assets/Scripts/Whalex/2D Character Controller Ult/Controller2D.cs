@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Experimental.UIElements;
 
 namespace Whalex
 {
@@ -19,6 +20,8 @@ namespace Whalex
         public Vector2 moveAmountOld;
         public int faceDir;
         public bool fallingThroughPlatform;
+        
+        public Collider2D curGroundCollider;
 
         public void Reset()
         {
@@ -72,7 +75,9 @@ namespace Whalex
 
             // it doesn't require movement on x axis to detect collision for wall sliding
             //if (moveAmount.x != 0)
+            {
                 HorizontalCollisions(ref moveAmount);
+            }
 
             //if (moveAmount.y != 0)
             {
@@ -138,14 +143,26 @@ namespace Whalex
                         }
 
                         ClimbSlope(ref moveAmount, slopeAngle, hit.normal);
+                        if (moveAmount.x == 0)
+                            print(longEnough);
                         if (longEnough)
+                        {
                             moveAmount.x += distanceToSlopeStart * directionX;
+                        }
                     }
 
-                    if (!collisions.climbingSlope || slopeAngle > maxSlopeAngle)
+                    // you should be able to walk through a one-way platform
+                    bool ignoreHorizontalCollider = false;
+                    if (hit.collider.CompareTag("Through") && hit.collider != collisions.curGroundCollider)
+                        ignoreHorizontalCollider = true;
+                    
+                    if ((!collisions.climbingSlope || slopeAngle > maxSlopeAngle) && !ignoreHorizontalCollider)
                     {
-                        moveAmount.x = (hit.distance - skinWidth) * directionX;
+                        // when player starts jumping on a slope, the x movement should not be changed
+                        if (moveAmount.x != 0)
+                            moveAmount.x = (hit.distance - skinWidth) * directionX;
                         rayLength = hit.distance;
+                        
                         // when you are climbing a slope and run into a wall, you need this chunk to adjust y movement to avoid jagging
                         if (collisions.climbingSlope)
                         {
@@ -204,6 +221,8 @@ namespace Whalex
                     
                     collisions.below = directionY == -1;
                     collisions.above = directionY == 1;
+                    
+                    collisions.curGroundCollider = hit.collider;
                 }
             }
             
@@ -271,6 +290,10 @@ namespace Whalex
                 collisions.climbingSlope = true;
                 collisions.slopeAngle = slopeAngle;
                 collisions.slopeNormal = slopeNormal;
+            }
+            else
+            {
+                print(moveAmount.x);
             }
         }
 
