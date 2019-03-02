@@ -57,6 +57,7 @@ public class Controller2D : RaycastController {
 	public void Move(Vector2 moveAmount, Vector2 input, bool standingOnPlatform = false) {
 		UpdateRaycastOrigins ();
 
+		
 		collisions.Reset ();
 		collisions.moveAmountOld = moveAmount;
 		playerInput = input;
