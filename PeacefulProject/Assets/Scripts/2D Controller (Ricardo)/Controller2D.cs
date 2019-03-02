@@ -117,6 +117,8 @@ public class Controller2D : RaycastController {
 					// if it happens to be descending and climbing at the same time, there is a lag 
 					// since descending function will decrease x movement but player will not descend (because it's climbing)
 					// that's why we restore its previous movement for climbing to work (EP 5 12:39)
+					
+					// TODO: figure out why this causes the controller to flicker between descending slope and below
 					if (collisions.descendingSlope) {
 						collisions.descendingSlope = false;
 						moveAmount = collisions.moveAmountOld;
