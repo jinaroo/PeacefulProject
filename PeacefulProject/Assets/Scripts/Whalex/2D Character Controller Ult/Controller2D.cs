@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Experimental.UIElements;
 
 namespace Whalex
 {
@@ -19,6 +20,8 @@ namespace Whalex
         public Vector2 moveAmountOld;
         public int faceDir;
         public bool fallingThroughPlatform;
+        
+        public Collider2D curGroundCollider;
 
         public void Reset()
         {
@@ -72,7 +75,9 @@ namespace Whalex
 
             // it doesn't require movement on x axis to detect collision for wall sliding
             //if (moveAmount.x != 0)
+            {
                 HorizontalCollisions(ref moveAmount);
+            }
 
             //if (moveAmount.y != 0)
             {
@@ -139,13 +144,21 @@ namespace Whalex
 
                         ClimbSlope(ref moveAmount, slopeAngle, hit.normal);
                         if (longEnough)
+                        {
                             moveAmount.x += distanceToSlopeStart * directionX;
+                        }
                     }
 
-                    if (!collisions.climbingSlope || slopeAngle > maxSlopeAngle)
+                    // you should be able to walk through a one-way platform
+                    bool ignoreHorizontalCollider = hit.collider.CompareTag("Through") && hit.collider != collisions.curGroundCollider;
+
+                    if ((!collisions.climbingSlope || slopeAngle > maxSlopeAngle) && !ignoreHorizontalCollider)
                     {
-                        moveAmount.x = (hit.distance - skinWidth) * directionX;
+                        // when player starts jumping on a slope, the x movement should not be changed
+                        if (moveAmount.x != 0)
+                            moveAmount.x = (hit.distance - skinWidth) * directionX;
                         rayLength = hit.distance;
+                        
                         // when you are climbing a slope and run into a wall, you need this chunk to adjust y movement to avoid jagging
                         if (collisions.climbingSlope)
                         {
@@ -191,6 +204,11 @@ namespace Whalex
                             Invoke("ResetFallingThroughPlatform", .5f);
                             continue;
                         }
+                        // bug fixed: player will be stuck when landing half way through a one-way platform
+                        if ((hit.normal.x < 0f && i != verticalRayCount - 1) || (hit.normal.x > 0f && i != 0))
+                        {
+                            continue;
+                        }
                     }
 
                     moveAmount.y = (hit.distance - skinWidth) * directionY;
@@ -204,6 +222,8 @@ namespace Whalex
                     
                     collisions.below = directionY == -1;
                     collisions.above = directionY == 1;
+                    
+                    collisions.curGroundCollider = hit.collider;
                 }
             }
             
@@ -227,7 +247,7 @@ namespace Whalex
                     }
                 }
                 
-                // you can't fall off the platform when you are facing up slope (no downward ray casting)
+                // bug fixed: now you can fall off the platform when you are facing up slope (no downward ray casting)
                 for (int i = 0; i < verticalRayCount; i++)
                 {
                     rayOrigin = raycastOrigins.bottomLeft + Vector2.right * (verticalRaySpacing * i + moveAmount.x);
