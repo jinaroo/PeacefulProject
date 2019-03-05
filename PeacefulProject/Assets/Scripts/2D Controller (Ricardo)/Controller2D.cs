@@ -198,7 +198,8 @@ public class Controller2D : RaycastController {
 				rayLength = hit.distance;
 
 				if (collisions.climbingSlope) {
-					moveAmount.x = moveAmount.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(moveAmount.x);
+					//moveAmount.x = moveAmount.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(moveAmount.x);
+					moveAmount.x = moveAmount.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * collisions.faceDir;
 				}
 
 				collisions.below = directionY == -1;
@@ -209,7 +210,7 @@ public class Controller2D : RaycastController {
 		}
 
 		if (collisions.climbingSlope) {
-			float directionX = Mathf.Sign(moveAmount.x);
+			float directionX = collisions.faceDir;
 			rayLength = Mathf.Abs(moveAmount.x) + skinWidth;
 			Vector2 rayOrigin = ((directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight) + Vector2.up * moveAmount.y;
 			RaycastHit2D hit = Physics2D.Raycast(rayOrigin,Vector2.right * directionX,rayLength,collisionMask);
