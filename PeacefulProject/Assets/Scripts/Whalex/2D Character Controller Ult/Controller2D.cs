@@ -62,15 +62,15 @@ namespace Whalex
             collisions.Reset();
             collisions.moveAmountOld = moveAmount;
             playerInput = input;
-
-            if (moveAmount.y < 0)
-            {
-                DescendSlope(ref moveAmount);
-            }
-
+            
             if (moveAmount.x != 0)
             {
                 collisions.faceDir = (int) Mathf.Sign(moveAmount.x);
+            }
+            
+            if (moveAmount.y < 0)
+            {
+                DescendSlope(ref moveAmount);
             }
 
             // it doesn't require movement on x axis to detect collision for wall sliding
@@ -217,7 +217,7 @@ namespace Whalex
                     if (collisions.climbingSlope)
                     {
                         moveAmount.x = moveAmount.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) *
-                                       Mathf.Sign(moveAmount.x);
+                                       collisions.faceDir;
                     }
                     
                     collisions.below = directionY == -1;
@@ -229,7 +229,7 @@ namespace Whalex
             
             if (collisions.climbingSlope)
             {
-                float directionX = Mathf.Sign(moveAmount.x);
+                float directionX = collisions.faceDir;
                 rayLength = Mathf.Abs(moveAmount.x) + skinWidth;
                 Vector2 rayOrigin = ((directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight) +
                                     Vector2.up * moveAmount.y;
@@ -286,7 +286,7 @@ namespace Whalex
             if (moveAmount.y <= climbmoveAmountY)
             {
                 moveAmount.y = climbmoveAmountY;
-                moveAmount.x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign(moveAmount.x);
+                moveAmount.x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance * collisions.faceDir;
                 collisions.below = true;
                 collisions.climbingSlope = true;
                 collisions.slopeAngle = slopeAngle;
@@ -309,9 +309,11 @@ namespace Whalex
 
             if (!collisions.slidingDownMaxSlope)
             {
-                float directionX = Mathf.Sign(moveAmount.x);
+                float directionX = collisions.faceDir;
+                
                 Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft;
-                RaycastHit2D hit = Physics2D.Raycast(rayOrigin, -Vector2.up, Mathf.Infinity, collisionMask);
+                RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, Mathf.Infinity, collisionMask);
+                Debug.DrawRay(rayOrigin,Vector3.down,Color.red);
 
                 if (hit)
                 {
@@ -321,13 +323,14 @@ namespace Whalex
                         if (Mathf.Sign(hit.normal.x) == directionX)
                         {
                             if (hit.distance - skinWidth <=
-                                Mathf.Tan(slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(moveAmount.x))
+                                Mathf.Tan(slopeAngle * Mathf.Deg2Rad) * 
+                                // bug fixed: jittering when standing on a descending slope
+                                (Mathf.Max(moveAmount.x, skinWidth)))
                             {
                                 float moveDistance = Mathf.Abs(moveAmount.x);
-                                float descendmoveAmountY = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
-                                moveAmount.x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance *
-                                               Mathf.Sign(moveAmount.x);
-                                moveAmount.y -= descendmoveAmountY;
+                                float descendMoveAmountY = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
+                                moveAmount.x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance * directionX;
+                                moveAmount.y -= descendMoveAmountY;
 
                                 collisions.slopeAngle = slopeAngle;
                                 collisions.descendingSlope = true;
