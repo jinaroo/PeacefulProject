@@ -107,7 +107,7 @@ namespace Whalex
                 Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
                 rayOrigin += Vector2.up * (horizontalRaySpacing * i);
                 RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
-                Debug.DrawRay(rayOrigin, Vector2.right * directionX, Color.red);
+                //Debug.DrawRay(rayOrigin, Vector2.right * directionX, Color.red);
 
                 if (hit)
                 {
@@ -183,7 +183,7 @@ namespace Whalex
                 rayOrigin += Vector2.right * (verticalRaySpacing * i + moveAmount.x);
                 RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
 
-                Debug.DrawRay(rayOrigin, Vector2.up * directionY, Color.red);
+                //Debug.DrawRay(rayOrigin, Vector2.up * directionY, Color.red);
 
                 if (hit)
                 {
@@ -252,7 +252,7 @@ namespace Whalex
                 {
                     rayOrigin = raycastOrigins.bottomLeft + Vector2.right * (verticalRaySpacing * i + moveAmount.x);
                     hit = Physics2D.Raycast(rayOrigin, -Vector2.up, Mathf.Abs(collisions.moveAmountOld.y) + skinWidth, collisionMask);
-                    Debug.DrawRay(rayOrigin, -Vector2.up, Color.red);
+                    //Debug.DrawRay(rayOrigin, -Vector2.up, Color.red);
                     if (hit)
                     {
                         if (hit.collider.tag == "Through")
@@ -313,7 +313,7 @@ namespace Whalex
                 
                 Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft;
                 RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, Mathf.Infinity, collisionMask);
-                Debug.DrawRay(rayOrigin,Vector3.down,Color.red);
+                //Debug.DrawRay(rayOrigin,Vector3.down,Color.red);
 
                 if (hit)
                 {
