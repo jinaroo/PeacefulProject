@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Experimental.UIElements;
 
 namespace Whalex
 {
@@ -19,6 +20,8 @@ namespace Whalex
         public Vector2 moveAmountOld;
         public int faceDir;
         public bool fallingThroughPlatform;
+        
+        public Collider2D curGroundCollider;
 
         public void Reset()
         {
@@ -59,20 +62,22 @@ namespace Whalex
             collisions.Reset();
             collisions.moveAmountOld = moveAmount;
             playerInput = input;
-
+            
+            if (moveAmount.x != 0)
+            {
+                collisions.faceDir = (int) Mathf.Sign(moveAmount.x);
+            }
+            
             if (moveAmount.y < 0)
             {
                 DescendSlope(ref moveAmount);
             }
 
-            if (moveAmount.x != 0)
-            {
-                collisions.faceDir = (int) Mathf.Sign(moveAmount.x);
-            }
-
             // it doesn't require movement on x axis to detect collision for wall sliding
             //if (moveAmount.x != 0)
+            {
                 HorizontalCollisions(ref moveAmount);
+            }
 
             //if (moveAmount.y != 0)
             {
@@ -102,7 +107,7 @@ namespace Whalex
                 Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
                 rayOrigin += Vector2.up * (horizontalRaySpacing * i);
                 RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
-                Debug.DrawRay(rayOrigin, Vector2.right * directionX, Color.red);
+                //Debug.DrawRay(rayOrigin, Vector2.right * directionX, Color.red);
 
                 if (hit)
                 {
@@ -139,13 +144,21 @@ namespace Whalex
 
                         ClimbSlope(ref moveAmount, slopeAngle, hit.normal);
                         if (longEnough)
+                        {
                             moveAmount.x += distanceToSlopeStart * directionX;
+                        }
                     }
 
-                    if (!collisions.climbingSlope || slopeAngle > maxSlopeAngle)
+                    // you should be able to walk through a one-way platform
+                    bool ignoreHorizontalCollider = hit.collider.CompareTag("Through") && hit.collider != collisions.curGroundCollider;
+
+                    if ((!collisions.climbingSlope || slopeAngle > maxSlopeAngle) && !ignoreHorizontalCollider)
                     {
-                        moveAmount.x = (hit.distance - skinWidth) * directionX;
+                        // when player starts jumping on a slope, the x movement should not be changed
+                        if (moveAmount.x != 0)
+                            moveAmount.x = (hit.distance - skinWidth) * directionX;
                         rayLength = hit.distance;
+                        
                         // when you are climbing a slope and run into a wall, you need this chunk to adjust y movement to avoid jagging
                         if (collisions.climbingSlope)
                         {
@@ -170,7 +183,7 @@ namespace Whalex
                 rayOrigin += Vector2.right * (verticalRaySpacing * i + moveAmount.x);
                 RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
 
-                Debug.DrawRay(rayOrigin, Vector2.up * directionY, Color.red);
+                //Debug.DrawRay(rayOrigin, Vector2.up * directionY, Color.red);
 
                 if (hit)
                 {
@@ -191,6 +204,11 @@ namespace Whalex
                             Invoke("ResetFallingThroughPlatform", .5f);
                             continue;
                         }
+                        // bug fixed: player will be stuck when landing half way through a one-way platform
+                        if ((hit.normal.x < 0f && i != verticalRayCount - 1) || (hit.normal.x > 0f && i != 0))
+                        {
+                            continue;
+                        }
                     }
 
                     moveAmount.y = (hit.distance - skinWidth) * directionY;
@@ -199,17 +217,19 @@ namespace Whalex
                     if (collisions.climbingSlope)
                     {
                         moveAmount.x = moveAmount.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) *
-                                       Mathf.Sign(moveAmount.x);
+                                       collisions.faceDir;
                     }
                     
                     collisions.below = directionY == -1;
                     collisions.above = directionY == 1;
+                    
+                    collisions.curGroundCollider = hit.collider;
                 }
             }
             
             if (collisions.climbingSlope)
             {
-                float directionX = Mathf.Sign(moveAmount.x);
+                float directionX = collisions.faceDir;
                 rayLength = Mathf.Abs(moveAmount.x) + skinWidth;
                 Vector2 rayOrigin = ((directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight) +
                                     Vector2.up * moveAmount.y;
@@ -227,12 +247,12 @@ namespace Whalex
                     }
                 }
                 
-                // you can't fall off the platform when you are facing up slope (no downward ray casting)
+                // bug fixed: now you can fall off the platform when you are facing up slope (no downward ray casting)
                 for (int i = 0; i < verticalRayCount; i++)
                 {
                     rayOrigin = raycastOrigins.bottomLeft + Vector2.right * (verticalRaySpacing * i + moveAmount.x);
                     hit = Physics2D.Raycast(rayOrigin, -Vector2.up, Mathf.Abs(collisions.moveAmountOld.y) + skinWidth, collisionMask);
-                    Debug.DrawRay(rayOrigin, -Vector2.up, Color.red);
+                    //Debug.DrawRay(rayOrigin, -Vector2.up, Color.red);
                     if (hit)
                     {
                         if (hit.collider.tag == "Through")
@@ -266,7 +286,7 @@ namespace Whalex
             if (moveAmount.y <= climbmoveAmountY)
             {
                 moveAmount.y = climbmoveAmountY;
-                moveAmount.x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign(moveAmount.x);
+                moveAmount.x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance * collisions.faceDir;
                 collisions.below = true;
                 collisions.climbingSlope = true;
                 collisions.slopeAngle = slopeAngle;
@@ -289,9 +309,11 @@ namespace Whalex
 
             if (!collisions.slidingDownMaxSlope)
             {
-                float directionX = Mathf.Sign(moveAmount.x);
+                float directionX = collisions.faceDir;
+                
                 Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft;
-                RaycastHit2D hit = Physics2D.Raycast(rayOrigin, -Vector2.up, Mathf.Infinity, collisionMask);
+                RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.down, Mathf.Infinity, collisionMask);
+                //Debug.DrawRay(rayOrigin,Vector3.down,Color.red);
 
                 if (hit)
                 {
@@ -301,13 +323,14 @@ namespace Whalex
                         if (Mathf.Sign(hit.normal.x) == directionX)
                         {
                             if (hit.distance - skinWidth <=
-                                Mathf.Tan(slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(moveAmount.x))
+                                Mathf.Tan(slopeAngle * Mathf.Deg2Rad) * 
+                                // bug fixed: jittering when standing on a descending slope
+                                (Mathf.Max(moveAmount.x, skinWidth)))
                             {
                                 float moveDistance = Mathf.Abs(moveAmount.x);
-                                float descendmoveAmountY = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
-                                moveAmount.x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance *
-                                               Mathf.Sign(moveAmount.x);
-                                moveAmount.y -= descendmoveAmountY;
+                                float descendMoveAmountY = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
+                                moveAmount.x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance * directionX;
+                                moveAmount.y -= descendMoveAmountY;
 
                                 collisions.slopeAngle = slopeAngle;
                                 collisions.descendingSlope = true;
