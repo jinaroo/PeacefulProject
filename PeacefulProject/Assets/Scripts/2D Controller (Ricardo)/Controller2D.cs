@@ -17,9 +17,13 @@ public struct CollisionInfo {
 	public int faceDir;
 	public bool fallingThroughPlatform;
 
+	public bool isMovingX;
+
 	public Collider2D curGroundCollider; 
 		
 	public void Reset() {
+		Debug.Log("reset called");
+		
 		above = below = false;
 		left = right = false;
 		climbingSlope = false;
@@ -79,6 +83,15 @@ public class Controller2D : RaycastController {
 			collisions.faceDir = (int)Mathf.Sign(moveAmount.x);
 		}
 
+		if (input.x != 0)
+		{
+			collisions.isMovingX = true;
+		}
+		else
+		{
+			collisions.isMovingX = false;
+		}
+
 		HorizontalCollisions (ref moveAmount);
 		VerticalCollisions (ref moveAmount);
 
@@ -120,7 +133,8 @@ public class Controller2D : RaycastController {
 					// that's why we restore its previous movement for climbing to work (EP 5 12:39)
 					
 					// TODO: figure out why this causes the controller to flicker between descending slope and below
-					if (collisions.descendingSlope) {
+					if (collisions.descendingSlope && moveAmount.x != 0f) {
+						Debug.Log("setting descend to false");
 						collisions.descendingSlope = false;
 						moveAmount = collisions.moveAmountOld;
 					}
@@ -290,7 +304,7 @@ public class Controller2D : RaycastController {
 				float slopeAngle = Vector2.Angle (hit.normal, Vector2.up);
 				if (slopeAngle != 0 && slopeAngle <= maxSlopeAngle) {
 					if (Mathf.Sign (hit.normal.x) == directionX) {
-						if (hit.distance - skinWidth <= Mathf.Tan (slopeAngle * Mathf.Deg2Rad) * Mathf.Abs (moveAmount.x)) {
+						if (hit.distance - skinWidth <= Mathf.Tan (slopeAngle * Mathf.Deg2Rad) * Mathf.Max(Mathf.Abs (moveAmount.x), skinWidth)) {
 							float moveDistance = Mathf.Abs (moveAmount.x);
 							float descendmoveAmountY = Mathf.Sin (slopeAngle * Mathf.Deg2Rad) * moveDistance;
 							moveAmount.x = Mathf.Cos (slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign (moveAmount.x);
