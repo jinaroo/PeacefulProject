@@ -18,6 +18,34 @@ namespace Whalex
         private RigidbodyType2D previewsType;
         private float currentDir, previewDir;
 
+        private void OnEnable()
+        {
+            //EventManager.Instance.StartListening("ObjCollect",PutDownObj);
+            EventManagerNew.Instance.Register<CollectEvent>(PutDownObj);
+        }
+
+        private void OnDisable()
+        {
+            //EventManager.Instance.StopListening("ObjCollect",PutDownObj);
+            EventManagerNew.Instance.Unregister<CollectEvent>(PutDownObj);
+        }
+
+        private void PutDownObj(CollectEvent myEvent)
+        {
+            holdingObject.transform.SetParent(myEvent.collectorTf);
+            holdingObject.transform.localPosition = Vector3.zero;
+            holdingObject.transform.localRotation = Quaternion.identity;
+            holdingObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            holdingObject.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+            holdingObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            holdingObject.GetComponent<Collider2D>().isTrigger = true;
+
+            // change its layer so it won't be picked up by player again
+            holdingObject.layer = LayerMask.NameToLayer("Placed");
+            holdingObject = null;
+            isHolding = false;
+        }
+
         private void Start()
         {
             controller = GetComponent<Controller2D>();
@@ -47,10 +75,13 @@ namespace Whalex
                     if (hit)
                     {
                         holdingObject = hit.collider.gameObject;
+                        
                         holdingObject.transform.SetParent((currentDir == -1) ? grabLeftPoint : grabRightPoint);
                         holdingObject.transform.localPosition = Vector3.zero;
                         holdingObject.transform.localRotation = Quaternion.identity;
-                        holdingObject.GetComponent<Collider2D>().enabled = false;
+                        holdingObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                        holdingObject.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+                        holdingObject.GetComponent<Collider2D>().isTrigger = true;
                         previewsType = holdingObject.GetComponent<Rigidbody2D>().bodyType;
                         holdingObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
                         isHolding = true;
@@ -61,7 +92,7 @@ namespace Whalex
             else if (Input.GetKeyDown(KeyCode.J) && isHolding)
             {
                 holdingObject.transform.SetParent(null);
-                holdingObject.GetComponent<Collider2D>().enabled = true;
+                holdingObject.GetComponent<Collider2D>().isTrigger = false;
                 holdingObject.GetComponent<Rigidbody2D>().bodyType = previewsType;
                 holdingObject = null;
                 isHolding = false;
