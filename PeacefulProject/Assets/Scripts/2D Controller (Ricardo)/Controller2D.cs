@@ -17,13 +17,11 @@ public struct CollisionInfo {
 	public int faceDir;
 	public bool fallingThroughPlatform;
 
-	public bool isMovingX;
+
 
 	public Collider2D curGroundCollider; 
 		
 	public void Reset() {
-		Debug.Log("reset called");
-		
 		above = below = false;
 		left = right = false;
 		climbingSlope = false;
@@ -43,6 +41,9 @@ public class Controller2D : RaycastController {
 	public float maxSlopeAngleClimbing = 90f;
 
 	public bool isClimbing = false;
+	public bool isWalking;
+	public bool isFalling;
+	public bool isRising;
 
 	public CollisionInfo collisions;
 	[HideInInspector]
@@ -83,22 +84,49 @@ public class Controller2D : RaycastController {
 			collisions.faceDir = (int)Mathf.Sign(moveAmount.x);
 		}
 
-		if (input.x != 0)
-		{
-			collisions.isMovingX = true;
-		}
-		else
-		{
-			collisions.isMovingX = false;
-		}
+
 
 		HorizontalCollisions (ref moveAmount);
 		VerticalCollisions (ref moveAmount);
 
 		transform.Translate (moveAmount);
-
+		
+		
 		if (standingOnPlatform) {
 			collisions.below = true;
+		}
+		
+		if (input.x != 0 && collisions.below)
+		{
+			isWalking = true;
+		}
+		else
+		{
+			isWalking = false;
+		}
+
+		if (!collisions.below)
+		{
+			if (moveAmount.y > 0)
+			{
+				isRising = true;
+				isFalling = false;
+			}
+			else if(moveAmount.y < 0)
+			{
+				isFalling = true;
+				isRising = false;
+			}
+			else
+			{
+				isFalling = false;
+				isRising = false;
+			}
+		}
+		else
+		{
+			isFalling = false;
+			isRising = false;
 		}
 	}
 
@@ -109,9 +137,18 @@ public class Controller2D : RaycastController {
 
 		// for wall climbing since the x movement may be zero at that situation
 		if (Mathf.Abs(moveAmount.x) < skinWidth) {
-			rayLength = 2*skinWidth;
+			// this multiplier was increased to account for slow movement on very slight slopes
+			rayLength = 10f * skinWidth;
 		}
 
+//		if (collisions.slopeAngleOld != 0f)
+//		{
+//			float newRayLength = rayLength / Mathf.Tan(collisions.slopeAngleOld);
+//			Debug.Log("current rayLength is: " + rayLength);
+//			Debug.Log("desired rayLength is: " + newRayLength);
+//			rayLength = newRayLength;
+//		}
+		
 		for (int i = 0; i < horizontalRayCount; i ++) {
 			Vector2 rayOrigin = (directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight;
 			rayOrigin += Vector2.up * (horizontalRaySpacing * i);
@@ -131,10 +168,7 @@ public class Controller2D : RaycastController {
 					// if it happens to be descending and climbing at the same time, there is a lag 
 					// since descending function will decrease x movement but player will not descend (because it's climbing)
 					// that's why we restore its previous movement for climbing to work (EP 5 12:39)
-					
-					// TODO: figure out why this causes the controller to flicker between descending slope and below
 					if (collisions.descendingSlope && moveAmount.x != 0f) {
-						Debug.Log("setting descend to false");
 						collisions.descendingSlope = false;
 						moveAmount = collisions.moveAmountOld;
 					}
@@ -150,14 +184,47 @@ public class Controller2D : RaycastController {
 					}
 					ClimbSlope(ref moveAmount, slopeAngle, hit.normal);
 					if (longEnough)
+					{
 						moveAmount.x += distanceToSlopeStart * directionX;
-					
-					if(collisions.climbingSlope)
+					}
+
+					if (collisions.climbingSlope)
+					{
 						collisions.curGroundCollider = hit.collider;
+						collisions.fallingThroughPlatform = false;
+					}
 				}
 
 				// ignore a horizontal "Through" collider if we're not already standing on it
-				bool ignoreHorizontalCollider = hit.collider.CompareTag("Through") && hit.collider != collisions.curGroundCollider;
+				bool ignoreHorizontalCollider = false;
+
+
+				if (i == 0)
+				{
+					if (hit.normal.y > 0f)
+					{
+						ignoreHorizontalCollider = false;
+					}
+					else
+					{
+						ignoreHorizontalCollider = true;
+					}
+				}
+				else
+				{
+					if (hit.collider.CompareTag("Through"))
+					{
+						if (hit.collider == collisions.curGroundCollider)
+						{
+							ignoreHorizontalCollider = false;
+						}
+						else
+						{
+							ignoreHorizontalCollider = true;
+						}
+					}
+				}
+				
 				if ((!collisions.climbingSlope || slopeAngle > maxSlopeAngle) && !ignoreHorizontalCollider) {
 					if(moveAmount.x != 0)
 						moveAmount.x = (hit.distance - skinWidth) * directionX;
@@ -172,36 +239,48 @@ public class Controller2D : RaycastController {
 					collisions.right = directionX == 1;
 				}
 			}
+			else
+			{
+				//Debug.Log("ray " + i + " did not hit anything, so ClimbSlope was not called");
+			}
 		}
 	}
 
 	void VerticalCollisions(ref Vector2 moveAmount) {
 		float directionY = Mathf.Sign (moveAmount.y);
 		float rayLength = Mathf.Abs (moveAmount.y) + skinWidth;
-		
+
+		Vector2 lastNormal = collisions.slopeNormal;
 		for (int i = 0; i < verticalRayCount; i ++) {
 
 			Vector2 rayOrigin = (directionY == -1)?raycastOrigins.bottomLeft:raycastOrigins.topLeft;
 			rayOrigin += Vector2.right * (verticalRaySpacing * i + moveAmount.x);
-			RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
+			RaycastHit2D[] hits = Physics2D.RaycastAll(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
 
 			Debug.DrawRay(rayOrigin, Vector2.up * directionY,Color.red);
 
-			if (hit) {
+			foreach (RaycastHit2D hit in hits)
+			{
 				if (hit.collider.CompareTag("Through")) {
-					if (directionY == 1 || hit.distance == 0) {
+					// TODO: figure out why sequential Through colliders don't respect slope climbing
+					// TODO: figure out how to respect nested Through solids
+
+					if ((directionY == 1 || hit.distance == 0))
+					{
 						continue;
 					}
 					// adding a amount of time for controller to accelerate in case the platform moves faster than it
-					if (collisions.fallingThroughPlatform) {
+					if (collisions.fallingThroughPlatform && hit.collider == collisions.curGroundCollider) {
 						continue;
 					}
 					if (playerInput.y == -1) {
 						collisions.fallingThroughPlatform = true;
-						Invoke("ResetFallingThroughPlatform",.5f);
+						//Invoke("ResetFallingThroughPlatform", .05f);
 						continue;
 					}
-					if ((hit.normal.x < 0f && i != verticalRayCount - 1) || (hit.normal.x > 0f && i != 0))
+					if (((hit.normal.x < 0f && i != verticalRayCount - 1) || (hit.normal.x > 0f && i != 0)) 
+					    && hit.collider != collisions.curGroundCollider 
+					    && hit.normal == lastNormal)
 					{
 						continue;
 					}
@@ -212,7 +291,6 @@ public class Controller2D : RaycastController {
 				rayLength = hit.distance;
 
 				if (collisions.climbingSlope) {
-					//moveAmount.x = moveAmount.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(moveAmount.x);
 					moveAmount.x = moveAmount.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * collisions.faceDir;
 				}
 
@@ -220,7 +298,12 @@ public class Controller2D : RaycastController {
 				collisions.above = directionY == 1;
 
 				collisions.curGroundCollider = hit.collider;
+				collisions.fallingThroughPlatform = false;
+				
+				lastNormal = hit.normal;
+
 			}
+			
 		}
 
 		if (collisions.climbingSlope) {
@@ -238,6 +321,7 @@ public class Controller2D : RaycastController {
 					collisions.slopeNormal = hit.normal;
 				}
 			}
+
 			
 			// you can't fall off the platform when you are facing up slope (no downward ray casting)
 			for (int i = 0; i < verticalRayCount; i++)
@@ -256,7 +340,7 @@ public class Controller2D : RaycastController {
 						if (playerInput.y == -1)
 						{
 							collisions.fallingThroughPlatform = true;
-							Invoke("ResetFallingThroughPlatform", .5f);
+							//Invoke("ResetFallingThroughPlatform", .05f);
 							moveAmount.y = collisions.moveAmountOld.y;
 						}
 					}
@@ -269,6 +353,8 @@ public class Controller2D : RaycastController {
 	#region Slope Handling
 
 	void ClimbSlope(ref Vector2 moveAmount, float slopeAngle, Vector2 slopeNormal) {
+		//Debug.Log("ClimbSlope called");
+		//float moveDistance = Mathf.Max(Mathf.Abs (moveAmount.x), skinWidth);
 		float moveDistance = Mathf.Abs (moveAmount.x);
 		float climbmoveAmountY = Mathf.Sin (slopeAngle * Mathf.Deg2Rad) * moveDistance;
 

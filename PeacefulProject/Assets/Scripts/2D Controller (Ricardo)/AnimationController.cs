@@ -25,22 +25,29 @@ public class AnimationController : MonoBehaviour
             transform.localRotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
         }
 
-        if (controller.isClimbing)
-        {
-            animator.SetBool("isClimbing", true);
-        }
-        else
-        {
-            animator.SetBool("isClimbing", false);
-            if (controller.collisions.below)
-            {
-                animator.SetBool("isWalking", controller.collisions.isMovingX);
-                animator.SetBool("isMidair", false);
-            }
-            else
-            {
-                animator.SetBool("isMidair", true);
-            }
-        }
+        
+        animator.SetBool("isClimbing", controller.isClimbing);
+        animator.SetBool("isRising", controller.isRising);
+        animator.SetBool("isFalling", controller.isFalling);
+        animator.SetBool("isWalking", controller.isWalking);
+        
+//        if (controller.isClimbing)
+//        {
+//            animator.SetBool("isClimbing", true);
+//        }
+//        else
+//        {
+//            animator.SetBool("isClimbing", false);
+//            if (controller.collisions.below)
+//            {
+//                animator.SetBool("isWalking", controller.isWalking);
+//                animator.SetBool("isMidair", );
+//                animator.SetBool("isMidair", false);
+//            }
+//            else
+//            {
+//                animator.SetBool("isMidair", true);
+//            }
+//        }
     }
 }

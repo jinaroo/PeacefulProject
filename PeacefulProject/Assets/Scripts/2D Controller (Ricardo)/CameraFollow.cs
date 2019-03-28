@@ -21,6 +21,8 @@ public class CameraFollow : MonoBehaviour {
 
 	bool lookAheadStopped;
 
+	public bool drawAreaGizmo = true;
+
 	void Start() {
 		focusArea = new FocusArea (target.collider.bounds, focusAreaSize);
 	}
@@ -54,8 +56,11 @@ public class CameraFollow : MonoBehaviour {
 	}
 
 	void OnDrawGizmos() {
-		Gizmos.color = new Color (1, 0, 0, .5f);
-		Gizmos.DrawCube (focusArea.centre, focusAreaSize);
+		if (drawAreaGizmo)
+		{
+			Gizmos.color = new Color (1, 0, 0, .5f);
+			Gizmos.DrawCube (focusArea.centre, focusAreaSize);
+		}
 	}
 
 	struct FocusArea {
