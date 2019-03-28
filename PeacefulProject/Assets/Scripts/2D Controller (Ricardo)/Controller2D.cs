@@ -140,6 +140,11 @@ public class Controller2D : RaycastController {
 			// this multiplier was increased to account for slow movement on very slight slopes
 			rayLength = 10f * skinWidth;
 		}
+
+		if (collisions.slopeAngleOld != 0)
+		{
+			rayLength *= 10f;
+		}
 		
 		for (int i = 0; i < horizontalRayCount; i ++) {
 			Vector2 rayOrigin = (directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight;
@@ -210,8 +215,8 @@ public class Controller2D : RaycastController {
 			else
 			{
 				// BUG: first ray sometimes doesn't hit anything when we start our climb
-				if(directionX > 0)
-					Debug.Log("ray " + i + " did not hit anything, so ClimbSlope was not called");
+				if(directionX > 0 && i == 0)
+					Debug.Log("ray " + i + " of length " + rayLength + " did not hit anything, so ClimbSlope was not called");
 			}
 		}
 	}
