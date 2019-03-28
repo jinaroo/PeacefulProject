@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Through
-  - Obstacle
+  - Collector
   layers:
   - Default
   - TransparentFX
@@ -19,7 +19,7 @@ TagManager:
   - Player
   - OneWay
   - Grabable
-  - 
+  - Placed
   - 
   - 
   - 
