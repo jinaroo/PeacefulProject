@@ -89,7 +89,7 @@ Animator:
   m_GameObject: {fileID: 652348376}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 43175b7d92d625b4b9bbac0de8381140, type: 2}
+  m_Controller: {fileID: 9100000, guid: 96f21fb766e95e64580f144cde8b02e9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -291,7 +291,7 @@ MonoBehaviour:
   rotationSmoothing: 0.5
   rotationSpeed: 30
   spriteTransform: {fileID: 1629046074}
-  ignoreBumpTime: 0.001
+  ignoreBumpTime: 0
 --- !u!1 &486876104978767568
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,6 +377,9 @@ MonoBehaviour:
   maxSlopeAngleWalking: 45
   maxSlopeAngleClimbing: 90
   isClimbing: 0
+  isWalking: 0
+  isFalling: 0
+  isRising: 0
   collisions:
     above: 0
     below: 0
@@ -391,7 +394,6 @@ MonoBehaviour:
     moveAmountOld: {x: 0, y: 0}
     faceDir: 0
     fallingThroughPlatform: 0
-    isMovingX: 0
     curGroundCollider: {fileID: 0}
   playerInput: {x: 0, y: 0}
 --- !u!114 &486876104978767569
@@ -439,6 +441,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1629046074}
     m_Modifications:
+    - target: {fileID: 100000, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_Name
+      value: Raccoon
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -483,10 +489,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
-      propertyPath: m_Name
-      value: Sprites1
-      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_RootBone
+      value: 
+      objectReference: {fileID: 652580818}
+    - target: {fileID: 11400008, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_BoneTransforms.Array.data[0]
+      value: 
+      objectReference: {fileID: 652580818}
+    - target: {fileID: 11400010, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_RootBone
+      value: 
+      objectReference: {fileID: 652580820}
+    - target: {fileID: 11400010, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_BoneTransforms.Array.data[0]
+      value: 
+      objectReference: {fileID: 652580820}
+    - target: {fileID: 11400012, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_RootBone
+      value: 
+      objectReference: {fileID: 652580822}
+    - target: {fileID: 11400012, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_BoneTransforms.Array.data[0]
+      value: 
+      objectReference: {fileID: 652580822}
+    - target: {fileID: 11400012, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_BoneTransforms.Array.data[1]
+      value: 
+      objectReference: {fileID: 652580808}
     - target: {fileID: 11400000, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
       propertyPath: m_RootBone
       value: 
@@ -523,34 +553,14 @@ PrefabInstance:
       propertyPath: m_BoneTransforms.Array.data[0]
       value: 
       objectReference: {fileID: 652580816}
-    - target: {fileID: 11400008, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
-      propertyPath: m_RootBone
-      value: 
-      objectReference: {fileID: 652580818}
-    - target: {fileID: 11400008, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[0]
-      value: 
-      objectReference: {fileID: 652580818}
-    - target: {fileID: 11400010, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
-      propertyPath: m_RootBone
-      value: 
-      objectReference: {fileID: 652580820}
-    - target: {fileID: 11400010, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[0]
-      value: 
-      objectReference: {fileID: 652580820}
-    - target: {fileID: 11400012, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
-      propertyPath: m_RootBone
-      value: 
-      objectReference: {fileID: 652580822}
-    - target: {fileID: 11400012, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[0]
-      value: 
-      objectReference: {fileID: 652580822}
-    - target: {fileID: 11400012, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
-      propertyPath: m_BoneTransforms.Array.data[1]
-      value: 
-      objectReference: {fileID: 652580808}
+    - target: {fileID: 400048, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.31205308
+      objectReference: {fileID: 0}
+    - target: {fileID: 400048, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.019121807
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
 --- !u!1 &652348376 stripped
