@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Whalex
-{
-    public class GrabObjects : MonoBehaviour
+    public class GrabObjectsTemporary : MonoBehaviour
     {
         public float grabDst;
         public LayerMask grabMask;
@@ -113,4 +111,3 @@ namespace Whalex
             }
         }
     }
-}

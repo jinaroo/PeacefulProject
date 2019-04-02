@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Through
-  - Obstacle
+  - Collector
   layers:
   - Default
   - TransparentFX
@@ -19,7 +19,7 @@ TagManager:
   - Player
   - OneWay
   - Grabable
-  - 
+  - Placed
   - 
   - 
   - 
@@ -45,4 +45,7 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 661482377
+    locked: 0
+  - name: Foreground
+    uniqueID: 2298042007
     locked: 0
