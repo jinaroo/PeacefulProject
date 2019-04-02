@@ -40,7 +40,7 @@ public class Controller2D : RaycastController {
 	public float maxSlopeAngleWalking = 45f;
 	public float maxSlopeAngleClimbing = 90f;
 
-	public bool isClimbing = false;
+	public bool isClimbing;
 	public bool isWalking;
 	public bool isFalling;
 	public bool isRising;
@@ -52,7 +52,6 @@ public class Controller2D : RaycastController {
 	public override void Start() {
 		base.Start ();
 		collisions.faceDir = 1;
-
 	}
 
 	public void Move(Vector2 moveAmount, bool standingOnPlatform) {
@@ -62,7 +61,6 @@ public class Controller2D : RaycastController {
 	public void Move(Vector2 moveAmount, Vector2 input, bool standingOnPlatform = false) {
 		UpdateRaycastOrigins ();
 
-		
 		collisions.Reset ();
 		collisions.moveAmountOld = moveAmount;
 		playerInput = input;
@@ -83,8 +81,6 @@ public class Controller2D : RaycastController {
 		if (moveAmount.x != 0) {
 			collisions.faceDir = (int)Mathf.Sign(moveAmount.x);
 		}
-
-
 
 		HorizontalCollisions (ref moveAmount);
 		VerticalCollisions (ref moveAmount);
@@ -136,29 +132,30 @@ public class Controller2D : RaycastController {
 		float rayLength = Mathf.Abs (moveAmount.x) + skinWidth;
 
 		// for wall climbing since the x movement may be zero at that situation
-		if (Mathf.Abs(moveAmount.x) < skinWidth) {
+		if (Mathf.Abs(moveAmount.x) < skinWidth || collisions.slopeAngleOld != 0) {
 			// this multiplier was increased to account for slow movement on very slight slopes
 			rayLength = 10f * skinWidth;
-		}
-
-		if (collisions.slopeAngleOld != 0)
-		{
-			rayLength *= 10f;
 		}
 		
 		for (int i = 0; i < horizontalRayCount; i ++) {
 			Vector2 rayOrigin = (directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight;
 			rayOrigin += Vector2.up * (horizontalRaySpacing * i);
-			RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
+			RaycastHit2D[] hits = Physics2D.RaycastAll(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
 
 			Debug.DrawRay(rayOrigin, Vector2.right * directionX,Color.red);
 
-			if (hit) {
-
+			foreach (RaycastHit2D hit in hits)
+			{
 				if (hit.distance == 0) {
 					continue;
 				}
 
+				if (hit.collider.CompareTag("Through") && playerInput.y == -1f)
+				{
+					// ignore horizontal collisions on Through platforms if we're trying to fall through them
+					continue;
+				}
+				
 				float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 
 				if (i == 0 && slopeAngle <= maxSlopeAngle) {
@@ -192,12 +189,14 @@ public class Controller2D : RaycastController {
 					}
 				}
 
-				// ignore a horizontal "Through" collider if we're not already standing on it
+				// ignore a horizontal "Through" collider if...
+				//		we're shooting out of our feet (i == 0) and the slope is angled down (hit.normal.y < 0f)
+				//		OR
+				//		we're not shooting out of our feet (i != 0) and we're hitting a collider that we aren't standing on (hit.collider != collisions.curGroundCollider)
 				bool ignoreHorizontalCollider = hit.collider.CompareTag("Through") &&
 				                                ((i == 0 && hit.normal.y < 0f) ||
 				                                 (i != 0 && hit.collider != collisions.curGroundCollider));
 
-				//Debug.Log(ignoreHorizontalCollider);
 				if ((!collisions.climbingSlope || slopeAngle > maxSlopeAngle) && !ignoreHorizontalCollider) {
 					if(moveAmount.x != 0)
 						moveAmount.x = (hit.distance - skinWidth) * directionX;
@@ -212,20 +211,15 @@ public class Controller2D : RaycastController {
 					collisions.right = directionX == 1;
 				}
 			}
-			else
-			{
-				// BUG: first ray sometimes doesn't hit anything when we start our climb
-				if(directionX > 0 && i == 0)
-					Debug.Log("ray " + i + " of length " + rayLength + " did not hit anything, so ClimbSlope was not called");
-			}
 		}
 	}
 
 	void VerticalCollisions(ref Vector2 moveAmount) {
 		float directionY = Mathf.Sign (moveAmount.y);
 		float rayLength = Mathf.Abs (moveAmount.y) + skinWidth;
+		float originalRayLength = rayLength;
 
-		Vector2 lastNormal = collisions.slopeNormal;
+		Vector2 lastNormal = Vector2.down;
 		for (int i = 0; i < verticalRayCount; i ++) {
 
 			Vector2 rayOrigin = (directionY == -1)?raycastOrigins.bottomLeft:raycastOrigins.topLeft;
@@ -237,33 +231,63 @@ public class Controller2D : RaycastController {
 			foreach (RaycastHit2D hit in hits)
 			{
 				if (hit.collider.CompareTag("Through")) {
-					// BUG: sequential Through colliders don't respect slope climbing
-					// BUG: controller ignores nested Through solids when approaching them off of the ground
-
-
+					
+					// always ignore if player is holding down
 					if (playerInput.y == -1) {
+						
 						collisions.fallingThroughPlatform = true;
 						continue;
 					}
 
+					// ignore if we're moving up or if we're inside the collider (which would make hit.distance 0)
 					if ((directionY == 1 || hit.distance == 0))
 					{
 						continue;
 					}
+					
 					// adding a amount of time for controller to accelerate in case the platform moves faster than it
 					if (collisions.fallingThroughPlatform && hit.collider == collisions.curGroundCollider) {
 						continue;
 					}
-
+					
+					// if we hit a slope that's angled left, we should ignore every ray except the last one
+					// otherwise, we should ignore every ray that isn't the first one
+					// and we should only do this if we're hitting a slope that we're not standing on
+					//		(this is so we don't accidentally ignore a curved slope that we're trying to climb/descend
 					if (((hit.normal.x < 0f && i != verticalRayCount - 1) || (hit.normal.x > 0f && i != 0)) 
-					    && hit.collider != collisions.curGroundCollider 
-					    && Mathf.Sign(hit.normal.x) == Mathf.Sign(lastNormal.x))
+					    && hit.collider != collisions.curGroundCollider)
 					{
-						continue;
+						// we figured out that we should maybe ignore this ray, but now we need to handle a special case:
+						// if we are landing on a surface with normals that have different X directions, we will fall through it even though it is a solid surface
+						// so we should only fall through a surface if the normal resulting from the previous hit is in the same direction as the new hit
+						// this means that we will still ignore slopes correctly if needed, but we will never ignore a hill/bump/hump
+						
+						
+						if (lastNormal == Vector2.down) // check to see if lastNormal has not been updated yet
+						{
+							lastNormal = hit.normal;
+							// this is the first ray that successfully hit the slope
+							// it might be ray 0, but maybe not
+							// if the slope is facing left, we should ignore this ray (because we only consider the last ray)
+							// otherwise, we should ignore anything that isn't the first ray (because we only care about the first ray if the slope is facing right)
+							if(hit.normal.x < 0f)
+								continue;
+							else if(i != 0)
+								continue;
+						}
+						else
+						{
+							// if the normal of the last hit is in the same direction of our current normal, then we can go ahead and ignore this ray as planned
+							if (Mathf.Sign(hit.normal.x) == Mathf.Sign(lastNormal.x))
+							{
+								lastNormal = hit.normal;
+								continue;
+							}
+						}
 					}
-					lastNormal = hit.normal;
-				}
 
+				}
+				
 				moveAmount.y = (hit.distance - skinWidth) * directionY;
 				rayLength = hit.distance;
 
@@ -290,33 +314,34 @@ public class Controller2D : RaycastController {
 			float directionX = collisions.faceDir;
 			rayLength = Mathf.Abs(moveAmount.x) + skinWidth;
 			Vector2 rayOrigin = ((directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight) + Vector2.up * moveAmount.y;
-			RaycastHit2D hit = Physics2D.Raycast(rayOrigin,Vector2.right * directionX,rayLength,collisionMask);
+			RaycastHit2D[] hits = Physics2D.RaycastAll(rayOrigin,Vector2.right * directionX,rayLength,collisionMask);
 
-			if (hit) {
-				float slopeAngle = Vector2.Angle(hit.normal,Vector2.up);
-				// avoid lagging when passing by the intersection of two slopes
-				if (slopeAngle != collisions.slopeAngle) {
-					moveAmount.x = (hit.distance - skinWidth) * directionX;
-					collisions.slopeAngle = slopeAngle;
-					collisions.slopeNormal = hit.normal;
-				}
-			}
-			else
+			foreach (RaycastHit2D hit in hits)
 			{
-				//Debug.Log("we're climbing a slope but this raycast missed");
-			}
+				if (hit.distance != 0f) // ignore rays that are cast inside a collider
+				{
+					float slopeAngle = Vector2.Angle(hit.normal,Vector2.up);
+					// avoid lagging when passing by the intersection of two slopes
+					if (slopeAngle != collisions.slopeAngle) {
+						moveAmount.x = (hit.distance - skinWidth) * directionX;
+						collisions.slopeAngle = slopeAngle;
+						collisions.slopeNormal = hit.normal;
+					}
+					
 
-			
+				}
+			}			
 			// you can't fall off the platform when you are facing up slope (no downward ray casting)
 			for (int i = 0; i < verticalRayCount; i++)
 			{
 				rayOrigin = raycastOrigins.bottomLeft + Vector2.right * (verticalRaySpacing * i + moveAmount.x);
-				hit = Physics2D.Raycast(rayOrigin, -Vector2.up, Mathf.Abs(collisions.moveAmountOld.y) + skinWidth, collisionMask);
-				Debug.DrawRay(rayOrigin, -Vector2.up, Color.red);
-				if (hit)
+				hits = Physics2D.RaycastAll(rayOrigin, -Vector2.up, originalRayLength * 5f, collisionMask);
+
+				foreach (RaycastHit2D hit in hits)
 				{
-					if (hit.collider.tag == "Through")
+					if (hit.collider.tag == "Through" && hit.distance != 0 && hit.collider == collisions.curGroundCollider)
 					{
+						Debug.DrawRay(rayOrigin, -Vector2.up, Color.red);
 						if (collisions.fallingThroughPlatform)
 						{
 							moveAmount.y = collisions.moveAmountOld.y;
@@ -324,13 +349,8 @@ public class Controller2D : RaycastController {
 						if (playerInput.y == -1)
 						{
 							collisions.fallingThroughPlatform = true;
-							//Invoke("ResetFallingThroughPlatform", .05f);
 							moveAmount.y = collisions.moveAmountOld.y;
 						}
-					}
-					else
-					{
-						Debug.Log("hit something that wasn't a through platform");
 					}
 				}
 			}
@@ -341,8 +361,6 @@ public class Controller2D : RaycastController {
 	#region Slope Handling
 
 	void ClimbSlope(ref Vector2 moveAmount, float slopeAngle, Vector2 slopeNormal) {
-		//Debug.Log("ClimbSlope called");
-		//float moveDistance = Mathf.Max(Mathf.Abs (moveAmount.x), skinWidth);
 		float moveDistance = Mathf.Abs (moveAmount.x);
 		float climbmoveAmountY = Mathf.Sin (slopeAngle * Mathf.Deg2Rad) * moveDistance;
 
@@ -372,22 +390,29 @@ public class Controller2D : RaycastController {
 			float directionX = collisions.faceDir;
 			
 			Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft;
-			RaycastHit2D hit = Physics2D.Raycast (rayOrigin, -Vector2.up, Mathf.Infinity, collisionMask);
+			RaycastHit2D[] hits = Physics2D.RaycastAll (rayOrigin, -Vector2.up, Mathf.Infinity, collisionMask);
 
-			if (hit) {
-				float slopeAngle = Vector2.Angle (hit.normal, Vector2.up);
-				if (slopeAngle != 0 && slopeAngle <= maxSlopeAngle) {
-					if (Mathf.Sign (hit.normal.x) == directionX) {
-						if (hit.distance - skinWidth <= Mathf.Tan (slopeAngle * Mathf.Deg2Rad) * Mathf.Max(Mathf.Abs (moveAmount.x), skinWidth)) {
-							float moveDistance = Mathf.Abs (moveAmount.x);
-							float descendmoveAmountY = Mathf.Sin (slopeAngle * Mathf.Deg2Rad) * moveDistance;
-							moveAmount.x = Mathf.Cos (slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign (moveAmount.x);
-							moveAmount.y -= descendmoveAmountY;
+			foreach (RaycastHit2D hit in hits)
+			{
+				if(hit.collider.CompareTag("Through") && playerInput.y == -1)
+					continue;
+				
+				if (hit.distance > 0f) // ignore rays that are cast inside a collider
+				{
+					float slopeAngle = Vector2.Angle (hit.normal, Vector2.up);
+					if (slopeAngle != 0 && slopeAngle <= maxSlopeAngle) {
+						if (Mathf.Sign (hit.normal.x) == directionX) {
+							if (hit.distance - skinWidth <= Mathf.Tan (slopeAngle * Mathf.Deg2Rad) * Mathf.Max(Mathf.Abs (moveAmount.x), skinWidth)) {
+								float moveDistance = Mathf.Abs (moveAmount.x);
+								float descendmoveAmountY = Mathf.Sin (slopeAngle * Mathf.Deg2Rad) * moveDistance;
+								moveAmount.x = Mathf.Cos (slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign (moveAmount.x);
+								moveAmount.y -= descendmoveAmountY;
 
-							collisions.slopeAngle = slopeAngle;
-							collisions.descendingSlope = true;
-							collisions.below = true;
-							collisions.slopeNormal = hit.normal;
+								collisions.slopeAngle = slopeAngle;
+								collisions.descendingSlope = true;
+								collisions.below = true;
+								collisions.slopeNormal = hit.normal;
+							}
 						}
 					}
 				}
@@ -409,10 +434,6 @@ public class Controller2D : RaycastController {
 		}
 	}
 	#endregion
-	
-	void ResetFallingThroughPlatform() {
-		collisions.fallingThroughPlatform = false;
-	}
 
 
 

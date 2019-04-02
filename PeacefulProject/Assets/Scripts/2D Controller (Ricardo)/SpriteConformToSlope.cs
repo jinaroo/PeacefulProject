@@ -34,13 +34,18 @@ public class SpriteConformToSlope : MonoBehaviour
     {        
         if (controller.collisions.below && (controller.collisions.climbingSlope || controller.collisions.descendingSlope))
         {
-            RaycastHit2D hit = Physics2D.Raycast(controller.transform.position, -controller.collisions.slopeNormal, 1.5f, layerMask);
-            if (hit && hit.collider == controller.collisions.curGroundCollider)
+            RaycastHit2D[] hits = Physics2D.RaycastAll(controller.transform.position, -controller.collisions.slopeNormal, 1.5f, layerMask);
+            foreach (RaycastHit2D hit in hits)
             {
-                heightAdjustment = hit.distance - (sRend.size.y / 2f);
-                tgtUp = controller.collisions.slopeNormal;
-                tgtLocalPos = new Vector3(0f, -heightAdjustment, 0f);
+                if (hit.collider == controller.collisions.curGroundCollider && hit.distance > 0f)
+                {
+                    heightAdjustment = hit.distance - (sRend.size.y / 2f);
+                    tgtUp = controller.collisions.slopeNormal;
+                    tgtLocalPos = new Vector3(0f, -heightAdjustment, 0f);
+                    break;
+                }
             }
+
 
 
         }
