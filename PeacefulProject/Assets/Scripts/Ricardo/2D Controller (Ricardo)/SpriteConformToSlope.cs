@@ -20,9 +20,13 @@ public class SpriteConformToSlope : MonoBehaviour
 
     public float ignoreBumpTime = 0.05f;
     private float timeToStopIgnoringSlope;
-    
+
+    public float climbAngleAdjustment = 90f;
+    public float climbHeightAdjustment = 0.35f;
     
     int layerMask = 1 << 8;
+
+    private int climbingDir = -10;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,9 +49,6 @@ public class SpriteConformToSlope : MonoBehaviour
                     break;
                 }
             }
-
-
-
         }
         else
         {
@@ -60,6 +61,20 @@ public class SpriteConformToSlope : MonoBehaviour
         {
             timeToStopIgnoringSlope = Time.timeSinceLevelLoad + ignoreBumpTime;
             oldTgtUp = tgtUp;
+        }
+
+        if (controller.isClimbing)
+        {
+            if (climbingDir == -10)
+            {
+                climbingDir = controller.collisions.faceDir;
+            }
+            tgtUp = Quaternion.AngleAxis(climbAngleAdjustment * -climbingDir, Vector3.forward) * tgtUp;
+            tgtLocalPos += Vector3.right * climbHeightAdjustment * climbingDir;
+        }
+        else
+        {
+            climbingDir = -10;
         }
         
         if (Time.timeSinceLevelLoad >= timeToStopIgnoringSlope)

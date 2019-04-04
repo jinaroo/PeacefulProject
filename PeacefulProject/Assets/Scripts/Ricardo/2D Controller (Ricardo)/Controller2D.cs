@@ -376,6 +376,8 @@ public class Controller2D : RaycastController {
 
 	void DescendSlope(ref Vector2 moveAmount) {
 
+		// TODO: make it so DescendSlope only moves downward when climbing steep walls (stick to walls in climbing mode)
+		
 		RaycastHit2D maxSlopeHitLeft = Physics2D.Raycast (raycastOrigins.bottomLeft, Vector2.down, Mathf.Abs (moveAmount.y) + skinWidth, collisionMask);
 		RaycastHit2D maxSlopeHitRight = Physics2D.Raycast (raycastOrigins.bottomRight, Vector2.down, Mathf.Abs (moveAmount.y) + skinWidth, collisionMask);
 		
