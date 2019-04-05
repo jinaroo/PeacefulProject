@@ -134,7 +134,6 @@ namespace WhalexNew
         }
 
         #region Collision Handling
-
         void HorizontalCollisions(ref Vector2 moveAmount)
         {
             float directionX = collisions.faceDir;
@@ -386,11 +385,9 @@ namespace WhalexNew
                 }
             }
         }
-
         #endregion
 
         #region Slope Handling
-
         void ClimbSlope(ref Vector2 moveAmount, float slopeAngle, Vector2 slopeNormal)
         {
             float moveDistance = Mathf.Abs(moveAmount.x);
@@ -480,7 +477,6 @@ namespace WhalexNew
                 }
             }
         }
-
         #endregion
     }
 }
