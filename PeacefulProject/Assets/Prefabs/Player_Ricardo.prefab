@@ -561,6 +561,34 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.019121807
       objectReference: {fileID: 0}
+    - target: {fileID: 21200024, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 102
+      objectReference: {fileID: 0}
+    - target: {fileID: 21200026, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 101
+      objectReference: {fileID: 0}
+    - target: {fileID: 21200018, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 103
+      objectReference: {fileID: 0}
+    - target: {fileID: 21200020, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 107
+      objectReference: {fileID: 0}
+    - target: {fileID: 21200022, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 106
+      objectReference: {fileID: 0}
+    - target: {fileID: 21200000, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 104
+      objectReference: {fileID: 0}
+    - target: {fileID: 21200002, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 105
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
 --- !u!1 &652348376 stripped
