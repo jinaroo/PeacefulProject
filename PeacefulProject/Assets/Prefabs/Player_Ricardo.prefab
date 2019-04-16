@@ -1372,9 +1372,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 486876104978767570}
   heightAdjustment: 0
-  tgtLocalPos: {x: 0, y: 0, z: 0}
   rotationSmoothing: 0.5
-  rotationSpeed: 30
+  rotationSpeed: 20
   spriteTransform: {fileID: 1629046074}
   ignoreBumpTime: 0
   climbAngleAdjustment: 90
@@ -1463,7 +1462,7 @@ MonoBehaviour:
   verticalRaySpacing: 0
   collider: {fileID: 0}
   maxSlopeAngleWalking: 45
-  maxSlopeAngleClimbing: 90
+  maxSlopeAngleClimbing: 90.01
   isClimbing: 0
   isWalking: 0
   isFalling: 0
