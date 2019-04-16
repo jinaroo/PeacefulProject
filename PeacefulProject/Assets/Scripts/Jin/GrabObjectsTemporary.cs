@@ -51,6 +51,8 @@ using UnityEngine;
         {
             controller = GetComponent<Controller2D>();
             rg2d = GetComponent<Rigidbody2D>();
+            // assigning these in the inspector so we can change where they are in the hierarchy 
+            // they are now children of the sprite, not the root player object
             //grabRightPoint = transform.Find("GrabRightPoint");
             //grabLeftPoint = transform.Find("GrabLeftPoint");
             currentDir = controller.collisions.faceDir;

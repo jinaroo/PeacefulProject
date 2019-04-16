@@ -217,6 +217,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &524445241 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 524445241, guid: 5c4b202269c9d394aaf062e86a6c9d21,
+    type: 3}
+  m_PrefabInstance: {fileID: 1795284875}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &696390317
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +373,7 @@ GameObject:
   - component: {fileID: 724163975}
   - component: {fileID: 724163974}
   m_Layer: 11
-  m_Name: GrabbaleObstacle1
+  m_Name: GrabbableObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -781,7 +787,7 @@ GameObject:
   m_Component:
   - component: {fileID: 911373515}
   m_Layer: 0
-  m_Name: Grabbable Obstacles
+  m_Name: Purely Grabbable Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1298,12 +1304,37 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1795284875}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1627228973}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21ae0c3d7722a4bc0b743f08432e661a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1627228973 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 486876104978767568, guid: 5c4b202269c9d394aaf062e86a6c9d21,
+    type: 3}
+  m_PrefabInstance: {fileID: 1795284875}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1627228974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627228973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65265ee6ed318d942b3491fa4f7369e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabDst: 0.3
+  grabMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  grabRightPoint: {fileID: 1943146779}
+  grabLeftPoint: {fileID: 524445241}
+  releaseForce: 45
 --- !u!1001 &1705869780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1651,8 +1682,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1627228974, guid: 5c4b202269c9d394aaf062e86a6c9d21, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5c4b202269c9d394aaf062e86a6c9d21, type: 3}
+--- !u!4 &1943146779 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1943146779, guid: 5c4b202269c9d394aaf062e86a6c9d21,
+    type: 3}
+  m_PrefabInstance: {fileID: 1795284875}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &488588373526199525
 PrefabInstance:
   m_ObjectHideFlags: 0

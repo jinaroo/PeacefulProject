@@ -1593,13 +1593,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 486876104978767568}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ed805c1fb57e425e8d36e940d1a1465, type: 3}
+  m_Script: {fileID: 11500000, guid: 65265ee6ed318d942b3491fa4f7369e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   grabDst: 0.3
   grabMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   grabRightPoint: {fileID: 1943146779}
   grabLeftPoint: {fileID: 524445241}
   releaseForce: 45
