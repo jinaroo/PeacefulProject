@@ -834,13 +834,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1158684462}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071067}
-  m_LocalPosition: {x: -24.45, y: -0.61, z: -0.015625}
-  m_LocalScale: {x: 8, y: 0.37499967, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -6.55, y: -2.35, z: -0.015625}
+  m_LocalScale: {x: 4, y: 0.37499967, z: 1}
   m_Children: []
   m_Father: {fileID: 1287935850}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &1190114044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,6 +1386,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Ricardo
       objectReference: {fileID: 0}
+    - target: {fileID: 486876104978767570, guid: 5c4b202269c9d394aaf062e86a6c9d21,
+        type: 3}
+      propertyPath: maxSlopeAngleClimbing
+      value: 90.01
+      objectReference: {fileID: 0}
     - target: {fileID: 486876104978767574, guid: 5c4b202269c9d394aaf062e86a6c9d21,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1440,6 +1445,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1966755156, guid: 5c4b202269c9d394aaf062e86a6c9d21, type: 3}
+      propertyPath: rotationSpeed
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c4b202269c9d394aaf062e86a6c9d21, type: 3}
@@ -1515,45 +1524,5 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1615763027}
-    - target: {fileID: 488588372839799166, guid: 9264d8c506661794788aa3d1a87539be,
-        type: 3}
-      propertyPath: drawAreaGizmo
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 488588372839799166, guid: 9264d8c506661794788aa3d1a87539be,
-        type: 3}
-      propertyPath: focusAreaSize.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 488588372839799166, guid: 9264d8c506661794788aa3d1a87539be,
-        type: 3}
-      propertyPath: focusAreaSize.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 488588372839799166, guid: 9264d8c506661794788aa3d1a87539be,
-        type: 3}
-      propertyPath: lookAheadDstX
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 488588372839799166, guid: 9264d8c506661794788aa3d1a87539be,
-        type: 3}
-      propertyPath: verticalSmoothTime
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 488588372839799166, guid: 9264d8c506661794788aa3d1a87539be,
-        type: 3}
-      propertyPath: overallSmoothing
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 488588372839799166, guid: 9264d8c506661794788aa3d1a87539be,
-        type: 3}
-      propertyPath: verticalOffset
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 488588372839799164, guid: 9264d8c506661794788aa3d1a87539be,
-        type: 3}
-      propertyPath: orthographic size
-      value: 5.25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9264d8c506661794788aa3d1a87539be, type: 3}

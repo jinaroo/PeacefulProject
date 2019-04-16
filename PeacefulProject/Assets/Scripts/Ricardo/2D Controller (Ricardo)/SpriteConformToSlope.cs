@@ -11,7 +11,11 @@ public class SpriteConformToSlope : MonoBehaviour
 
     private Vector3 tgtUp;
     private Vector3 oldTgtUp;
-    public Vector3 tgtLocalPos;
+    private Vector3 modifiedTgtUp;
+    
+    private Vector3 tgtLocalPos;
+    private Vector3 modifiedTgtLocalPos;
+    
 
     public float rotationSmoothing = 0.5f;
     public float rotationSpeed = 10f;
@@ -62,25 +66,30 @@ public class SpriteConformToSlope : MonoBehaviour
             timeToStopIgnoringSlope = Time.timeSinceLevelLoad + ignoreBumpTime;
             oldTgtUp = tgtUp;
         }
-
+        
         if (controller.isClimbing)
         {
             if (climbingDir == -10)
             {
                 climbingDir = controller.collisions.faceDir;
             }
-            tgtUp = Quaternion.AngleAxis(climbAngleAdjustment * -climbingDir, Vector3.forward) * tgtUp;
-            tgtLocalPos += Vector3.right * climbHeightAdjustment * climbingDir;
+            modifiedTgtUp = Quaternion.AngleAxis(climbAngleAdjustment * -climbingDir, Vector3.forward) * tgtUp;
+            //modifiedTgtUp = tgtUp;
+            modifiedTgtLocalPos = tgtLocalPos + Vector3.right * climbHeightAdjustment * climbingDir;
         }
         else
         {
             climbingDir = -10;
+            modifiedTgtUp = tgtUp;
+            modifiedTgtLocalPos = tgtLocalPos;
         }
+
+
         
         if (Time.timeSinceLevelLoad >= timeToStopIgnoringSlope)
         {
-            transform.up += (tgtUp - transform.up) * rotationSmoothing * rotationSpeed * Time.deltaTime;
-            spriteTransform.localPosition += (tgtLocalPos - spriteTransform.localPosition) * rotationSmoothing * rotationSpeed * Time.deltaTime;
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(Vector3.forward, modifiedTgtUp), rotationSmoothing * rotationSpeed * Time.deltaTime);
+            spriteTransform.localPosition += (modifiedTgtLocalPos - spriteTransform.localPosition) * rotationSmoothing * rotationSpeed * Time.deltaTime;
         }
     }
 }
