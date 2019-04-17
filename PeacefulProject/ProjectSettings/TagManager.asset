@@ -22,7 +22,7 @@ TagManager:
   - OneWay
   - Grabbable
   - Placed
-  - 
+  - GrabbableObstacle
   - 
   - 
   - 

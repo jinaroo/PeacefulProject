@@ -28,7 +28,7 @@ public class SpriteConformToSlope : MonoBehaviour
     public float climbAngleAdjustment = 90f;
     public float climbHeightAdjustment = 0.35f;
     
-    int layerMask = 1 << 8;
+    public LayerMask layerMask;
 
     private int climbingDir = -10;
     // Start is called before the first frame update

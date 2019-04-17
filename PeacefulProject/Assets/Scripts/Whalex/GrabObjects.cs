@@ -13,8 +13,8 @@ using UnityEngine;
 
         private bool isHolding;
         private GameObject holdingObject;
-        private RigidbodyType2D previewsType;
-        private float currentDir, previewDir;
+        private RigidbodyType2D previousType;
+        private float currentDir, previousDir;
 
         public float releaseForce = 10f;
         
@@ -56,12 +56,12 @@ using UnityEngine;
             //grabRightPoint = transform.Find("GrabRightPoint");
             //grabLeftPoint = transform.Find("GrabLeftPoint");
             currentDir = controller.collisions.faceDir;
-            previewDir = controller.collisions.faceDir;
+            previousDir = controller.collisions.faceDir;
         }
 
         private void Update()
         {
-            previewDir = currentDir;
+            previousDir = currentDir;
             currentDir = controller.collisions.faceDir;
 
             if (Input.GetKeyDown(KeyCode.J) && isHolding == false)
@@ -82,11 +82,13 @@ using UnityEngine;
                         holdingObject.transform.SetParent((currentDir == -1) ? grabLeftPoint : grabRightPoint);
                         holdingObject.transform.localPosition = Vector3.zero;
                         holdingObject.transform.localRotation = Quaternion.identity;
-                        holdingObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                        holdingObject.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+                        Rigidbody2D holdingObjRigidbody = holdingObject.GetComponent<Rigidbody2D>();
+                        holdingObjRigidbody.velocity = Vector2.zero;
+                        holdingObjRigidbody.angularVelocity = 0f;
                         holdingObject.GetComponent<Collider2D>().isTrigger = true;
-                        previewsType = holdingObject.GetComponent<Rigidbody2D>().bodyType;
-                        holdingObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                        previousType = holdingObject.GetComponent<Rigidbody2D>().bodyType;
+                        holdingObjRigidbody.bodyType = RigidbodyType2D.Kinematic;
+                        holdingObject.layer = LayerMask.NameToLayer("Grabbable");
                         isHolding = true;
                         break;
                     }
@@ -96,8 +98,10 @@ using UnityEngine;
             {
                 holdingObject.transform.SetParent(null);
                 holdingObject.GetComponent<Collider2D>().isTrigger = false;
-                holdingObject.GetComponent<Rigidbody2D>().bodyType = previewsType;
-                holdingObject.GetComponent<Rigidbody2D>().velocity = controller.collisions.moveAmountOld * releaseForce;
+                Rigidbody2D holdingObjRigidbody = holdingObject.GetComponent<Rigidbody2D>();
+                holdingObjRigidbody.velocity = controller.collisions.moveAmountOld * releaseForce;
+                //holdingObjRigidbody.bodyType = previousType;
+                holdingObjRigidbody.bodyType = RigidbodyType2D.Dynamic;
                 holdingObject = null;
                 isHolding = false;
             }
@@ -109,7 +113,7 @@ using UnityEngine;
         {
             if (!isHolding) return;
 
-            if (currentDir != previewDir)
+            if (currentDir != previousDir)
             {
                 holdingObject.transform.SetParent((currentDir == -1) ? grabLeftPoint : grabRightPoint);
                 holdingObject.transform.localPosition = Vector3.zero;
