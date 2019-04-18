@@ -54,6 +54,7 @@ public class Player : MonoBehaviour {
 		CalculateVelocity ();
 		HandleWallSliding ();
 
+		
 		controller.Move (velocity * Time.deltaTime, directionalInput);
 
 		if (controller.collisions.above || controller.collisions.below) {
