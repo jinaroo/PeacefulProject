@@ -44,6 +44,7 @@ public class Controller2D : RaycastController {
 	public bool isWalking;
 	public bool isFalling;
 	public bool isRising;
+	public bool isHolding;
 
 	public CollisionInfo collisions;
 	[HideInInspector]
