@@ -79,6 +79,36 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &524445240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 524445241}
+  m_Layer: 9
+  m_Name: GrabLeftPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &524445241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524445240}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.75, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1629046074}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &652348328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,6 +1256,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 652580856}
+  - {fileID: 524445241}
+  - {fileID: 1943146779}
   m_Father: {fileID: 1966755154}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1277,6 +1309,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1943146778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1943146779}
+  m_Layer: 9
+  m_Name: GrabRightPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1943146779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943146778}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.75, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1629046074}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1966755153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1372,13 +1434,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 486876104978767570}
   heightAdjustment: 0
-  tgtLocalPos: {x: 0, y: 0, z: 0}
   rotationSmoothing: 0.5
-  rotationSpeed: 30
+  rotationSpeed: 20
   spriteTransform: {fileID: 1629046074}
   ignoreBumpTime: 0
   climbAngleAdjustment: 90
   climbHeightAdjustment: 0.3
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8448
 --- !u!1 &486876104978767568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1392,6 +1456,7 @@ GameObject:
   - component: {fileID: 486876104978767570}
   - component: {fileID: 486876104978767569}
   - component: {fileID: 486876104978767575}
+  - component: {fileID: 1627228974}
   m_Layer: 9
   m_Name: Player_Ricardo
   m_TagString: Player
@@ -1456,14 +1521,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 8448
   horizontalRayCount: 4
   verticalRayCount: 4
   horizontalRaySpacing: 0
   verticalRaySpacing: 0
   collider: {fileID: 0}
   maxSlopeAngleWalking: 45
-  maxSlopeAngleClimbing: 90
+  maxSlopeAngleClimbing: 92
   isClimbing: 0
   isWalking: 0
   isFalling: 0
@@ -1522,3 +1587,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81de9558679394d24b9a80bed2b095c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1627228974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486876104978767568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65265ee6ed318d942b3491fa4f7369e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabDst: 0.3
+  grabMask:
+    serializedVersion: 2
+    m_Bits: 10240
+  grabRightPoint: {fileID: 1943146779}
+  grabLeftPoint: {fileID: 524445241}
+  releaseForce: 45

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Whalex
-{
     public class GrabObjects : MonoBehaviour
     {
         public float grabDst;
@@ -11,13 +9,15 @@ namespace Whalex
 
         private Controller2D controller;
         private Rigidbody2D rg2d;
-        private Transform grabRightPoint, grabLeftPoint;
+        public Transform grabRightPoint, grabLeftPoint;
 
         private bool isHolding;
         private GameObject holdingObject;
-        private RigidbodyType2D previewsType;
-        private float currentDir, previewDir;
+        private RigidbodyType2D previousType;
+        private float currentDir, previousDir;
 
+        public float releaseForce = 10f;
+        
         private void OnEnable()
         {
             //EventManager.Instance.StartListening("ObjCollect",PutDownObj);
@@ -40,6 +40,7 @@ namespace Whalex
             holdingObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             holdingObject.GetComponent<Collider2D>().isTrigger = true;
 
+            
             // change its layer so it won't be picked up by player again
             holdingObject.layer = LayerMask.NameToLayer("Placed");
             holdingObject = null;
@@ -50,15 +51,17 @@ namespace Whalex
         {
             controller = GetComponent<Controller2D>();
             rg2d = GetComponent<Rigidbody2D>();
-            grabRightPoint = transform.Find("GrabRightPoint");
-            grabLeftPoint = transform.Find("GrabLeftPoint");
+            // assigning these in the inspector so we can change where they are in the hierarchy 
+            // they are now children of the sprite, not the root player object
+            //grabRightPoint = transform.Find("GrabRightPoint");
+            //grabLeftPoint = transform.Find("GrabLeftPoint");
             currentDir = controller.collisions.faceDir;
-            previewDir = controller.collisions.faceDir;
+            previousDir = controller.collisions.faceDir;
         }
 
         private void Update()
         {
-            previewDir = currentDir;
+            previousDir = currentDir;
             currentDir = controller.collisions.faceDir;
 
             if (Input.GetKeyDown(KeyCode.J) && isHolding == false)
@@ -79,11 +82,13 @@ namespace Whalex
                         holdingObject.transform.SetParent((currentDir == -1) ? grabLeftPoint : grabRightPoint);
                         holdingObject.transform.localPosition = Vector3.zero;
                         holdingObject.transform.localRotation = Quaternion.identity;
-                        holdingObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                        holdingObject.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+                        Rigidbody2D holdingObjRigidbody = holdingObject.GetComponent<Rigidbody2D>();
+                        holdingObjRigidbody.velocity = Vector2.zero;
+                        holdingObjRigidbody.angularVelocity = 0f;
                         holdingObject.GetComponent<Collider2D>().isTrigger = true;
-                        previewsType = holdingObject.GetComponent<Rigidbody2D>().bodyType;
-                        holdingObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                        previousType = holdingObject.GetComponent<Rigidbody2D>().bodyType;
+                        holdingObjRigidbody.bodyType = RigidbodyType2D.Kinematic;
+                        holdingObject.layer = LayerMask.NameToLayer("Grabbable");
                         isHolding = true;
                         break;
                     }
@@ -93,7 +98,10 @@ namespace Whalex
             {
                 holdingObject.transform.SetParent(null);
                 holdingObject.GetComponent<Collider2D>().isTrigger = false;
-                holdingObject.GetComponent<Rigidbody2D>().bodyType = previewsType;
+                Rigidbody2D holdingObjRigidbody = holdingObject.GetComponent<Rigidbody2D>();
+                holdingObjRigidbody.velocity = controller.collisions.moveAmountOld * releaseForce;
+                //holdingObjRigidbody.bodyType = previousType;
+                holdingObjRigidbody.bodyType = RigidbodyType2D.Dynamic;
                 holdingObject = null;
                 isHolding = false;
             }
@@ -105,7 +113,7 @@ namespace Whalex
         {
             if (!isHolding) return;
 
-            if (currentDir != previewDir)
+            if (currentDir != previousDir)
             {
                 holdingObject.transform.SetParent((currentDir == -1) ? grabLeftPoint : grabRightPoint);
                 holdingObject.transform.localPosition = Vector3.zero;
@@ -113,4 +121,3 @@ namespace Whalex
             }
         }
     }
-}
