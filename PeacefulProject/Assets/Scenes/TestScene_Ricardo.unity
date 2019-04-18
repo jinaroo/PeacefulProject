@@ -2276,7 +2276,7 @@ SpriteShapeRenderer:
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e4484a9757058dd46bcf49a7dec468ec, type: 3}
   m_Sprites:
-  - {fileID: 0}
+  - {fileID: 21300000, guid: f947f261e6bece8449cc1f978ca580bd, type: 3}
   - {fileID: 0}
   - {fileID: 21300000, guid: f947f261e6bece8449cc1f978ca580bd, type: 3}
   - {fileID: 21300000, guid: f947f261e6bece8449cc1f978ca580bd, type: 3}
@@ -2293,8 +2293,8 @@ SpriteShapeRenderer:
   - {fileID: 0}
   - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 9.340216, y: 3.719305, z: -0.0015}
-    m_Extent: {x: 25.250872, y: 11.498616, z: 0.0015}
+    m_Center: {x: 8.395175, y: 3.0044904, z: -0.002}
+    m_Extent: {x: 26.195911, y: 12.21343, z: 0.002}
 --- !u!4 &2129100715
 Transform:
   m_ObjectHideFlags: 0
@@ -2381,5 +2381,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1615763027}
+    - target: {fileID: 488588372839799166, guid: 9264d8c506661794788aa3d1a87539be,
+        type: 3}
+      propertyPath: drawAreaGizmo
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9264d8c506661794788aa3d1a87539be, type: 3}
