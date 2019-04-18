@@ -2070,6 +2070,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Ricardo
       objectReference: {fileID: 0}
+    - target: {fileID: 486876104978767570, guid: 5c4b202269c9d394aaf062e86a6c9d21,
+        type: 3}
+      propertyPath: collisions.fallingThroughPlatform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 486876104978767574, guid: 5c4b202269c9d394aaf062e86a6c9d21,
         type: 3}
       propertyPath: m_LocalPosition.x
