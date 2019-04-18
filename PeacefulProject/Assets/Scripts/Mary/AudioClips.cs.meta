@@ -3,7 +3,19 @@ guid: 4bd32fd96902f4c2d9927d963a02abbf
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - pickUpItem: {fileID: 8300000, guid: e0c55a9f2b9074cd7a878fdbbcb59c4b, type: 3}
+  - dropItem: {fileID: 8300000, guid: 9a22097eadb4548f4950a4b93d65f92b, type: 3}
+  - playerWalkdirt: {fileID: 8300000, guid: cef7b459ff89e435eb2b6b4bb5291d8d, type: 3}
+  - playerWalkindoor: {fileID: 8300000, guid: bdb55c6446c754016bd14044597df439, type: 3}
+  - playerWalkgrass: {fileID: 8300000, guid: b94103639d2f9424b87b9a83f4a601db, type: 3}
+  - Playerclimb: {fileID: 8300000, guid: 30ce45bdd07394e9b8fc795df9ea8a24, type: 3}
+  - outdoor: {fileID: 8300000, guid: 4b54cc6b0b17a4e93be49d15c113651a, type: 3}
+  - underground: {fileID: 8300000, guid: a19401cf62aaa44bcbd1fae8b784b709, type: 3}
+  - interior: {fileID: 8300000, guid: 7bfe2acce31d24ab49dd06f6dd77675e, type: 3}
+  - dogStoryBubble: {fileID: 8300000, guid: e293a9ed966d44b1da612f372b0b8819, type: 3}
+  - birdStoryBubble: {instanceID: 0}
+  - snakeStoryBubble: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

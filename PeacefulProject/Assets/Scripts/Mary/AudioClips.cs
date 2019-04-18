@@ -10,39 +10,19 @@ public class AudioClips : MonoBehaviour
 
 //Item sound effects
     public AudioClip pickUpItem;
-    public AudioClip pushItem;
-    public AudioClip[] droppedItem;
+    public AudioClip dropItem;
     
 //player sound effects
-    public AudioClip[] playerWalk; //sounds different depending on surface.
-    public AudioClip[] playerJump; //sounds different depending on surface.
-    public AudioClip[] playerClimb; //might wanna have the climb sound diferent/ more difficult if it takes longer
-    public AudioClip[] PlayerSlide; //sounds different depending on surface.
-    
-    //dog sound effects
-    public AudioClip[] dogHappy;
-    public AudioClip[] dogSad;
-    public AudioClip[] dogQuest;
-    public AudioClip[] dogReward;
-    
-    //bird sound effects
-    public AudioClip[] birdHappy;
-    public AudioClip[] birdSad;
-    public AudioClip[] birdQuest;
-    public AudioClip[] birdReward;
-    
-    //snake sound effects
-    public AudioClip[] snakeHappy;
-    public AudioClip[] snakeSad;
-    public AudioClip[] snakeQuest;
-    public AudioClip[] snakeReward;
+    public AudioClip playerWalkdirt; //sounds different depending on surface.
+    public AudioClip playerWalkindoor; //sounds different depending on surface.
+    public AudioClip playerWalkgrass; //might wanna have the climb sound diferent/ more difficult if it takes longer
+    public AudioClip Playerclimb; //sounds different depending on surface.
     
     //enviroment sound effects
-    public AudioClip treeShuffle;
-    public AudioClip[] rockShuffle;
-    public AudioClip dirtShuffle;
-    public AudioClip pavementShuffle;
-    public AudioClip gravelShuffle;
+    public AudioClip outdoor;
+    public AudioClip underground;
+    public AudioClip interior;
+    
     
     //narrative sound effect for thought bubble stories after they are in the nest,
     //if we still want a mini story about what happened to the humans
