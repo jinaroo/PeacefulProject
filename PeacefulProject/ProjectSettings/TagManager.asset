@@ -20,9 +20,9 @@ TagManager:
   - Obstacle
   - Player
   - OneWay
-  - Grabable
+  - Grabbable
   - Placed
-  - 
+  - GrabbableObstacle
   - 
   - 
   - 
