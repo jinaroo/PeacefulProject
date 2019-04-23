@@ -16,6 +16,14 @@ public class MasterSceneManager : MonoBehaviour
     public bool snakeHasBeenRescued;
     public bool birdHasBeenRescued;
 
+    public Vector3 dogTunnelPosition;
+    public Vector3 snakeTunnelPosition;
+    public Vector3 birdTunnelPosition;
+
+    public Transform dogTransform;
+    public Transform snakeTransform;
+    public Transform birdTransform;
+
     public float audioFadeTime = 1f;
 
     public float outdoorAudioVolume = 1f;
@@ -96,17 +104,26 @@ public class MasterSceneManager : MonoBehaviour
     
     public void TeleportDogToTunnel()
     {
+        if(dogHasBeenRescued)
+            return;
         dogHasBeenRescued = true;
+        dogTransform.position = dogTunnelPosition;
     }
     
     public void TeleportSnakeToTunnel()
     {
+        if (snakeHasBeenRescued)
+            return;
         snakeHasBeenRescued = true;
+        snakeTransform.position = snakeTunnelPosition;
     }
     
     public void TeleportBirdToTunnel()
     {
+        if (birdHasBeenRescued)
+            return;
         birdHasBeenRescued = true;
+        birdTransform.position = birdTunnelPosition;
     }
 
     public void EnterUnderground()
