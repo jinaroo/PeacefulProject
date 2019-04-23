@@ -17,6 +17,8 @@ using UnityEngine;
         private float currentDir, previousDir;
 
         public float releaseForce = 10f;
+        public int holdingSortOrder = 90;
+        private int previousSortOrder;
         
         private void OnEnable()
         {
@@ -45,7 +47,8 @@ using UnityEngine;
             holdingObject.layer = LayerMask.NameToLayer("Placed");
             holdingObject = null;
             isHolding = false;
-
+            holdingObject.GetComponent<SpriteRenderer>().sortingOrder = previousSortOrder;
+            
             controller.isHolding = false;
         }
 
@@ -93,6 +96,8 @@ using UnityEngine;
                         holdingObject.layer = LayerMask.NameToLayer("Grabbable");
                         isHolding = true;
                         controller.isHolding = true;
+                        previousSortOrder = holdingObject.GetComponent<SpriteRenderer>().sortingOrder;
+                        holdingObject.GetComponent<SpriteRenderer>().sortingOrder = holdingSortOrder;
                         break;
                     }
                 }
@@ -105,6 +110,7 @@ using UnityEngine;
                 holdingObjRigidbody.velocity = controller.collisions.moveAmountOld * releaseForce;
                 //holdingObjRigidbody.bodyType = previousType;
                 holdingObjRigidbody.bodyType = RigidbodyType2D.Dynamic;
+                holdingObject.GetComponent<SpriteRenderer>().sortingOrder = previousSortOrder;
                 holdingObject = null;
                 isHolding = false;
                 controller.isHolding = false;
