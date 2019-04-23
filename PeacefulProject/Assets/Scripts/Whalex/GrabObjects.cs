@@ -10,6 +10,7 @@ using UnityEngine;
         private Controller2D controller;
         private Rigidbody2D rg2d;
         public Transform grabRightPoint, grabLeftPoint;
+        public AudioManager audioManager;
 
         private bool isHolding;
         private GameObject holdingObject;
@@ -19,6 +20,8 @@ using UnityEngine;
         public float releaseForce = 10f;
         public int holdingSortOrder = 90;
         private int previousSortOrder;
+
+        public float pickupAndGrabVolume = 0.75f;
         
         private void OnEnable()
         {
@@ -41,6 +44,8 @@ using UnityEngine;
             holdingObject.GetComponent<Rigidbody2D>().angularVelocity = 0f;
             holdingObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             holdingObject.GetComponent<Collider2D>().isTrigger = true;
+            
+            audioManager.PlaySoundEffect(audioManager.Clips.dropItem, pickupAndGrabVolume);
 
             
             // change its layer so it won't be picked up by player again
@@ -62,6 +67,9 @@ using UnityEngine;
             //grabLeftPoint = transform.Find("GrabLeftPoint");
             currentDir = controller.collisions.faceDir;
             previousDir = controller.collisions.faceDir;
+            
+            if (audioManager == null)
+                audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
         }
 
         private void Update()
@@ -98,6 +106,7 @@ using UnityEngine;
                         controller.isHolding = true;
                         previousSortOrder = holdingObject.GetComponent<SpriteRenderer>().sortingOrder;
                         holdingObject.GetComponent<SpriteRenderer>().sortingOrder = holdingSortOrder;
+                        audioManager.PlaySoundEffect(audioManager.Clips.pickUpItem, pickupAndGrabVolume);
                         break;
                     }
                 }
@@ -114,6 +123,7 @@ using UnityEngine;
                 holdingObject = null;
                 isHolding = false;
                 controller.isHolding = false;
+                audioManager.PlaySoundEffect(audioManager.Clips.dropItem, pickupAndGrabVolume);
             }
 
             DetectFlip();

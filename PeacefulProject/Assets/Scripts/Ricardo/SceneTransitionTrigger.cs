@@ -10,12 +10,13 @@ public class SceneTransitionTrigger : MonoBehaviour
     public KeyCode changeSceneKey;
     public Vector3 nextSceneTargetPos;
 
-    public StateManager stateManager;
+    public MasterSceneManager masterSceneManager;
     
     // Start is called before the first frame update
     void Start()
     {
-        stateManager = GameObject.FindWithTag("StateManager").GetComponent<StateManager>();
+        if(masterSceneManager == null)
+            masterSceneManager = GameObject.FindWithTag("MasterSceneManager").GetComponent<MasterSceneManager>();
     }
 
     // Update is called once per frame
@@ -30,9 +31,8 @@ public class SceneTransitionTrigger : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                stateManager.raccoonStartPos = nextSceneTargetPos;
-                stateManager.isDogActive = true;
-                SceneManager.LoadScene(targetScene);
+                masterSceneManager.nextTeleportPosition = nextSceneTargetPos;
+                masterSceneManager.TeleportRaccoon();
             }
         }
     }

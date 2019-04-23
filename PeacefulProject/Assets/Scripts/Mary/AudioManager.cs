@@ -16,6 +16,7 @@ public class AudioManager : MonoBehaviour
 		{
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
+			Clips = Resources.Load<GameObject>("Clips").GetComponent<AudioClips>();
 		}
 		else
 		{
@@ -25,10 +26,10 @@ public class AudioManager : MonoBehaviour
 
 	public void Start()
 	{
-		Clips = Resources.Load<GameObject>("Clips").GetComponent<AudioClips>();
+		//Clips = Resources.Load<GameObject>("Clips").GetComponent<AudioClips>();
 	}
 
-	public GameObject PlaySoundEffect(AudioClip audioClip, float volume = 1.0f, bool looping = false)
+	public GameObject PlaySoundEffect(AudioClip audioClip, float volume = 1.0f, bool looping = false, bool randomPitch = false, float pitchVariation = 0.1f, bool keepAlive = false)
 	{
 		var newGameObject = new GameObject("Audio Effect");
 		newGameObject.transform.position = Camera.main.transform.position;
@@ -40,9 +41,12 @@ public class AudioManager : MonoBehaviour
 		newAudioSource.volume = volume;
 		newAudioSource.loop = looping;
 
+		if (randomPitch)
+			newAudioSource.pitch = Random.Range(1f - pitchVariation, 1f + pitchVariation);
+
 		newAudioSource.Play();
 
-		if (!looping)
+		if (!looping && !keepAlive)
 		{
 			Destroy(newGameObject, audioClip.length * 3.0f);
 		}
