@@ -34,5 +34,6 @@ public class AnimationController : MonoBehaviour
         animator.SetBool("isRising", controller.isRising);
         animator.SetBool("isFalling", controller.isFalling);
         animator.SetBool("isWalking", controller.isWalking);
+        animator.SetBool("isHolding", controller.isHolding);
     }
 }

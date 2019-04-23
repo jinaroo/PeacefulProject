@@ -45,6 +45,8 @@ using UnityEngine;
             holdingObject.layer = LayerMask.NameToLayer("Placed");
             holdingObject = null;
             isHolding = false;
+
+            controller.isHolding = false;
         }
 
         private void Start()
@@ -90,6 +92,7 @@ using UnityEngine;
                         holdingObjRigidbody.bodyType = RigidbodyType2D.Kinematic;
                         holdingObject.layer = LayerMask.NameToLayer("Grabbable");
                         isHolding = true;
+                        controller.isHolding = true;
                         break;
                     }
                 }
@@ -104,6 +107,7 @@ using UnityEngine;
                 holdingObjRigidbody.bodyType = RigidbodyType2D.Dynamic;
                 holdingObject = null;
                 isHolding = false;
+                controller.isHolding = false;
             }
 
             DetectFlip();
