@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MasterSceneManager : MonoBehaviour
 {
@@ -50,8 +51,7 @@ public class MasterSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (audioManager == null)
-            audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
+        audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
         
         outdoorAudSrc = audioManager.PlaySoundEffect(audioManager.Clips.outdoor, outdoorAudioVolume, true).GetComponent<AudioSource>();
         indoorAudSrc = audioManager.PlaySoundEffect(audioManager.Clips.interior, 0f, true).GetComponent<AudioSource>();
@@ -67,7 +67,10 @@ public class MasterSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     public void TeleportRaccoon()
