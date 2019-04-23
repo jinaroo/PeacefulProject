@@ -42,7 +42,7 @@ public class Player : MonoBehaviour {
 	}
 
 	void Update() {
-		if (controller.isClimbing && controller.isHolding)
+		if (controller.isClimbing && !controller.isHolding)
 		{
 			moveSpeed = climbSpeed;
 		}

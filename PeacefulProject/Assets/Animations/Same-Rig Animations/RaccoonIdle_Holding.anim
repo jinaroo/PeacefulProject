@@ -54,7 +54,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 54
+        value: 40
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -65,7 +65,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_SortingOrder
-    path: Hand1
+    path: Head
     classID: 212
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -77,7 +77,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1060977728
+      path: 130111906
       attribute: 3762991556
       script: {fileID: 0}
       typeID: 212
@@ -238,7 +238,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 54
+        value: 40
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -249,7 +249,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_SortingOrder
-    path: Hand1
+    path: Head
     classID: 212
     script: {fileID: 0}
   m_EulerEditorCurves:

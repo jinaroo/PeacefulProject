@@ -69,7 +69,7 @@ using UnityEngine;
             previousDir = currentDir;
             currentDir = controller.collisions.faceDir;
 
-            if (Input.GetKeyDown(KeyCode.J) && isHolding == false)
+            if (Input.GetKeyDown(KeyCode.E) && isHolding == false)
             {
                 for (int i = 0; i < controller.horizontalRayCount; i++)
                 {
@@ -102,7 +102,7 @@ using UnityEngine;
                     }
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.J) && isHolding)
+            else if (Input.GetKeyDown(KeyCode.E) && isHolding)
             {
                 holdingObject.transform.SetParent(null);
                 holdingObject.GetComponent<Collider2D>().isTrigger = false;
