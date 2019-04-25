@@ -435,7 +435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &506572685
 Transform:
   m_ObjectHideFlags: 0
@@ -486,9 +486,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 40
   m_Sprite: {fileID: 21300000, guid: fced241640af7494a98ff8d2b0df9398, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.764151, g: 0.49381453, b: 0.49381453, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1535,7 +1535,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 48
+  m_SortingOrder: 41
   m_Sprite: {fileID: 21300000, guid: fced241640af7494a98ff8d2b0df9398, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2012,7 +2012,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.99999994}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &1542389695
 SpriteRenderer:
@@ -2050,9 +2050,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 40
   m_Sprite: {fileID: 21300000, guid: fced241640af7494a98ff8d2b0df9398, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2572,21 +2572,6 @@ PrefabInstance:
       propertyPath: audioManager
       value: 
       objectReference: {fileID: 1636366594}
-    - target: {fileID: 486876104978767569, guid: 5c4b202269c9d394aaf062e86a6c9d21,
-        type: 3}
-      propertyPath: timeBetweenSteps
-      value: 0.225
-      objectReference: {fileID: 0}
-    - target: {fileID: 486876104978767569, guid: 5c4b202269c9d394aaf062e86a6c9d21,
-        type: 3}
-      propertyPath: timeBetweenClimbSteps
-      value: 0.375
-      objectReference: {fileID: 0}
-    - target: {fileID: 486876104978767569, guid: 5c4b202269c9d394aaf062e86a6c9d21,
-        type: 3}
-      propertyPath: climbVolume
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 1627228974, guid: 5c4b202269c9d394aaf062e86a6c9d21, type: 3}
       propertyPath: audioManager
       value: 
