@@ -34,8 +34,12 @@ namespace Whalex
             npcDialogue.transform.SetParent(transform.Find("Dialogue"));
             npcDialogue.transform.localPosition = Vector3.zero;
             npcDialogue.SetActive(false);
-            
-            masterSceneManager = GameObject.FindWithTag("MasterSceneManager").GetComponent<MasterSceneManager>();
+
+            GameObject masterSceneObj = GameObject.FindWithTag("MasterSceneManager");
+            if (masterSceneObj)
+            {
+                masterSceneManager = masterSceneObj.GetComponent<MasterSceneManager>();
+            }
         }
 
         private void Update()
@@ -67,7 +71,8 @@ namespace Whalex
                         npcPrompt.SetActive(false);
                         npcDialogue.SetActive(true);
                         
-                        Invoke("Teleport", rescueTeleportDelay);
+                        if(masterSceneManager)
+                            Invoke("Teleport", rescueTeleportDelay);
                     }
                     break;
             }

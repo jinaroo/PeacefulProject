@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.U2D;
 
-    public class GrabObjects : MonoBehaviour
+public class GrabObjects : MonoBehaviour
     {
         public float grabDst;
         public LayerMask grabMask;
@@ -45,14 +46,21 @@ using UnityEngine;
             holdingObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             holdingObject.GetComponent<Collider2D>().isTrigger = true;
             
-            audioManager.PlaySoundEffect(audioManager.Clips.dropItem, pickupAndGrabVolume);
+            if(audioManager)
+                audioManager.PlaySoundEffect(audioManager.Clips.dropItem, pickupAndGrabVolume);
 
             
             // change its layer so it won't be picked up by player again
             holdingObject.layer = LayerMask.NameToLayer("Placed");
             holdingObject = null;
             isHolding = false;
-            holdingObject.GetComponent<SpriteRenderer>().sortingOrder = previousSortOrder;
+            if (holdingObject.GetComponent<SpriteRenderer>())
+            {
+                holdingObject.GetComponent<SpriteRenderer>().sortingOrder = previousSortOrder;
+            } else if (holdingObject.GetComponent<SpriteShapeRenderer>())
+            {
+                holdingObject.GetComponent<SpriteShapeRenderer>().sortingOrder = previousSortOrder;
+            }
             
             controller.isHolding = false;
         }
@@ -67,9 +75,15 @@ using UnityEngine;
             //grabLeftPoint = transform.Find("GrabLeftPoint");
             currentDir = controller.collisions.faceDir;
             previousDir = controller.collisions.faceDir;
-            
+
             if (audioManager == null)
-                audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
+            {
+                GameObject audioManagerObj = GameObject.FindWithTag("AudioManager");
+                if (audioManagerObj)
+                {
+                    audioManager = audioManagerObj.GetComponent<AudioManager>();
+                }
+            }
         }
 
         private void Update()
@@ -104,9 +118,18 @@ using UnityEngine;
                         holdingObject.layer = LayerMask.NameToLayer("Grabbable");
                         isHolding = true;
                         controller.isHolding = true;
-                        previousSortOrder = holdingObject.GetComponent<SpriteRenderer>().sortingOrder;
-                        holdingObject.GetComponent<SpriteRenderer>().sortingOrder = holdingSortOrder;
-                        audioManager.PlaySoundEffect(audioManager.Clips.pickUpItem, pickupAndGrabVolume);
+                        if (holdingObject.GetComponent<SpriteRenderer>())
+                        {
+                            previousSortOrder = holdingObject.GetComponent<SpriteRenderer>().sortingOrder;
+                            holdingObject.GetComponent<SpriteRenderer>().sortingOrder = holdingSortOrder;
+                        } else if (holdingObject.GetComponent<SpriteShapeRenderer>())
+                        {
+                            previousSortOrder = holdingObject.GetComponent<SpriteShapeRenderer>().sortingOrder;
+                            holdingObject.GetComponent<SpriteShapeRenderer>().sortingOrder = holdingSortOrder;
+                        }
+                        
+                        if(audioManager)
+                            audioManager.PlaySoundEffect(audioManager.Clips.pickUpItem, pickupAndGrabVolume);
                         break;
                     }
                 }
@@ -119,11 +142,19 @@ using UnityEngine;
                 holdingObjRigidbody.velocity = controller.collisions.moveAmountOld * releaseForce;
                 //holdingObjRigidbody.bodyType = previousType;
                 holdingObjRigidbody.bodyType = RigidbodyType2D.Dynamic;
-                holdingObject.GetComponent<SpriteRenderer>().sortingOrder = previousSortOrder;
+                if (holdingObject.GetComponent<SpriteRenderer>())
+                {
+                    holdingObject.GetComponent<SpriteRenderer>().sortingOrder = previousSortOrder;
+                } else if (holdingObject.GetComponent<SpriteShapeRenderer>())
+                {
+                    holdingObject.GetComponent<SpriteShapeRenderer>().sortingOrder = previousSortOrder;
+                }
                 holdingObject = null;
                 isHolding = false;
                 controller.isHolding = false;
-                audioManager.PlaySoundEffect(audioManager.Clips.dropItem, pickupAndGrabVolume);
+                
+                if(audioManager)
+                    audioManager.PlaySoundEffect(audioManager.Clips.dropItem, pickupAndGrabVolume);
             }
 
             DetectFlip();
