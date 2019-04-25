@@ -21,13 +21,13 @@ public class PlayerInput : MonoBehaviour {
 			player.OnJumpInputUp ();
 		}
 
-		if (Input.GetKey(KeyCode.LeftShift) && player.controller.collisions.below && !player.controller.isHolding)
+		if (Input.GetKey(KeyCode.LeftShift) && !player.controller.isHolding)
 		{
-			player.controller.isClimbing = true;
+			player.controller.isTryingToClimb = true;
 		}
 		else
 		{
-			player.controller.isClimbing = false;
+			player.controller.isTryingToClimb = false;
 		}
 		
 	}

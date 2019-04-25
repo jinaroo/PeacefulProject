@@ -555,7 +555,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 46
+  m_SortingOrder: 47
   m_Sprite: {fileID: 21300006, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -653,7 +653,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 33
+  m_SortingOrder: 46
   m_Sprite: {fileID: 21300000, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -751,7 +751,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 33
+  m_SortingOrder: 46
   m_Sprite: {fileID: 21300002, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -850,7 +850,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 33
+  m_SortingOrder: 46
   m_Sprite: {fileID: 21300012, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1021,7 +1021,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 34
+  m_SortingOrder: 47
   m_Sprite: {fileID: 21300010, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1120,7 +1120,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 51
+  m_SortingOrder: 48
   m_Sprite: {fileID: 21300008, guid: 4fcdffbf32d25784cbe543e7f06e7df1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1439,7 +1439,8 @@ MonoBehaviour:
   spriteTransform: {fileID: 1629046074}
   ignoreBumpTime: 0
   climbAngleAdjustment: 90
-  climbHeightAdjustment: 0.3
+  climbHeightAdjustment: 0.4
+  climbHeightSlopeModifier: 3
   layerMask:
     serializedVersion: 2
     m_Bits: 8448
@@ -1529,6 +1530,7 @@ MonoBehaviour:
   collider: {fileID: 0}
   maxSlopeAngleWalking: 45
   maxSlopeAngleClimbing: 92
+  isTryingToClimb: 0
   isClimbing: 0
   isWalking: 0
   isFalling: 0
@@ -1576,6 +1578,11 @@ MonoBehaviour:
   wallSlideSpeedMax: 30
   wallStickTime: 0.1
   controller: {fileID: 0}
+  audioManager: {fileID: 0}
+  footstepVolume: 1
+  timeBetweenSteps: 0.225
+  climbVolume: 0.5
+  timeBetweenClimbSteps: 0.375
 --- !u!114 &486876104978767575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1606,5 +1613,7 @@ MonoBehaviour:
     m_Bits: 10240
   grabRightPoint: {fileID: 1943146779}
   grabLeftPoint: {fileID: 524445241}
+  audioManager: {fileID: 0}
   releaseForce: 45
   holdingSortOrder: 50
+  pickupAndGrabVolume: 0.75

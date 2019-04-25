@@ -40,6 +40,7 @@ public class Controller2D : RaycastController {
 	public float maxSlopeAngleWalking = 45f;
 	public float maxSlopeAngleClimbing = 90f;
 
+	public bool isTryingToClimb;
 	public bool isClimbing;
 	public bool isWalking;
 	public bool isFalling;
@@ -68,7 +69,7 @@ public class Controller2D : RaycastController {
 
 		if (!isHolding)
 		{
-			if (isClimbing)
+			if (isTryingToClimb)
 			{
 				maxSlopeAngle = maxSlopeAngleClimbing;
 			}
@@ -77,6 +78,8 @@ public class Controller2D : RaycastController {
 				maxSlopeAngle = maxSlopeAngleWalking;
 			}
 		}
+
+
 
 
 		if (moveAmount.y < 0) {
@@ -96,18 +99,27 @@ public class Controller2D : RaycastController {
 		if (standingOnPlatform) {
 			collisions.below = true;
 		}
-		
-		if (input.x != 0 && collisions.below)
+
+		if (collisions.below)
 		{
-			isWalking = true;
+			isFalling = false;
+			isRising = false;
+
+			if (input.x != 0f)
+				isWalking = true;
+			else
+				isWalking = false;
+
+			if (isTryingToClimb)
+				isClimbing = true;
+			else
+				isClimbing = false;
 		}
 		else
 		{
 			isWalking = false;
-		}
-
-		if (!collisions.below)
-		{
+			isClimbing = false;
+			
 			if (moveAmount.y > 0)
 			{
 				isRising = true;
@@ -123,11 +135,6 @@ public class Controller2D : RaycastController {
 				isFalling = false;
 				isRising = false;
 			}
-		}
-		else
-		{
-			isFalling = false;
-			isRising = false;
 		}
 	}
 

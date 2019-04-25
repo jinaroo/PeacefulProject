@@ -27,6 +27,7 @@ public class SpriteConformToSlope : MonoBehaviour
 
     public float climbAngleAdjustment = 90f;
     public float climbHeightAdjustment = 0.35f;
+    public float climbHeightSlopeModifier = 3f;
     
     public LayerMask layerMask;
 
@@ -75,7 +76,7 @@ public class SpriteConformToSlope : MonoBehaviour
             }
             modifiedTgtUp = Quaternion.AngleAxis(climbAngleAdjustment * -climbingDir, Vector3.forward) * tgtUp;
             //modifiedTgtUp = tgtUp;
-            modifiedTgtLocalPos = tgtLocalPos + Vector3.right * climbHeightAdjustment * climbingDir;
+            modifiedTgtLocalPos = tgtLocalPos + Vector3.right * (climbHeightAdjustment + tgtLocalPos.magnitude * climbHeightSlopeModifier * climbHeightAdjustment) * climbingDir;
         }
         else
         {
