@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.U2D;
 
-    public class GrabObjects : MonoBehaviour
+public class GrabObjects : MonoBehaviour
     {
         public float grabDst;
         public LayerMask grabMask;
@@ -10,6 +11,7 @@ using UnityEngine;
         private Controller2D controller;
         private Rigidbody2D rg2d;
         public Transform grabRightPoint, grabLeftPoint;
+        public AudioManager audioManager;
 
         private bool isHolding;
         private GameObject holdingObject;
@@ -17,6 +19,10 @@ using UnityEngine;
         private float currentDir, previousDir;
 
         public float releaseForce = 10f;
+        public int holdingSortOrder = 90;
+        private int previousSortOrder;
+
+        public float pickupAndGrabVolume = 0.75f;
         
         private void OnEnable()
         {
@@ -39,12 +45,24 @@ using UnityEngine;
             holdingObject.GetComponent<Rigidbody2D>().angularVelocity = 0f;
             holdingObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             holdingObject.GetComponent<Collider2D>().isTrigger = true;
+            
+            if(audioManager)
+                audioManager.PlaySoundEffect(audioManager.Clips.dropItem, pickupAndGrabVolume);
 
             
             // change its layer so it won't be picked up by player again
             holdingObject.layer = LayerMask.NameToLayer("Placed");
             holdingObject = null;
             isHolding = false;
+            if (holdingObject.GetComponent<SpriteRenderer>())
+            {
+                holdingObject.GetComponent<SpriteRenderer>().sortingOrder = previousSortOrder;
+            } else if (holdingObject.GetComponent<SpriteShapeRenderer>())
+            {
+                holdingObject.GetComponent<SpriteShapeRenderer>().sortingOrder = previousSortOrder;
+            }
+            
+            controller.isHolding = false;
         }
 
         private void Start()
@@ -57,6 +75,15 @@ using UnityEngine;
             //grabLeftPoint = transform.Find("GrabLeftPoint");
             currentDir = controller.collisions.faceDir;
             previousDir = controller.collisions.faceDir;
+
+            if (audioManager == null)
+            {
+                GameObject audioManagerObj = GameObject.FindWithTag("AudioManager");
+                if (audioManagerObj)
+                {
+                    audioManager = audioManagerObj.GetComponent<AudioManager>();
+                }
+            }
         }
 
         private void Update()
@@ -64,7 +91,7 @@ using UnityEngine;
             previousDir = currentDir;
             currentDir = controller.collisions.faceDir;
 
-            if (Input.GetKeyDown(KeyCode.J) && isHolding == false)
+            if (Input.GetKeyDown(KeyCode.E) && isHolding == false)
             {
                 for (int i = 0; i < controller.horizontalRayCount; i++)
                 {
@@ -90,11 +117,24 @@ using UnityEngine;
                         holdingObjRigidbody.bodyType = RigidbodyType2D.Kinematic;
                         holdingObject.layer = LayerMask.NameToLayer("Grabbable");
                         isHolding = true;
+                        controller.isHolding = true;
+                        if (holdingObject.GetComponent<SpriteRenderer>())
+                        {
+                            previousSortOrder = holdingObject.GetComponent<SpriteRenderer>().sortingOrder;
+                            holdingObject.GetComponent<SpriteRenderer>().sortingOrder = holdingSortOrder;
+                        } else if (holdingObject.GetComponent<SpriteShapeRenderer>())
+                        {
+                            previousSortOrder = holdingObject.GetComponent<SpriteShapeRenderer>().sortingOrder;
+                            holdingObject.GetComponent<SpriteShapeRenderer>().sortingOrder = holdingSortOrder;
+                        }
+                        
+                        if(audioManager)
+                            audioManager.PlaySoundEffect(audioManager.Clips.pickUpItem, pickupAndGrabVolume);
                         break;
                     }
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.J) && isHolding)
+            else if (Input.GetKeyDown(KeyCode.E) && isHolding)
             {
                 holdingObject.transform.SetParent(null);
                 holdingObject.GetComponent<Collider2D>().isTrigger = false;
@@ -102,8 +142,19 @@ using UnityEngine;
                 holdingObjRigidbody.velocity = controller.collisions.moveAmountOld * releaseForce;
                 //holdingObjRigidbody.bodyType = previousType;
                 holdingObjRigidbody.bodyType = RigidbodyType2D.Dynamic;
+                if (holdingObject.GetComponent<SpriteRenderer>())
+                {
+                    holdingObject.GetComponent<SpriteRenderer>().sortingOrder = previousSortOrder;
+                } else if (holdingObject.GetComponent<SpriteShapeRenderer>())
+                {
+                    holdingObject.GetComponent<SpriteShapeRenderer>().sortingOrder = previousSortOrder;
+                }
                 holdingObject = null;
                 isHolding = false;
+                controller.isHolding = false;
+                
+                if(audioManager)
+                    audioManager.PlaySoundEffect(audioManager.Clips.dropItem, pickupAndGrabVolume);
             }
 
             DetectFlip();

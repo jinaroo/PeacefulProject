@@ -66,14 +66,18 @@ public class Controller2D : RaycastController {
 		collisions.moveAmountOld = moveAmount;
 		playerInput = input;
 
-		if (isClimbing)
+		if (!isHolding)
 		{
-			maxSlopeAngle = maxSlopeAngleClimbing;
+			if (isClimbing)
+			{
+				maxSlopeAngle = maxSlopeAngleClimbing;
+			}
+			else
+			{
+				maxSlopeAngle = maxSlopeAngleWalking;
+			}
 		}
-		else
-		{
-			maxSlopeAngle = maxSlopeAngleWalking;
-		}
+
 
 		if (moveAmount.y < 0) {
 			DescendSlope(ref moveAmount);

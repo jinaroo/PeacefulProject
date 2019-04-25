@@ -8,6 +8,8 @@ TagManager:
   - Collector
   - NPC
   - StateManager
+  - MasterSceneManager
+  - AudioManager
   layers:
   - Default
   - TransparentFX

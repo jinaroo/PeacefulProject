@@ -33,22 +33,69 @@ public class Player : MonoBehaviour {
 	bool wallSliding;
 	int wallDirX;
 
+	public AudioManager audioManager;
+	public float footstepVolume = 1f;
+	public float timeBetweenSteps = 0.2f;
+	public float climbVolume = 1f;
+	public float timeBetweenClimbSteps = 0.5f;
+	private float nextStepSoundTime;
+	private float nextClimbSoundTime;
+	
 	void Start() {
 		controller = GetComponent<Controller2D> ();
 
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
+
+		if (audioManager == null)
+		{
+			GameObject audioManagerObj = GameObject.FindWithTag("AudioManager");
+			if (audioManagerObj)
+			{
+				audioManager = audioManagerObj.GetComponent<AudioManager>();
+			}
+		}
 	}
 
 	void Update() {
-		if (controller.isClimbing)
+		if (controller.isClimbing && !controller.isHolding)
 		{
 			moveSpeed = climbSpeed;
 		}
 		else
 		{
 			moveSpeed = walkSpeed;
+		}
+
+		if (controller.isWalking)
+		{
+			if (controller.isClimbing)
+			{
+				if (Time.timeSinceLevelLoad > nextClimbSoundTime)
+				{
+					nextClimbSoundTime = Time.timeSinceLevelLoad + timeBetweenClimbSteps;
+					if(audioManager)
+						audioManager.PlaySoundEffect(audioManager.Clips.Playerclimb, climbVolume, false, true);
+				}
+				nextStepSoundTime += Time.deltaTime;
+			}
+			else
+			{
+				if (Time.timeSinceLevelLoad > nextStepSoundTime)
+				{
+					nextStepSoundTime = Time.timeSinceLevelLoad + timeBetweenSteps;
+					if(audioManager)
+						audioManager.PlaySoundEffect(audioManager.Clips.playerWalkindoor, footstepVolume, false, true);
+				}
+				nextClimbSoundTime += Time.deltaTime;
+			}
+
+		}
+		else
+		{
+			nextStepSoundTime += Time.deltaTime;
+			nextClimbSoundTime += Time.deltaTime;
 		}
 		
 		CalculateVelocity ();
