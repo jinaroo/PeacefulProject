@@ -189,6 +189,46 @@ PrefabInstance:
       propertyPath: m_ShapeTexture
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 121264671603100651, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 121264672097382851, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 121264671480795587, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 121264671776559640, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 121264672193198888, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 121264672344849868, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 121264673128571098, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 121264673474566957, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cf09d8691e5d0047a80abda93b35bba, type: 3}
 --- !u!1001 &615225918
