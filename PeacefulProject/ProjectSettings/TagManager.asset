@@ -8,6 +8,7 @@ TagManager:
   - Collector
   - NPC
   - StateManager
+  - Ball
   layers:
   - Default
   - TransparentFX
