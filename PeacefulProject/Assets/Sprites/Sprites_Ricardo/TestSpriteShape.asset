@@ -17,43 +17,43 @@ MonoBehaviour:
     m_End: 22.5
     m_Order: 7
     m_Sprites:
-    - {fileID: 21300000, guid: f947f261e6bece8449cc1f978ca580bd, type: 3}
+    - {fileID: 21300000, guid: 1e5d390c15bf1b14bb6ca9751bf8f98d, type: 3}
   - m_Start: 22.5
     m_End: 67.5
     m_Order: 6
     m_Sprites:
-    - {fileID: 21300000, guid: f947f261e6bece8449cc1f978ca580bd, type: 3}
+    - {fileID: 21300000, guid: 1e5d390c15bf1b14bb6ca9751bf8f98d, type: 3}
   - m_Start: 67.5
     m_End: 112.5
     m_Order: 4
     m_Sprites:
-    - {fileID: 21300000, guid: f947f261e6bece8449cc1f978ca580bd, type: 3}
+    - {fileID: 21300000, guid: b331076aff3ebb049b283ace7b51dc02, type: 3}
   - m_Start: 112.5
     m_End: 157.5
     m_Order: 2
     m_Sprites:
-    - {fileID: 0}
+    - {fileID: 21300000, guid: b331076aff3ebb049b283ace7b51dc02, type: 3}
   - m_Start: 157.5
     m_End: 202.5
     m_Order: 8
     m_Sprites:
-    - {fileID: 0}
+    - {fileID: 21300000, guid: b331076aff3ebb049b283ace7b51dc02, type: 3}
   - m_Start: -157.5
     m_End: -112.5
     m_Order: 1
     m_Sprites:
-    - {fileID: 0}
+    - {fileID: 21300000, guid: b331076aff3ebb049b283ace7b51dc02, type: 3}
   - m_Start: -112.5
     m_End: -67.5
     m_Order: 3
     m_Sprites:
-    - {fileID: 21300000, guid: f947f261e6bece8449cc1f978ca580bd, type: 3}
+    - {fileID: 21300000, guid: b331076aff3ebb049b283ace7b51dc02, type: 3}
   - m_Start: -67.5
     m_End: -22.5
     m_Order: 5
     m_Sprites:
-    - {fileID: 21300000, guid: f947f261e6bece8449cc1f978ca580bd, type: 3}
-  m_FillTexture: {fileID: 2800000, guid: e4484a9757058dd46bcf49a7dec468ec, type: 3}
+    - {fileID: 21300000, guid: 1e5d390c15bf1b14bb6ca9751bf8f98d, type: 3}
+  m_FillTexture: {fileID: 2800000, guid: 64b1f4259aa97494f84be88806482206, type: 3}
   m_CornerSprites:
   - m_CornerType: 0
     m_Sprites:
@@ -79,7 +79,7 @@ MonoBehaviour:
   - m_CornerType: 7
     m_Sprites:
     - {fileID: 0}
-  m_FillPixelPerUnit: 162.8
+  m_FillPixelPerUnit: 350
   m_BevelSize: 0
   m_BevelCutoff: 0
   m_FillOffset: 0

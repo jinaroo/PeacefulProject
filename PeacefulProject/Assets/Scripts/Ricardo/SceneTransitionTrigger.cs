@@ -5,23 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionTrigger : MonoBehaviour
 {
-
-    public int targetScene;
     public KeyCode changeSceneKey;
-    public Vector3 nextSceneTargetPos;
+    public Vector3 targetPos;
 
-    public StateManager stateManager;
+    public MasterSceneManager masterSceneManager;
     
     // Start is called before the first frame update
     void Start()
     {
-        stateManager = GameObject.FindWithTag("StateManager").GetComponent<StateManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(masterSceneManager == null)
+            masterSceneManager = GameObject.FindWithTag("MasterSceneManager").GetComponent<MasterSceneManager>();
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -30,9 +23,8 @@ public class SceneTransitionTrigger : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                stateManager.raccoonStartPos = nextSceneTargetPos;
-                stateManager.isDogActive = true;
-                SceneManager.LoadScene(targetScene);
+                masterSceneManager.nextTeleportPosition = targetPos;
+                masterSceneManager.TeleportRaccoon();
             }
         }
     }

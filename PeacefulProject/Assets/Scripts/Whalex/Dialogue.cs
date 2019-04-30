@@ -6,12 +6,16 @@ namespace Whalex
 {
     public class Dialogue : MonoBehaviour
     {
-        [SerializeField] private NpcTalkStatus status;
+       [SerializeField] private NpcTalkStatus status;
         
         private GameObject npcIndicator;
         private GameObject npcPrompt;
         private GameObject npcDialogue;
 
+        public float rescueTeleportDelay = 4;
+        private MasterSceneManager masterSceneManager;
+        public CharacterType charType;
+        
         private void Start()
         {
             status = NpcTalkStatus.P0_FAR;
@@ -30,6 +34,12 @@ namespace Whalex
             npcDialogue.transform.SetParent(transform.Find("Dialogue"));
             npcDialogue.transform.localPosition = Vector3.zero;
             npcDialogue.SetActive(false);
+
+            GameObject masterSceneObj = GameObject.FindWithTag("MasterSceneManager");
+            if (masterSceneObj)
+            {
+                masterSceneManager = masterSceneObj.GetComponent<MasterSceneManager>();
+            }
         }
 
         private void Update()
@@ -60,6 +70,9 @@ namespace Whalex
                         npcIndicator.SetActive(false);
                         npcPrompt.SetActive(false);
                         npcDialogue.SetActive(true);
+                        
+                        if(masterSceneManager)
+                            Invoke("Teleport", rescueTeleportDelay);
                     }
                     break;
             }
@@ -77,7 +90,7 @@ namespace Whalex
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                if (Input.GetKeyDown(KeyCode.K))
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     switch (status)
                     {
@@ -105,11 +118,37 @@ namespace Whalex
             }
         }
 
+        void Teleport()
+        {
+            switch (charType)
+            {
+                case CharacterType.DOG:
+                    masterSceneManager.TeleportDogToTunnel();
+                    break;
+                case CharacterType.SNAKE:
+                    masterSceneManager.TeleportSnakeToTunnel();
+                    break;
+                case CharacterType.BIRD:
+                    masterSceneManager.TeleportBirdToTunnel();
+                    break;
+                default:
+                    Debug.Log("charType has not been set for this character!");
+                    break;
+            }
+        }
+        
         enum NpcTalkStatus
         {
             P0_FAR,
             P1_NEAR,
             P2_TALK_,
+        }
+
+        public enum CharacterType
+        {
+            DOG, 
+            SNAKE,
+            BIRD
         }
     }
 }

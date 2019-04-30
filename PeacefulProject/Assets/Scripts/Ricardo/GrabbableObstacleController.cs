@@ -6,18 +6,18 @@ public class GrabbableObstacleController : MonoBehaviour
 {
     private Rigidbody2D rBody;
 
-    public LayerMask staticLayer;
+    public LayerMask staticLayer = 1 << 13;
 
     private bool isStatic = false;
 
-    public LayerMask playerLayer;
+    public LayerMask playerLayer = 1 << 9;
     private ContactFilter2D conFilter;
 
     private float staticThreshold = 0.0001f;
     
     // Start is called before the first frame update
     void Start()
-    {
+    {   
         rBody = GetComponent<Rigidbody2D>();
         conFilter = new ContactFilter2D();
         conFilter.layerMask = playerLayer;
