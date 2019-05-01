@@ -364,13 +364,61 @@ PrefabInstance:
       propertyPath: m_ShapeTexture
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 3692208045354724813, guid: 0f50983f6b5985243b8e264399ae4ca5,
+    - target: {fileID: 3692208044804457561, guid: 0f50983f6b5985243b8e264399ae4ca5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.3171587
+      objectReference: {fileID: 0}
+    - target: {fileID: 3692208044804457561, guid: 0f50983f6b5985243b8e264399ae4ca5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9483725
+      objectReference: {fileID: 0}
+    - target: {fileID: 3692208044804457561, guid: 0f50983f6b5985243b8e264399ae4ca5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 36.982002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3692208044804457561, guid: 0f50983f6b5985243b8e264399ae4ca5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 3692208044804457561, guid: 0f50983f6b5985243b8e264399ae4ca5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -11.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 8501484201961427618, guid: 0f50983f6b5985243b8e264399ae4ca5,
         type: 3}
       propertyPath: m_ShapeTexture
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 3692208044702790442, guid: 0f50983f6b5985243b8e264399ae4ca5,
+    - target: {fileID: 7375524026390140471, guid: 0f50983f6b5985243b8e264399ae4ca5,
         type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 245327139220850046, guid: 0f50983f6b5985243b8e264399ae4ca5,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 34637236919587583, guid: 0f50983f6b5985243b8e264399ae4ca5,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839365079289324022, guid: 0f50983f6b5985243b8e264399ae4ca5,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776555002, guid: 0f50983f6b5985243b8e264399ae4ca5, type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281737620, guid: 0f50983f6b5985243b8e264399ae4ca5, type: 3}
       propertyPath: m_ShapeTexture
       value: 
       objectReference: {fileID: 0}
