@@ -156,7 +156,9 @@ GameObject:
   - component: {fileID: 4299848123878393528}
   - component: {fileID: 7071934992336783636}
   - component: {fileID: 9123650796887700066}
-  m_Layer: 8
+  - component: {fileID: 4480226306217619366}
+  - component: {fileID: 1866390088}
+  m_Layer: 13
   m_Name: Book (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,6 +307,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4.0000005}
   m_EdgeRadius: 0
+--- !u!114 &4480226306217619366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222862062792917649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6527e4cb71ea7419020a11d3b2f1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!50 &1866390088
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222862062792917649}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &224069602845766862
 GameObject:
   m_ObjectHideFlags: 0
@@ -7446,7 +7487,9 @@ GameObject:
   - component: {fileID: 1631506494977487982}
   - component: {fileID: 1128164261383939347}
   - component: {fileID: 1490814399909948016}
-  m_Layer: 8
+  - component: {fileID: 6235679332886626514}
+  - component: {fileID: 766576535}
+  m_Layer: 13
   m_Name: Book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7595,6 +7638,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4.0000005}
   m_EdgeRadius: 0
+--- !u!114 &6235679332886626514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811194218892323650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6527e4cb71ea7419020a11d3b2f1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!50 &766576535
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811194218892323650}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1926994509142959454
 GameObject:
   m_ObjectHideFlags: 0
@@ -8786,8 +8868,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2922194352610737407}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.72, y: 6.53, z: 0}
-  m_LocalScale: {x: -0.53195, y: 0.53195, z: 0.53195}
+  m_LocalPosition: {x: 15.75, y: 6.71, z: 0}
+  m_LocalScale: {x: 0.53195, y: 0.53195, z: 0.53195}
   m_Children: []
   m_Father: {fileID: 2825143742107845163}
   m_RootOrder: 3
@@ -8829,7 +8911,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 18
-  m_Sprite: {fileID: 21300000, guid: 80302374dd35b434d934ed43bda103b4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ce8c66a507945407092ead058b4e537e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -9437,7 +9519,9 @@ GameObject:
   - component: {fileID: 7585304626702506450}
   - component: {fileID: 601680188270646887}
   - component: {fileID: 5197025239434178163}
-  m_Layer: 8
+  - component: {fileID: 2891052810277544860}
+  - component: {fileID: 2004051269}
+  m_Layer: 13
   m_Name: Book (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9586,6 +9670,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4.0000005}
   m_EdgeRadius: 0
+--- !u!114 &2891052810277544860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3257725214440329734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6527e4cb71ea7419020a11d3b2f1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!50 &2004051269
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3257725214440329734}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &3454735442506455577
 GameObject:
   m_ObjectHideFlags: 0
@@ -9913,7 +10036,9 @@ GameObject:
   - component: {fileID: 9200660168229381336}
   - component: {fileID: 2290191690665169180}
   - component: {fileID: 7526052785710662608}
-  m_Layer: 8
+  - component: {fileID: 779298703677455816}
+  - component: {fileID: 136458646}
+  m_Layer: 13
   m_Name: Book (5)
   m_TagString: Through
   m_Icon: {fileID: 0}
@@ -10062,6 +10187,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4.0000005}
   m_EdgeRadius: 0
+--- !u!114 &779298703677455816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3576461783829547923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6527e4cb71ea7419020a11d3b2f1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!50 &136458646
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3576461783829547923}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &3609524487902365623
 GameObject:
   m_ObjectHideFlags: 0
@@ -10825,7 +10989,9 @@ GameObject:
   - component: {fileID: 4575107334745289767}
   - component: {fileID: 8749376495813222682}
   - component: {fileID: 6374635385673212414}
-  m_Layer: 8
+  - component: {fileID: 958997398843408166}
+  - component: {fileID: 2092696885}
+  m_Layer: 13
   m_Name: Book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10974,6 +11140,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4.0000014}
   m_EdgeRadius: 0
+--- !u!114 &958997398843408166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4008517792053925710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6527e4cb71ea7419020a11d3b2f1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!50 &2092696885
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4008517792053925710}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &4160158631027763028
 GameObject:
   m_ObjectHideFlags: 0
@@ -13583,7 +13788,9 @@ GameObject:
   - component: {fileID: 8057641110435672618}
   - component: {fileID: 4567863252034325299}
   - component: {fileID: 7228410007536639320}
-  m_Layer: 8
+  - component: {fileID: 6907957808612838472}
+  - component: {fileID: 1332650988}
+  m_Layer: 13
   m_Name: Book (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13732,6 +13939,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4.0000005}
   m_EdgeRadius: 0
+--- !u!114 &6907957808612838472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5867119616882828880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6527e4cb71ea7419020a11d3b2f1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!50 &1332650988
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5867119616882828880}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &5911453679154833817
 GameObject:
   m_ObjectHideFlags: 0
@@ -14076,7 +14322,9 @@ GameObject:
   - component: {fileID: 412060610153266023}
   - component: {fileID: 8711140986141626533}
   - component: {fileID: 8731334366494893209}
-  m_Layer: 8
+  - component: {fileID: 2770173941176506490}
+  - component: {fileID: 1428275995}
+  m_Layer: 13
   m_Name: Book (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14225,6 +14473,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.000001, y: 4.0000014}
   m_EdgeRadius: 0
+--- !u!114 &2770173941176506490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6326740246987771084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6527e4cb71ea7419020a11d3b2f1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!50 &1428275995
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6326740246987771084}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &6396207400699336981
 GameObject:
   m_ObjectHideFlags: 0
@@ -14237,7 +14524,9 @@ GameObject:
   - component: {fileID: 4884090090968534867}
   - component: {fileID: 8249963057419117754}
   - component: {fileID: 4216976714856738862}
-  m_Layer: 8
+  - component: {fileID: 9201697075844040037}
+  - component: {fileID: 2058458511}
+  m_Layer: 13
   m_Name: Book (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14386,6 +14675,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.000001, y: 4.0000014}
   m_EdgeRadius: 0
+--- !u!114 &9201697075844040037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6396207400699336981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6527e4cb71ea7419020a11d3b2f1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!50 &2058458511
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6396207400699336981}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &6432233674943362566
 GameObject:
   m_ObjectHideFlags: 0
@@ -14777,7 +15105,9 @@ GameObject:
   - component: {fileID: 2549260253456547143}
   - component: {fileID: 9109649487899904167}
   - component: {fileID: 2271969282330171444}
-  m_Layer: 8
+  - component: {fileID: 3022436394781894101}
+  - component: {fileID: 1616279778}
+  m_Layer: 13
   m_Name: Book (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14926,6 +15256,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
+--- !u!114 &3022436394781894101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6606627722757329729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6527e4cb71ea7419020a11d3b2f1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!50 &1616279778
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6606627722757329729}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &6630038059806638638
 GameObject:
   m_ObjectHideFlags: 0
@@ -18277,7 +18646,9 @@ GameObject:
   - component: {fileID: 6138117625990573680}
   - component: {fileID: 6757395191948884088}
   - component: {fileID: 6146308194964684426}
-  m_Layer: 8
+  - component: {fileID: 1792728144064105105}
+  - component: {fileID: 1078254366}
+  m_Layer: 13
   m_Name: Book (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18426,6 +18797,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.9999998, y: 4.0000005}
   m_EdgeRadius: 0
+--- !u!114 &1792728144064105105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8999957909684124611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6527e4cb71ea7419020a11d3b2f1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!50 &1078254366
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8999957909684124611}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &9109979430580779787
 GameObject:
   m_ObjectHideFlags: 0
@@ -18556,7 +18966,9 @@ GameObject:
   - component: {fileID: 1709012510835343051}
   - component: {fileID: 1887570200411498036}
   - component: {fileID: 2211399715871339240}
-  m_Layer: 8
+  - component: {fileID: 8921755262830602983}
+  - component: {fileID: 1777489600}
+  m_Layer: 13
   m_Name: Book
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18705,6 +19117,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.000001, y: 4.0000014}
   m_EdgeRadius: 0
+--- !u!114 &8921755262830602983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9144033567585312098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6527e4cb71ea7419020a11d3b2f1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staticLayer:
+    serializedVersion: 2
+    m_Bits: 8192
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!50 &1777489600
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9144033567585312098}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &9189814353234750256
 GameObject:
   m_ObjectHideFlags: 0

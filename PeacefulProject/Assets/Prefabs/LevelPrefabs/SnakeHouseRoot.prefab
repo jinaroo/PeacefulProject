@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 3692208044496574452}
   m_Layer: 13
   m_Name: GrabbableObstacle (23)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -699,7 +699,7 @@ GameObject:
   - component: {fileID: 3692208044499901499}
   - component: {fileID: 3692208044499901496}
   - component: {fileID: 3692208044499901497}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: GrabbableObstacle (1)
   m_TagString: Through
   m_Icon: {fileID: 0}
@@ -1014,7 +1014,7 @@ GameObject:
   - component: {fileID: 3692208044545578338}
   - component: {fileID: 3692208044545578339}
   - component: {fileID: 3692208044545578336}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: GrabbableObstacle (2)
   m_TagString: Through
   m_Icon: {fileID: 0}
@@ -1163,7 +1163,7 @@ GameObject:
   - component: {fileID: 3692208044577149327}
   m_Layer: 13
   m_Name: GrabbableObstacle (16)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1310,7 +1310,7 @@ GameObject:
   - component: {fileID: 3692208044699250597}
   m_Layer: 13
   m_Name: GrabbableObstacle (26)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1759,7 +1759,7 @@ GameObject:
   - component: {fileID: 3692208044754545262}
   m_Layer: 13
   m_Name: GrabbableObstacle (19)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1906,7 +1906,7 @@ GameObject:
   - component: {fileID: 3692208044804457560}
   m_Layer: 13
   m_Name: GrabbableObstacle (24)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1918,13 +1918,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3692208044804457566}
-  m_LocalRotation: {x: -0, y: -0, z: 0.45503777, w: 0.89047223}
-  m_LocalPosition: {x: -3.03, y: -11.66, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.3171587, w: 0.9483725}
+  m_LocalPosition: {x: -2.98, y: -11.67, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 3692208045702577598}
   m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 36.982002}
 --- !u!61 &3692208044804457573
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2011,7 +2011,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 4.0000005
+  m_Mass: 3.9999998
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -2187,7 +2187,7 @@ GameObject:
   - component: {fileID: 3692208044820450733}
   m_Layer: 13
   m_Name: GrabbableObstacle (27)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2693,7 +2693,7 @@ GameObject:
   - component: {fileID: 3692208045136316292}
   m_Layer: 13
   m_Name: GrabbableObstacle (28)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2840,7 +2840,7 @@ GameObject:
   - component: {fileID: 3692208045140347632}
   m_Layer: 13
   m_Name: GrabbableObstacle (22)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2987,7 +2987,7 @@ GameObject:
   - component: {fileID: 3692208045151531119}
   m_Layer: 13
   m_Name: GrabbableObstacle (29)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3134,7 +3134,7 @@ GameObject:
   - component: {fileID: 3692208045181850268}
   m_Layer: 13
   m_Name: GrabbableObstacle (20)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3507,7 +3507,7 @@ GameObject:
   - component: {fileID: 3692208045239749981}
   m_Layer: 13
   m_Name: GrabbableObstacle (25)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3955,7 +3955,7 @@ GameObject:
   - component: {fileID: 3692208045769800635}
   m_Layer: 13
   m_Name: GrabbableObstacle (18)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4925,7 +4925,7 @@ GameObject:
   - component: {fileID: 3692208046304112212}
   m_Layer: 13
   m_Name: GrabbableObstacle (17)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5072,7 +5072,7 @@ GameObject:
   - component: {fileID: 3692208046498609898}
   m_Layer: 13
   m_Name: GrabbableObstacle (21)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
