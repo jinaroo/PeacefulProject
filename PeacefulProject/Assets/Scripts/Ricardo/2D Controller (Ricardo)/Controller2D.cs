@@ -47,6 +47,8 @@ public class Controller2D : RaycastController {
 	public bool isRising;
 	public bool isHolding;
 
+	public int spriteFaceDir;
+
 	public CollisionInfo collisions;
 	[HideInInspector]
 	public Vector2 playerInput;
@@ -88,6 +90,8 @@ public class Controller2D : RaycastController {
 
 		if (moveAmount.x != 0) {
 			collisions.faceDir = (int)Mathf.Sign(moveAmount.x);
+			if (!collisions.slidingDownMaxSlope)
+				spriteFaceDir = collisions.faceDir;
 		}
 
 		HorizontalCollisions (ref moveAmount);
@@ -170,34 +174,41 @@ public class Controller2D : RaycastController {
 				
 				float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 
-				if (i == 0 && slopeAngle <= maxSlopeAngle) {
-					// if it happens to be descending and climbing at the same time, there is a lag 
-					// since descending function will decrease x movement but player will not descend (because it's climbing)
-					// that's why we restore its previous movement for climbing to work (EP 5 12:39)
-					if (collisions.descendingSlope && moveAmount.x != 0f) {
-						collisions.descendingSlope = false;
-						moveAmount = collisions.moveAmountOld;
-					}
-					float distanceToSlopeStart = 0;
-					bool longEnough = false;
-					if (slopeAngle != collisions.slopeAngleOld) {
-						distanceToSlopeStart = hit.distance-skinWidth;
-						if (moveAmount.x > skinWidth)
+				if (i == 0) {
+					if (slopeAngle <= maxSlopeAngle)
+					{
+						// if it happens to be descending and climbing at the same time, there is a lag 
+						// since descending function will decrease x movement but player will not descend (because it's climbing)
+						// that's why we restore its previous movement for climbing to work (EP 5 12:39)
+						if (collisions.descendingSlope && moveAmount.x != 0f) {
+							collisions.descendingSlope = false;
+							moveAmount = collisions.moveAmountOld;
+						}
+						float distanceToSlopeStart = 0;
+						bool longEnough = false;
+						if (slopeAngle != collisions.slopeAngleOld) {
+							distanceToSlopeStart = hit.distance-skinWidth;
+							if (moveAmount.x > skinWidth)
+							{
+								longEnough = true;
+								moveAmount.x -= distanceToSlopeStart * directionX;
+							}
+						}
+						ClimbSlope(ref moveAmount, slopeAngle, hit.normal);
+						if (longEnough)
 						{
-							longEnough = true;
-							moveAmount.x -= distanceToSlopeStart * directionX;
+							moveAmount.x += distanceToSlopeStart * directionX;
+						}
+
+						if (collisions.climbingSlope)
+						{
+							collisions.curGroundCollider = hit.collider;
+							collisions.fallingThroughPlatform = false;
 						}
 					}
-					ClimbSlope(ref moveAmount, slopeAngle, hit.normal);
-					if (longEnough)
+					else
 					{
-						moveAmount.x += distanceToSlopeStart * directionX;
-					}
-
-					if (collisions.climbingSlope)
-					{
-						collisions.curGroundCollider = hit.collider;
-						collisions.fallingThroughPlatform = false;
+						//collisions.climbingSlope = true;
 					}
 				}
 

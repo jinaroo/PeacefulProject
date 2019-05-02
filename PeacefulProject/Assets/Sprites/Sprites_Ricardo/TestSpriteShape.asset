@@ -27,20 +27,20 @@ MonoBehaviour:
     m_End: 112.5
     m_Order: 4
     m_Sprites:
-    - {fileID: 21300000, guid: b331076aff3ebb049b283ace7b51dc02, type: 3}
+    - {fileID: 0}
   - m_Start: 112.5
-    m_End: 157.5
-    m_Order: 2
+    m_End: 158
+    m_Order: -1
     m_Sprites:
     - {fileID: 21300000, guid: b331076aff3ebb049b283ace7b51dc02, type: 3}
-  - m_Start: 157.5
-    m_End: 202.5
-    m_Order: 8
+  - m_Start: 158
+    m_End: 202
+    m_Order: -1
     m_Sprites:
     - {fileID: 21300000, guid: b331076aff3ebb049b283ace7b51dc02, type: 3}
   - m_Start: -157.5
     m_End: -112.5
-    m_Order: 1
+    m_Order: -1
     m_Sprites:
     - {fileID: 21300000, guid: b331076aff3ebb049b283ace7b51dc02, type: 3}
   - m_Start: -112.5
@@ -82,6 +82,6 @@ MonoBehaviour:
   m_FillPixelPerUnit: 350
   m_BevelSize: 0
   m_BevelCutoff: 0
-  m_FillOffset: 0
+  m_FillOffset: -0.02
   m_WorldSpaceUV: 0
   m_UseSpriteBorders: 1
