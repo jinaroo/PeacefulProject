@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Whalex
@@ -9,31 +10,45 @@ namespace Whalex
        [SerializeField] private NpcTalkStatus status;
         
         private GameObject npcIndicator;
-        private GameObject npcPrompt;
-        private GameObject npcDialogue;
+        private GameObject npcHeart;
+        private GameObject npcDialogueCloud;
 
         public float rescueTeleportDelay = 4;
         private MasterSceneManager masterSceneManager;
         public CharacterType charType;
+        public bool hasBeenRescued;
+        public bool questComplete;
+
+        public int totalQuestSteps;
+        public int numQuestStepsCompleted;
+
+        public float growTime = 1f;
+        public Ease growEase;
+        public Ease shrinkEase;
+
+        public SpriteRenderer[] questItemIcons;
+        public Color itemCompleteColor;
         
         private void Start()
         {
-            status = NpcTalkStatus.P0_FAR;
+            UpdateStatus(NpcTalkStatus.P0_FAR);
             
             npcIndicator = Instantiate((Resources.Load<GameObject>("heart_prefab_prepare")));
-            npcIndicator.transform.SetParent(transform.Find("Prompt"));
+            npcIndicator.transform.SetParent(transform.Find("Heart"));
             npcIndicator.transform.localPosition = Vector3.zero;
             npcIndicator.SetActive(false);
             
-            npcPrompt = Instantiate(Resources.Load<GameObject>("heart_prefab"));
-            npcPrompt.transform.SetParent(transform.Find("Prompt"));
-            npcPrompt.transform.localPosition = Vector3.zero;
-            npcPrompt.SetActive(false);
+            npcHeart = Instantiate(Resources.Load<GameObject>("heart_prefab"));
+            npcHeart.transform.SetParent(transform.Find("Heart"));
+            npcHeart.transform.localPosition = Vector3.zero;
+            //npcHeart.SetActive(false);
+            npcHeart.transform.localScale = Vector3.zero;
             
-            npcDialogue = Instantiate(Resources.Load<GameObject>("npc_cloud"));
-            npcDialogue.transform.SetParent(transform.Find("Dialogue"));
-            npcDialogue.transform.localPosition = Vector3.zero;
-            npcDialogue.SetActive(false);
+            npcDialogueCloud = Instantiate(Resources.Load<GameObject>("npc_cloud"));
+            npcDialogueCloud.transform.SetParent(transform.Find("Dialogue"));
+            npcDialogueCloud.transform.localPosition = Vector3.zero;
+            //npcDialogueCloud.SetActive(false);
+            npcDialogueCloud.transform.localScale = Vector3.zero;
 
             GameObject masterSceneObj = GameObject.FindWithTag("MasterSceneManager");
             if (masterSceneObj)
@@ -42,47 +57,11 @@ namespace Whalex
             }
         }
 
-        private void Update()
-        {
-            switch (status)
-            {
-                case NpcTalkStatus.P0_FAR:
-                    if (!npcIndicator.activeSelf)
-                    {
-                        npcIndicator.SetActive(true);
-                        npcPrompt.SetActive(false);
-                        npcDialogue.SetActive(false);
-                    }
-                    break;
-                
-                case NpcTalkStatus.P1_NEAR:
-                    if (!npcPrompt.activeSelf)
-                    {
-                        npcIndicator.SetActive(false);
-                        npcPrompt.SetActive(true);
-                        npcDialogue.SetActive(false);
-                    }
-                    break;
-                    
-                case NpcTalkStatus.P2_TALK_:
-                    if (!npcDialogue.activeSelf)
-                    {
-                        npcIndicator.SetActive(false);
-                        npcPrompt.SetActive(false);
-                        npcDialogue.SetActive(true);
-                        
-                        if(masterSceneManager)
-                            Invoke("Teleport", rescueTeleportDelay);
-                    }
-                    break;
-            }
-        }
-
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                status = NpcTalkStatus.P1_NEAR;
+                UpdateStatus(NpcTalkStatus.P1_NEAR);
             }
         }
 
@@ -95,15 +74,29 @@ namespace Whalex
                     switch (status)
                     {
                         case NpcTalkStatus.P1_NEAR:
-                            status = NpcTalkStatus.P2_TALK_;
+                            if (hasBeenRescued)
+                            {
+                                if (questComplete)
+                                {
+                                    UpdateStatus(NpcTalkStatus.P2_HAPPY);
+                                }
+                                else
+                                {
+                                    UpdateStatus(NpcTalkStatus.P3_QUEST);
+                                }
+                            }
+                            else
+                            {
+                                UpdateStatus(NpcTalkStatus.P2_HAPPY);
+                            }
                             break;
                         
-                        case NpcTalkStatus.P2_TALK_:
-                            status = NpcTalkStatus.P1_NEAR;
+                        case NpcTalkStatus.P2_HAPPY:
+                            //UpdateStatus(NpcTalkStatus.P1_NEAR);
                             break;
                         
                         default:
-                            print("Wrong NPC talking status!");
+                            print("No behavior specified for this talking status!");
                             break;
                     }
                 }
@@ -114,12 +107,88 @@ namespace Whalex
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                status = NpcTalkStatus.P0_FAR;
+                UpdateStatus(NpcTalkStatus.P0_FAR);
             }
         }
 
+        void UpdateStatus(NpcTalkStatus newStatus)
+        {
+            if (status == newStatus)
+                return;
+
+            status = newStatus;
+            switch (status)
+            {
+                case NpcTalkStatus.P0_FAR:
+                    if (npcDialogueCloud.transform.localScale != Vector3.zero)
+                    {
+                        npcDialogueCloud.transform.DOScale(0f, growTime).SetEase(shrinkEase);
+                    }
+
+                    if (questComplete)
+                    {
+                        if (npcHeart.transform.localScale != Vector3.zero)
+                        {
+                            npcHeart.transform.DOScale(0f, growTime).SetEase(shrinkEase);
+                        }
+                    }
+                    break;
+                
+                case NpcTalkStatus.P1_NEAR:
+                    if (questComplete)
+                    {
+                        if (npcHeart.transform.localScale == Vector3.zero)
+                        {
+                            npcHeart.transform.DOScale(1f, growTime).SetEase(growEase);
+                        }
+                    }
+                    else
+                    {
+                        // display button prompt
+                    }
+                    break;
+                    
+                case NpcTalkStatus.P2_HAPPY:
+                    if(!hasBeenRescued)
+                    {
+                        hasBeenRescued = true;
+                        if(masterSceneManager)
+                            Invoke("Teleport", rescueTeleportDelay);
+                    }
+                    if (npcHeart.transform.localScale == Vector3.zero)
+                    {
+                        npcHeart.transform.DOScale(1f, growTime).SetEase(growEase);
+                    }
+                    break;
+                case NpcTalkStatus.P3_QUEST:
+                    if (npcDialogueCloud.transform.localScale == Vector3.zero)
+                    {
+                        npcDialogueCloud.transform.DOScale(1f, growTime).SetEase(growEase);
+                        npcHeart.transform.DOScale(0f, growTime).SetEase(shrinkEase);
+                    }
+
+                    break;
+            }
+        }
+
+        public void AcceptItem(int itemIndex)
+        {
+            questItemIcons[itemIndex].color = itemCompleteColor;
+            numQuestStepsCompleted++;
+
+            if (numQuestStepsCompleted == totalQuestSteps)
+            {
+                questComplete = true;
+                UpdateStatus(NpcTalkStatus.P2_HAPPY);
+            }
+        }
+        
         void Teleport()
         {
+            if (npcHeart.transform.localScale != Vector3.zero)
+            {
+                npcHeart.transform.DOScale(0f, growTime).SetEase(shrinkEase);
+            }
             switch (charType)
             {
                 case CharacterType.DOG:
@@ -141,7 +210,8 @@ namespace Whalex
         {
             P0_FAR,
             P1_NEAR,
-            P2_TALK_,
+            P2_HAPPY,
+            P3_QUEST 
         }
 
         public enum CharacterType

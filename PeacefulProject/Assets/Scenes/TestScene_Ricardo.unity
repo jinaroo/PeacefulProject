@@ -1242,7 +1242,7 @@ PrefabInstance:
     - target: {fileID: 8065886303863495499, guid: 1a8844faea220ca439e56ecdb2e82937,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.62
+      value: -5.65
       objectReference: {fileID: 0}
     - target: {fileID: 8065886303863495499, guid: 1a8844faea220ca439e56ecdb2e82937,
         type: 3}
@@ -1299,8 +1299,47 @@ PrefabInstance:
       propertyPath: charType
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8065886304507769178, guid: 1a8844faea220ca439e56ecdb2e82937, type: 3}
+    - target: {fileID: 1658738509107218126, guid: 1a8844faea220ca439e56ecdb2e82937,
+        type: 3}
+      propertyPath: growEase
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658738509107218126, guid: 1a8844faea220ca439e56ecdb2e82937,
+        type: 3}
+      propertyPath: growTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658738509107218126, guid: 1a8844faea220ca439e56ecdb2e82937,
+        type: 3}
+      propertyPath: shrinkEase
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658738508197289388, guid: 1a8844faea220ca439e56ecdb2e82937,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658738508197289388, guid: 1a8844faea220ca439e56ecdb2e82937,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658738508880850690, guid: 1a8844faea220ca439e56ecdb2e82937,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658738508880850690, guid: 1a8844faea220ca439e56ecdb2e82937,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658738508197289391, guid: 1a8844faea220ca439e56ecdb2e82937,
+        type: 3}
+      propertyPath: m_Name
+      value: Heart
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a8844faea220ca439e56ecdb2e82937, type: 3}
 --- !u!4 &1056256723 stripped
 Transform:
@@ -2080,7 +2119,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1542389693
 Transform:
   m_ObjectHideFlags: 0
@@ -2696,6 +2735,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SceneTransitionTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731740204360195356, guid: da697e3176b8d924fb51fbf80f7d88a6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5731740204360195331, guid: da697e3176b8d924fb51fbf80f7d88a6,
         type: 3}
@@ -3431,7 +3475,7 @@ PrefabInstance:
     - target: {fileID: 8314092149170794045, guid: 9b5f29e3b13d6b541869e6c6dc669fed,
         type: 3}
       propertyPath: dogTunnelPosition.x
-      value: 30
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 8314092149170794045, guid: 9b5f29e3b13d6b541869e6c6dc669fed,
         type: 3}
