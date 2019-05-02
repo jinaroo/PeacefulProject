@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.U2D;
 
 public class SpriteConformToSlope : MonoBehaviour
 {
@@ -22,9 +23,6 @@ public class SpriteConformToSlope : MonoBehaviour
 
     public Transform spriteTransform;
 
-    public float ignoreBumpTime = 0.05f;
-    private float timeToStopIgnoringSlope;
-
     public float climbAngleAdjustment = 90f;
     public float climbHeightAdjustment = 0.35f;
     public float climbHeightSlopeModifier = 3f;
@@ -32,10 +30,45 @@ public class SpriteConformToSlope : MonoBehaviour
     public LayerMask layerMask;
 
     private int climbingDir = -10;
+
+    private Collider2D oldClimbingCollider;
+
+    public SpriteRenderer headSprite;
+    public SpriteRenderer bodySprite;
+    public SpriteRenderer tailSprite;
+    public SpriteRenderer arm1Sprite;
+    public SpriteRenderer arm2Sprite;
+    public SpriteRenderer leg1Sprite;
+    public SpriteRenderer leg2Sprite;
+    
+    private int headWalkingOrder;
+    private int bodyWalkingOrder;
+    private int tailWalkingOrder;
+    private int arm1WalkingOrder;
+    private int arm2WalkingOrder;
+    private int leg1WalkingOrder;
+    private int leg2WalkingOrder;
+    
+    public int headClimbingOrderOffset;
+    public int bodyClimbingOrderOffset;
+    public int tailClimbingOrderOffset;
+    public int arm1ClimbingOrderOffset;
+    public int arm2ClimbingOrderOffset;
+    public int leg1ClimbingOrderOffset;
+    public int leg2ClimbingOrderOffset;
+    
     // Start is called before the first frame update
     void Start()
     {
         sRend = GetComponent<SpriteRenderer>();
+
+        headWalkingOrder = headSprite.sortingOrder;
+        bodyWalkingOrder = bodySprite.sortingOrder;
+        tailWalkingOrder = tailSprite.sortingOrder;
+        arm1WalkingOrder = arm1Sprite.sortingOrder;
+        arm2WalkingOrder = arm2Sprite.sortingOrder;
+        leg1WalkingOrder = leg1Sprite.sortingOrder;
+        leg2WalkingOrder = leg2Sprite.sortingOrder;
     }
 
     // Update is called once per frame
@@ -61,15 +94,30 @@ public class SpriteConformToSlope : MonoBehaviour
             tgtUp = Vector3.up;
             tgtLocalPos = Vector3.zero;
         }
+
+
         
-        if (oldTgtUp != tgtUp)
-        {
-            timeToStopIgnoringSlope = Time.timeSinceLevelLoad + ignoreBumpTime;
-            oldTgtUp = tgtUp;
-        }
         
         if (controller.isClimbing)
         {
+            if (controller.collisions.curGroundCollider != oldClimbingCollider)
+            {
+                //Debug.Log("hitting a new collider");
+                oldClimbingCollider = controller.collisions.curGroundCollider;
+                SpriteShapeRenderer spriteShapeRend = oldClimbingCollider.GetComponent<SpriteShapeRenderer>();
+                SpriteRenderer spriteRend = oldClimbingCollider.GetComponent<SpriteRenderer>();
+
+                int curObstacleSortOrder = 45;
+                if (spriteShapeRend)
+                {
+                    curObstacleSortOrder = spriteShapeRend.sortingOrder;
+                } else if (spriteRend)
+                {
+                    curObstacleSortOrder = spriteRend.sortingOrder;
+                }
+                
+                SwitchToClimbingOrders(curObstacleSortOrder);
+            }
             if (climbingDir == -10)
             {
                 climbingDir = controller.collisions.faceDir;
@@ -80,6 +128,12 @@ public class SpriteConformToSlope : MonoBehaviour
         }
         else
         {
+            if (climbingDir != -10)
+            {
+                SwitchToWalkingOrders();
+                oldClimbingCollider = null;
+            }
+            
             climbingDir = -10;
             modifiedTgtUp = tgtUp;
             modifiedTgtLocalPos = tgtLocalPos;
@@ -87,10 +141,31 @@ public class SpriteConformToSlope : MonoBehaviour
 
 
         
-        if (Time.timeSinceLevelLoad >= timeToStopIgnoringSlope)
-        {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(Vector3.forward, modifiedTgtUp), rotationSmoothing * rotationSpeed * Time.deltaTime);
-            spriteTransform.localPosition += (modifiedTgtLocalPos - spriteTransform.localPosition) * rotationSmoothing * rotationSpeed * Time.deltaTime;
-        }
+
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(Vector3.forward, modifiedTgtUp), rotationSmoothing * rotationSpeed * Time.deltaTime);
+        spriteTransform.localPosition += (modifiedTgtLocalPos - spriteTransform.localPosition) * rotationSmoothing * rotationSpeed * Time.deltaTime;
+    }
+
+    void SwitchToClimbingOrders(int obstacleLayer)
+    {
+        Debug.Log("switching to climbing orders");
+        bodySprite.sortingOrder = obstacleLayer + bodyClimbingOrderOffset;
+        headSprite.sortingOrder = obstacleLayer + headClimbingOrderOffset;
+        tailSprite.sortingOrder = obstacleLayer + tailClimbingOrderOffset;
+        arm1Sprite.sortingOrder = obstacleLayer + arm1ClimbingOrderOffset;
+        arm2Sprite.sortingOrder = obstacleLayer + arm2ClimbingOrderOffset;
+        leg1Sprite.sortingOrder = obstacleLayer + leg1ClimbingOrderOffset;
+        leg2Sprite.sortingOrder = obstacleLayer + leg2ClimbingOrderOffset;
+    }
+
+    void SwitchToWalkingOrders()
+    {
+        bodySprite.sortingOrder = bodyWalkingOrder;
+        headSprite.sortingOrder = headWalkingOrder;
+        tailSprite.sortingOrder = tailWalkingOrder;
+        arm1Sprite.sortingOrder = arm1WalkingOrder;
+        arm2Sprite.sortingOrder = arm2WalkingOrder;
+        leg1Sprite.sortingOrder = leg1WalkingOrder;
+        leg2Sprite.sortingOrder = leg2WalkingOrder;
     }
 }

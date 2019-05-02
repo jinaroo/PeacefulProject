@@ -1437,13 +1437,26 @@ MonoBehaviour:
   rotationSmoothing: 0.5
   rotationSpeed: 20
   spriteTransform: {fileID: 1629046074}
-  ignoreBumpTime: 0
   climbAngleAdjustment: 90
   climbHeightAdjustment: 0.4
   climbHeightSlopeModifier: 3
   layerMask:
     serializedVersion: 2
     m_Bits: 8448
+  headSprite: {fileID: 664859116}
+  bodySprite: {fileID: 664859128}
+  tailSprite: {fileID: 664859106}
+  arm1Sprite: {fileID: 664859130}
+  arm2Sprite: {fileID: 664859114}
+  leg1Sprite: {fileID: 664859118}
+  leg2Sprite: {fileID: 664859104}
+  headClimbingOrderOffset: 2
+  bodyClimbingOrderOffset: -1
+  tailClimbingOrderOffset: -2
+  arm1ClimbingOrderOffset: 1
+  arm2ClimbingOrderOffset: -1
+  leg1ClimbingOrderOffset: 1
+  leg2ClimbingOrderOffset: -1
 --- !u!1 &486876104978767568
 GameObject:
   m_ObjectHideFlags: 0
