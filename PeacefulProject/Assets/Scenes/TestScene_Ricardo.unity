@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 506572686}
   m_Layer: 8
   m_Name: Obstacle 1 (1)
-  m_TagString: Through
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -443,13 +443,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506572684}
-  m_LocalRotation: {x: 0, y: 0, z: -0.84306306, w: 0.53781474}
+  m_LocalRotation: {x: 0, y: 0, z: 0.67629755, w: 0.73662853}
   m_LocalPosition: {x: 0.46, y: -1.03, z: -0.015625}
   m_LocalScale: {x: 8, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1287935850}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -114.93}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 85.11}
 --- !u!212 &506572686
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1613,7 +1613,7 @@ GameObject:
   - component: {fileID: 1139436935}
   m_Layer: 8
   m_Name: Obstacle 1 (2)
-  m_TagString: Through
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

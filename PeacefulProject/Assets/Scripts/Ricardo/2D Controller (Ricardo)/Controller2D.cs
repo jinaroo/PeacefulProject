@@ -36,7 +36,7 @@ public struct CollisionInfo {
 
 public class Controller2D : RaycastController {
 
-	float maxSlopeAngle = 80;
+	public float maxSlopeAngle = 80;
 	public float maxSlopeAngleWalking = 45f;
 	public float maxSlopeAngleClimbing = 90f;
 
@@ -153,6 +153,7 @@ public class Controller2D : RaycastController {
 			rayLength = 10f * skinWidth;
 		}
 		
+		
 		for (int i = 0; i < horizontalRayCount; i ++) {
 			Vector2 rayOrigin = (directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight;
 			rayOrigin += Vector2.up * (horizontalRaySpacing * i);
@@ -206,9 +207,21 @@ public class Controller2D : RaycastController {
 							collisions.fallingThroughPlatform = false;
 						}
 					}
-					else
+					else if(slopeAngle < 90f)
 					{
-						//collisions.climbingSlope = true;
+						float moveDistance = Mathf.Abs (moveAmount.x);
+						float climbmoveAmountY = Mathf.Sin (slopeAngle * Mathf.Deg2Rad) * moveDistance;
+
+						if (moveAmount.y <= climbmoveAmountY)
+						{
+							collisions.below = true;
+							collisions.curGroundCollider = hit.collider;
+							collisions.slopeAngle = collisions.slopeAngleOld;
+							collisions.slopeNormal = hit.normal;
+						}
+
+						if (slopeAngle >= maxSlopeAngle)
+							collisions.slidingDownMaxSlope = true;
 					}
 				}
 

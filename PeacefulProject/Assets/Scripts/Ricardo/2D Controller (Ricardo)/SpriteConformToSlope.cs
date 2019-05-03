@@ -74,18 +74,24 @@ public class SpriteConformToSlope : MonoBehaviour
     // Update is called once per frame
     void Update()
     {        
-        if (controller.collisions.below && (controller.collisions.climbingSlope || controller.collisions.descendingSlope))
+        if (controller.collisions.below && controller.collisions.slopeAngle != 0f)
         {
-            RaycastHit2D[] hits = Physics2D.RaycastAll(controller.transform.position, -controller.collisions.slopeNormal, 1.5f, layerMask);
-            foreach (RaycastHit2D hit in hits)
+            if (!controller.collisions.slidingDownMaxSlope)
             {
-                if (hit.collider == controller.collisions.curGroundCollider && hit.distance > 0f)
+                Vector3 slopeDir = Quaternion.AngleAxis(controller.collisions.slopeAngle, Vector3.forward) * Vector3.right;
+                Vector3 slopeNormal = Vector3.Cross(slopeDir, Vector3.back).normalized;
+                Debug.Log(slopeNormal);
+                RaycastHit2D[] hits = Physics2D.RaycastAll(controller.transform.position, -slopeNormal, 1.5f, layerMask);
+                foreach (RaycastHit2D hit in hits)
                 {
-                    heightAdjustment = hit.distance - (sRend.size.y / 2f);
-                    tgtUp = controller.collisions.slopeNormal;
-                    tgtLocalPos = new Vector3(0f, -heightAdjustment, 0f);
-                    break;
-                }
+                    if (hit.collider == controller.collisions.curGroundCollider && hit.distance > 0f)
+                    {
+                        heightAdjustment = hit.distance - (sRend.size.y / 2f);
+                        tgtUp = slopeNormal;
+                        tgtLocalPos = new Vector3(0f, -heightAdjustment, 0f);
+                        break;
+                    }
+                } 
             }
         }
         else
@@ -95,14 +101,10 @@ public class SpriteConformToSlope : MonoBehaviour
             tgtLocalPos = Vector3.zero;
         }
 
-
-        
-        
         if (controller.isClimbing)
         {
             if (controller.collisions.curGroundCollider != oldClimbingCollider)
             {
-                //Debug.Log("hitting a new collider");
                 oldClimbingCollider = controller.collisions.curGroundCollider;
                 SpriteShapeRenderer spriteShapeRend = oldClimbingCollider.GetComponent<SpriteShapeRenderer>();
                 SpriteRenderer spriteRend = oldClimbingCollider.GetComponent<SpriteRenderer>();
@@ -120,10 +122,9 @@ public class SpriteConformToSlope : MonoBehaviour
             }
             if (climbingDir == -10)
             {
-                climbingDir = controller.collisions.faceDir;
+                climbingDir = controller.spriteFaceDir;
             }
             modifiedTgtUp = Quaternion.AngleAxis(climbAngleAdjustment * -climbingDir, Vector3.forward) * tgtUp;
-            //modifiedTgtUp = tgtUp;
             modifiedTgtLocalPos = tgtLocalPos + Vector3.right * (climbHeightAdjustment + tgtLocalPos.magnitude * climbHeightSlopeModifier * climbHeightAdjustment) * climbingDir;
         }
         else

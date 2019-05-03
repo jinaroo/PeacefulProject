@@ -118,30 +118,29 @@ public class Player : MonoBehaviour {
 	}
 
 	public void OnJumpInputDown() {
-		if (wallSliding) {
-			if (wallDirX == directionalInput.x) {
-				velocity.x = -wallDirX * wallJumpClimb.x;
-				velocity.y = wallJumpClimb.y;
-			}
-			else if (directionalInput.x == 0) {
-				velocity.x = -wallDirX * wallJumpOff.x;
-				velocity.y = wallJumpOff.y;
-			}
-			else {
-				velocity.x = -wallDirX * wallLeap.x;
-				velocity.y = wallLeap.y;
-			}
-		}
-		if (controller.collisions.below) {
-			velocity.y = maxJumpVelocity;
-//			if (controller.collisions.slidingDownMaxSlope) {
-//				if (directionalInput.x != -Mathf.Sign (controller.collisions.slopeNormal.x)) { // not jumping against max slope
-//					velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
-//					velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
-//				}
-//			} else {
-//				velocity.y = maxJumpVelocity;
+//		if (wallSliding) {
+//			if (wallDirX == directionalInput.x) {
+//				velocity.x = -wallDirX * wallJumpClimb.x;
+//				velocity.y = wallJumpClimb.y;
 //			}
+//			else if (directionalInput.x == 0) {
+//				velocity.x = -wallDirX * wallJumpOff.x;
+//				velocity.y = wallJumpOff.y;
+//			}
+//			else {
+//				velocity.x = -wallDirX * wallLeap.x;
+//				velocity.y = wallLeap.y;
+//			}
+//		}
+		if (controller.collisions.below) {
+			if (controller.collisions.slidingDownMaxSlope) {
+				if (directionalInput.x != -Mathf.Sign (controller.collisions.slopeNormal.x)) { // not jumping against max slope
+					velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
+					velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
+				}
+			} else {
+				velocity.y = maxJumpVelocity;
+			}
 		}
 	}
 

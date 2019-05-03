@@ -18,7 +18,7 @@ public class AnimationController : MonoBehaviour
     {
         if (!controller.isClimbing)
         {
-            if (controller.collisions.faceDir == 1)
+            if (controller.spriteFaceDir == 1)
             {
                 transform.localRotation = Quaternion.Euler(new Vector3(0f, 180f, 0f));
             }
