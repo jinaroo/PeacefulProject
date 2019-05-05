@@ -262,10 +262,105 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1631506494977487982, guid: db8c50b01f2b7284c8b0b715d65029ac,
         type: 3}
-      propertyPath: m_SelectedEditorRenderState
-      value: 0
+      propertyPath: m_ShapeTexture
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3811309683355041809, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4299848123878393528, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683306684035927665, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200660168229381336, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 14743602783386866, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269652152571406986, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 412060610153266023, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4884090090968534867, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2549260253456547143, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138117625990573680, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 592486135405103602, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1884954171246537750, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 65606040455701454, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5850484887511239818, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7585304626702506450, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4575107334745289767, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8057641110435672618, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3246343393162207380, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6171540408104061293, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1709012510835343051, guid: db8c50b01f2b7284c8b0b715d65029ac,
         type: 3}
       propertyPath: m_ShapeTexture
       value: 
