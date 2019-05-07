@@ -38,6 +38,8 @@ public class GrabObjects : MonoBehaviour
 
         private void PutDownObj(CollectEvent myEvent)
         {
+            if (holdingObject == null)
+                return;
             holdingObject.transform.SetParent(myEvent.collectorTf);
             holdingObject.transform.localPosition = Vector3.zero;
             holdingObject.transform.localRotation = Quaternion.identity;
@@ -52,7 +54,6 @@ public class GrabObjects : MonoBehaviour
             
             // change its layer so it won't be picked up by player again
             holdingObject.layer = LayerMask.NameToLayer("Placed");
-            holdingObject = null;
             isHolding = false;
             if (holdingObject.GetComponent<SpriteRenderer>())
             {
@@ -61,7 +62,8 @@ public class GrabObjects : MonoBehaviour
             {
                 holdingObject.GetComponent<SpriteShapeRenderer>().sortingOrder = previousSortOrder;
             }
-            
+
+            holdingObject = null;
             controller.isHolding = false;
         }
 
@@ -99,7 +101,8 @@ public class GrabObjects : MonoBehaviour
                         ? controller.raycastOrigins.bottomLeft
                         : controller.raycastOrigins.bottomRight;
                     rayOrigin += Vector2.up * (controller.horizontalRaySpacing * i);
-                    RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * currentDir, grabDst, grabMask);
+                    
+                    RaycastHit2D hit = Physics2D.CircleCast(rayOrigin, controller.horizontalRaySpacing, Vector2.right * currentDir, grabDst, grabMask);
                     Debug.DrawRay(rayOrigin, Vector2.right * currentDir * grabDst, Color.yellow);
 
                     if (hit)

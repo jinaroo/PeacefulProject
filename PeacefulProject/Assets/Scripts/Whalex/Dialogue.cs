@@ -173,7 +173,7 @@ namespace Whalex
 
         public void AcceptItem(int itemIndex)
         {
-            questItemIcons[itemIndex].color = itemCompleteColor;
+            //questItemIcons[itemIndex].color = itemCompleteColor;
             numQuestStepsCompleted++;
 
             if (numQuestStepsCompleted == totalQuestSteps)

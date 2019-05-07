@@ -17,7 +17,7 @@ public class Collector : MonoBehaviour
     public Transform[] collectTransforms;
     public Dialogue targetDialogue;
     
-    private bool[] collectStatus;
+    public bool[] collectStatus;
     private int numItemsCollected;
     
     private void OnTriggerEnter2D(Collider2D other)
@@ -33,20 +33,20 @@ public class Collector : MonoBehaviour
                         {
                             collectStatus[0] = true;
                             targetDialogue.AcceptItem(0);
-                            EventManagerNew.Instance.Fire(new CollectEvent(collectTransforms[0]));
+                            SnapItem(other.gameObject, collectTransforms[0]);
                         }
                         break;
                     case Dialogue.CharacterType.SNAKE:
                         if (other.CompareTag("SnakeBranch") && numItemsCollected < 3)
                         {
                             targetDialogue.AcceptItem(numItemsCollected);
-                            EventManagerNew.Instance.Fire(new CollectEvent(collectTransforms[numItemsCollected]));
+                            SnapItem(other.gameObject, collectTransforms[numItemsCollected]);
                             numItemsCollected++;
                         } else if (other.CompareTag("SnakeLighter") && !collectStatus[3])
                         {
                             collectStatus[3] = true;
                             targetDialogue.AcceptItem(3);
-                            EventManagerNew.Instance.Fire(new CollectEvent(collectTransforms[3]));
+                            SnapItem(other.gameObject, collectTransforms[3]);
                         }
                         break;
                     case Dialogue.CharacterType.BIRD:
@@ -54,27 +54,48 @@ public class Collector : MonoBehaviour
                         {
                             collectStatus[0] = true;
                             targetDialogue.AcceptItem(0);
-                            EventManagerNew.Instance.Fire(new CollectEvent(collectTransforms[0]));
+                            SnapItem(other.gameObject, collectTransforms[0]);
                         } else if (other.CompareTag("BirdSquare") && !collectStatus[1])
                         {
                             collectStatus[1] = true;
                             targetDialogue.AcceptItem(1);
-                            EventManagerNew.Instance.Fire(new CollectEvent(collectTransforms[1]));
+                            SnapItem(other.gameObject, collectTransforms[1]);
                         } else if (other.CompareTag("BirdCircle") && !collectStatus[2])
                         {
                             collectStatus[2] = true;
                             targetDialogue.AcceptItem(2);
-                            EventManagerNew.Instance.Fire(new CollectEvent(collectTransforms[2]));
+                            SnapItem(other.gameObject, collectTransforms[2]);
                         } else if (other.CompareTag("BirdTriangle") && !collectStatus[3])
                         {
                             collectStatus[3] = true;
                             targetDialogue.AcceptItem(3);
-                            EventManagerNew.Instance.Fire(new CollectEvent(collectTransforms[3]));
+                            SnapItem(other.gameObject, collectTransforms[3]);
                         }
                         break;
                 }
             }
             
+        }
+    }
+
+    void SnapItem(GameObject holdingObject, Transform collectorTf)
+    {
+        if (holdingObject.GetComponent<Collider2D>().isTrigger)
+        {
+            EventManagerNew.Instance.Fire(new CollectEvent(collectorTf));  
+        }
+        else
+        {
+            holdingObject.transform.SetParent(collectorTf);
+            holdingObject.transform.localPosition = Vector3.zero;
+            holdingObject.transform.localRotation = Quaternion.identity;
+            holdingObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            holdingObject.GetComponent<Rigidbody2D>().angularVelocity = 0f;
+            holdingObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            holdingObject.GetComponent<Collider2D>().isTrigger = true;
+
+            // change its layer so it won't be picked up by player again
+            holdingObject.layer = LayerMask.NameToLayer("Placed");
         }
     }
 }
