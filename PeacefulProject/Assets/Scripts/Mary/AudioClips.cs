@@ -23,12 +23,7 @@ public class AudioClips : MonoBehaviour
     public AudioClip underground;
     public AudioClip interior;
     
-    
-    //narrative sound effect for thought bubble stories after they are in the nest,
-    //if we still want a mini story about what happened to the humans
-    public AudioClip dogStoryBubble;
-    public AudioClip birdStoryBubble;
-    public AudioClip snakeStoryBubble;
+   
 }
 
 
