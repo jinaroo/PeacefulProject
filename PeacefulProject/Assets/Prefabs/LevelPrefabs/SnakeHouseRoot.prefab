@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 3692208044496574452}
   m_Layer: 13
   m_Name: GrabbableObstacle (23)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -658,8 +658,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 3.9999998
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -699,7 +699,7 @@ GameObject:
   - component: {fileID: 3692208044499901499}
   - component: {fileID: 3692208044499901496}
   - component: {fileID: 3692208044499901497}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: GrabbableObstacle (1)
   m_TagString: Through
   m_Icon: {fileID: 0}
@@ -714,8 +714,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3692208044499901503}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.576, y: -0.21, z: 0}
-  m_LocalScale: {x: 0.24497302, y: 0.65326136, z: 0.48994604}
+  m_LocalPosition: {x: 4.7025585, y: 4.357072, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 5736538169601127161}
   m_RootOrder: 1
@@ -805,8 +805,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 3.9999998
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -1014,7 +1014,7 @@ GameObject:
   - component: {fileID: 3692208044545578338}
   - component: {fileID: 3692208044545578339}
   - component: {fileID: 3692208044545578336}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: GrabbableObstacle (2)
   m_TagString: Through
   m_Icon: {fileID: 0}
@@ -1029,8 +1029,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3692208044545578342}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.102, y: 1.05, z: 0}
-  m_LocalScale: {x: 0.24497302, y: 0.65326136, z: 0.48994604}
+  m_LocalPosition: {x: 0.8327448, y: 8.21464, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 5736538169601127161}
   m_RootOrder: 2
@@ -1120,8 +1120,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 3.9999998
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -1163,7 +1163,7 @@ GameObject:
   - component: {fileID: 3692208044577149327}
   m_Layer: 13
   m_Name: GrabbableObstacle (16)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1267,8 +1267,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 3.9999993
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -1310,7 +1310,7 @@ GameObject:
   - component: {fileID: 3692208044699250597}
   m_Layer: 13
   m_Name: GrabbableObstacle (26)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1414,7 +1414,7 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
+  m_UseAutoMass: 1
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
@@ -1759,7 +1759,7 @@ GameObject:
   - component: {fileID: 3692208044754545262}
   m_Layer: 13
   m_Name: GrabbableObstacle (19)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1863,7 +1863,7 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
+  m_UseAutoMass: 1
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
@@ -1906,7 +1906,7 @@ GameObject:
   - component: {fileID: 3692208044804457560}
   m_Layer: 13
   m_Name: GrabbableObstacle (24)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1918,13 +1918,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3692208044804457566}
-  m_LocalRotation: {x: -0, y: -0, z: 0.45503777, w: 0.89047223}
-  m_LocalPosition: {x: -3.03, y: -11.66, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: 0.3171587, w: 0.9483725}
+  m_LocalPosition: {x: -2.98, y: -11.67, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 3692208045702577598}
   m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 36.982002}
 --- !u!61 &3692208044804457573
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2010,8 +2010,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 3.9999998
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -2187,7 +2187,7 @@ GameObject:
   - component: {fileID: 3692208044820450733}
   m_Layer: 13
   m_Name: GrabbableObstacle (27)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2291,8 +2291,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 5.6384993
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -2412,8 +2412,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3692208045018018747}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.229, y: 1.05, z: 0}
-  m_LocalScale: {x: 0.24497302, y: 0.65326136, z: 0.48994604}
+  m_LocalPosition: {x: 10.033758, y: 8.21464, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 5736538169601127161}
   m_RootOrder: 3
@@ -2503,8 +2503,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 3.9999998
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -2559,8 +2559,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3692208045095436869}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.691, y: -0.95, z: 0}
-  m_LocalScale: {x: 0.24497302, y: 0.65326136, z: 0.48994604}
+  m_LocalPosition: {x: 5.6414375, y: 2.0915163, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 5736538169601127161}
   m_RootOrder: 0
@@ -2650,8 +2650,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 3.9999998
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -2693,7 +2693,7 @@ GameObject:
   - component: {fileID: 3692208045136316292}
   m_Layer: 13
   m_Name: GrabbableObstacle (28)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2797,8 +2797,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 6.4799995
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -2840,7 +2840,7 @@ GameObject:
   - component: {fileID: 3692208045140347632}
   m_Layer: 13
   m_Name: GrabbableObstacle (22)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2944,8 +2944,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 1.8554263
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -2987,7 +2987,7 @@ GameObject:
   - component: {fileID: 3692208045151531119}
   m_Layer: 13
   m_Name: GrabbableObstacle (29)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3091,8 +3091,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 3.9999998
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -3134,7 +3134,7 @@ GameObject:
   - component: {fileID: 3692208045181850268}
   m_Layer: 13
   m_Name: GrabbableObstacle (20)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3238,8 +3238,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 3.1499996
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -3373,8 +3373,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3692208045222826689}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.41, y: -0.96, z: 0}
-  m_LocalScale: {x: 0.24497302, y: 0.65326136, z: 0.48994604}
+  m_LocalPosition: {x: 3.3473074, y: 2.0609007, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 5736538169601127161}
   m_RootOrder: 4
@@ -3464,8 +3464,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 3.9999998
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -3507,7 +3507,7 @@ GameObject:
   - component: {fileID: 3692208045239749981}
   m_Layer: 13
   m_Name: GrabbableObstacle (25)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3611,8 +3611,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 3.9999998
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -3747,8 +3747,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3692208045431654662}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.533, y: -0.93, z: 0}
-  m_LocalScale: {x: 0.24497302, y: 0.65326136, z: 0.48994604}
+  m_LocalPosition: {x: -4.3514996, y: 2.1527474, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 5736538169601127161}
   m_RootOrder: 5
@@ -3838,8 +3838,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 3.9999998
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -3955,7 +3955,7 @@ GameObject:
   - component: {fileID: 3692208045769800635}
   m_Layer: 13
   m_Name: GrabbableObstacle (18)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4059,8 +4059,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 2.7000003
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -4578,15 +4578,6 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: -1.913793, y: 6.468972, z: 0}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 0
-      height: 1
-      bevelCutoff: 0
-      bevelSize: 0
-      spriteIndex: 0
-      corner: 0
     - position: {x: -1.8500003, y: 6.4729767, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
@@ -4714,15 +4705,6 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
     - position: {x: 1.825, y: 6.51457, z: 0}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 0
-      height: 1
-      bevelCutoff: 0
-      bevelSize: 0
-      spriteIndex: 0
-      corner: 0
-    - position: {x: 1.8828956, y: 6.5129576, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
       mode: 0
@@ -4875,8 +4857,6 @@ PolygonCollider2D:
       - {x: 0.85, y: 7.825}
       - {x: -1.57965, y: 7.825}
       - {x: -1.57965, y: 7.825}
-      - {x: -1.91379, y: 6.46897}
-      - {x: -1.91379, y: 6.46897}
       - {x: -1.85, y: 6.47297}
       - {x: -1.85, y: 6.47297}
       - {x: -1.85, y: 2}
@@ -4907,8 +4887,6 @@ PolygonCollider2D:
       - {x: 1.82198, y: 2.93531}
       - {x: 1.825, y: 6.51457}
       - {x: 1.825, y: 6.51457}
-      - {x: 1.88289, y: 6.51295}
-      - {x: 1.88289, y: 6.51295}
       - {x: 1.57965, y: 7.825}
       - {x: 1.57965, y: 7.825}
       - {x: 1.35, y: 7.825}
@@ -4947,7 +4925,7 @@ GameObject:
   - component: {fileID: 3692208046304112212}
   m_Layer: 13
   m_Name: GrabbableObstacle (17)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5051,8 +5029,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 2.9999998
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -5094,7 +5072,7 @@ GameObject:
   - component: {fileID: 3692208046498609898}
   m_Layer: 13
   m_Name: GrabbableObstacle (21)
-  m_TagString: Untagged
+  m_TagString: Through
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5198,7 +5176,7 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
+  m_UseAutoMass: 1
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
@@ -5602,7 +5580,7 @@ GameObject:
   - component: {fileID: 3924104102642755341}
   m_Layer: 8
   m_Name: Trapdoor
-  m_TagString: Through
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5779,9 +5757,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7650854322465083540}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 8.164165, y: 3.0615618, z: 2.0410411}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3692208045095436868}
   - {fileID: 3692208044499901502}
