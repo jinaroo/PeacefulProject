@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ConcreteSpriteShapeProfile
   m_EditorClassIdentifier: 
   m_Angles: []
-  m_FillTexture: {fileID: 2800000, guid: 85fd3267d433c4aa1aeea75e60995fa5, type: 3}
+  m_FillTexture: {fileID: 2800000, guid: ce34fa14e1b2541aca40a30043766fe1, type: 3}
   m_CornerSprites:
   - m_CornerType: 0
     m_Sprites:
