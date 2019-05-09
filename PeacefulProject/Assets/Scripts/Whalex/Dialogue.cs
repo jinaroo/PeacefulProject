@@ -30,6 +30,8 @@ namespace Whalex
 
         public SpriteRenderer[] questItemIcons;
         public Color itemCompleteColor;
+
+        private bool playerInRange = false;
         
         private void Start()
         {
@@ -64,43 +66,41 @@ namespace Whalex
             if (other.gameObject.CompareTag("Player"))
             {
                 UpdateStatus(NpcTalkStatus.P1_NEAR);
+                playerInRange = true;
             }
         }
 
-        private void OnTriggerStay2D(Collider2D other)
+        void Update()
         {
-            if (other.gameObject.CompareTag("Player"))
+            if (Input.GetKeyDown(KeyCode.E) && playerInRange)
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                switch (status)
                 {
-                    switch (status)
-                    {
-                        case NpcTalkStatus.P1_NEAR:
-                            if (hasBeenRescued)
-                            {
-                                if (questComplete)
-                                {
-                                    UpdateStatus(NpcTalkStatus.P2_HAPPY);
-                                }
-                                else
-                                {
-                                    UpdateStatus(NpcTalkStatus.P3_QUEST);
-                                }
-                            }
-                            else
+                    case NpcTalkStatus.P1_NEAR:
+                        if (hasBeenRescued)
+                        {
+                            if (questComplete)
                             {
                                 UpdateStatus(NpcTalkStatus.P2_HAPPY);
                             }
-                            break;
+                            else
+                            {
+                                UpdateStatus(NpcTalkStatus.P3_QUEST);
+                            }
+                        }
+                        else
+                        {
+                            UpdateStatus(NpcTalkStatus.P2_HAPPY);
+                        }
+                        break;
                         
-                        case NpcTalkStatus.P2_HAPPY:
-                            //UpdateStatus(NpcTalkStatus.P1_NEAR);
-                            break;
+                    case NpcTalkStatus.P2_HAPPY:
+                        //UpdateStatus(NpcTalkStatus.P1_NEAR);
+                        break;
                         
-                        default:
-                            print("No behavior specified for this talking status!");
-                            break;
-                    }
+                    default:
+                        print("No behavior specified for this talking status!");
+                        break;
                 }
             }
         }
@@ -110,6 +110,7 @@ namespace Whalex
             if (other.gameObject.CompareTag("Player"))
             {
                 UpdateStatus(NpcTalkStatus.P0_FAR);
+                playerInRange = false;
             }
         }
 

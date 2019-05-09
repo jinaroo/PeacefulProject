@@ -47,6 +47,8 @@ public class MasterSceneManager : MonoBehaviour
     public float teleportDelay = 0.1f;
 
     private bool isTeleporting;
+
+    public Transform currentTeleportingTransform;
     
     // Start is called before the first frame update
     void Start()
@@ -81,33 +83,52 @@ public class MasterSceneManager : MonoBehaviour
         if (isTeleporting)
             return;
         isTeleporting = true;
+        currentTeleportingTransform = raccoonTransform;
         raccoonTransform.GetComponent<PlayerInput>().isFrozen = true;
         TeleportFadeOut();
     }
 
     void TeleportFadeOut()
     {
-        blackScreenSprite.DOFade(1f, teleportFadeTime).OnComplete(TranslateRaccoon);
+        blackScreenSprite.DOFade(1f, teleportFadeTime).OnComplete(TranslateAnimal);
         DOTween.To(()=> AudioListener.volume , x=> AudioListener.volume  = x, 0f, teleportFadeTime);
     }
 
     void TeleportFadeIn()
     {
         blackScreenSprite.DOFade(0f, teleportFadeTime).OnComplete(FinishTeleporting);
-        raccoonTransform.GetComponent<PlayerInput>().isFrozen = false;
+        if (currentTeleportingTransform == raccoonTransform)
+        {
+            raccoonTransform.GetComponent<PlayerInput>().isFrozen = false;
+        }
         DOTween.To(()=> AudioListener.volume , x=> AudioListener.volume  = x, 1f, teleportFadeTime);
+
     }
 
-    void TranslateRaccoon()
-    {       
-        mainCamTransform.position = nextTeleportPosition;
-        raccoonTransform.position = nextTeleportPosition;
+    void TranslateAnimal()
+    {
+        if (currentTeleportingTransform == raccoonTransform)
+        {
+            mainCamTransform.position = nextTeleportPosition;
+            raccoonTransform.position = nextTeleportPosition;
+        } else if (currentTeleportingTransform == dogTransform)
+        {
+            dogTransform.position = dogTunnelPosition;
+        } else if (currentTeleportingTransform == dogTransform)
+        {
+            birdTransform.position = birdTunnelPosition;
+        } else if (currentTeleportingTransform == dogTransform)
+        {
+            snakeTransform.position = snakeTunnelPosition;
+        }
+        
         Invoke("TeleportFadeIn", teleportDelay);
     }
 
     void FinishTeleporting()
     {
         isTeleporting = false;
+        currentTeleportingTransform = null;
     }
     
     public void TeleportDogToTunnel()
@@ -115,7 +136,8 @@ public class MasterSceneManager : MonoBehaviour
         if(dogHasBeenRescued)
             return;
         dogHasBeenRescued = true;
-        dogTransform.position = dogTunnelPosition;
+        currentTeleportingTransform = dogTransform;
+        TeleportFadeOut();
     }
     
     public void TeleportSnakeToTunnel()
@@ -123,7 +145,8 @@ public class MasterSceneManager : MonoBehaviour
         if (snakeHasBeenRescued)
             return;
         snakeHasBeenRescued = true;
-        snakeTransform.position = snakeTunnelPosition;
+        currentTeleportingTransform = snakeTransform;
+        TeleportFadeOut();
     }
     
     public void TeleportBirdToTunnel()
@@ -131,7 +154,8 @@ public class MasterSceneManager : MonoBehaviour
         if (birdHasBeenRescued)
             return;
         birdHasBeenRescued = true;
-        birdTransform.position = birdTunnelPosition;
+        currentTeleportingTransform = birdTransform;
+        TeleportFadeOut();
     }
 
     public void EnterUnderground()
