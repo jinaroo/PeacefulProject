@@ -98,6 +98,7 @@ namespace Whalex
                                     break;
                                 case CharacterType.SNAKE:
                                     GetComponent<SnakeRescueEvent>().TriggerSewerEvent();
+                                    
                                     break;
                                 case CharacterType.BIRD:
                                     GetComponent<BirdRescueEvent>().TriggerDirtClumpEvent();
