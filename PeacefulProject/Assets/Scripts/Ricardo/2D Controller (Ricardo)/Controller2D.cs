@@ -17,7 +17,9 @@ public struct CollisionInfo {
 	public int faceDir;
 	public bool fallingThroughPlatform;
 
-
+	public bool huggingMaxSlope;
+	public Vector2 persistentSlopeNormal;
+	public float persistentSlopeAngle;
 
 	public Collider2D curGroundCollider; 
 		
@@ -27,6 +29,7 @@ public struct CollisionInfo {
 		climbingSlope = false;
 		descendingSlope = false;
 		slidingDownMaxSlope = false;
+		huggingMaxSlope = false;
 		slopeNormal = Vector2.zero;
 
 		slopeAngleOld = slopeAngle;
@@ -207,22 +210,6 @@ public class Controller2D : RaycastController {
 							collisions.fallingThroughPlatform = false;
 						}
 					}
-					else if(slopeAngle < 90f)
-					{
-						float moveDistance = Mathf.Abs (moveAmount.x);
-						float climbmoveAmountY = Mathf.Sin (slopeAngle * Mathf.Deg2Rad) * moveDistance;
-
-						if (moveAmount.y <= climbmoveAmountY)
-						{
-							collisions.below = true;
-							collisions.curGroundCollider = hit.collider;
-							collisions.slopeAngle = collisions.slopeAngleOld;
-							collisions.slopeNormal = hit.normal;
-						}
-
-						if (slopeAngle >= maxSlopeAngle)
-							collisions.slidingDownMaxSlope = true;
-					}
 				}
 
 				// ignore a horizontal "Through" collider if...
@@ -234,13 +221,17 @@ public class Controller2D : RaycastController {
 				                                 (i != 0 && hit.collider != collisions.curGroundCollider));
 
 				if ((!collisions.climbingSlope || slopeAngle > maxSlopeAngle) && !ignoreHorizontalCollider) {
-					if(moveAmount.x != 0)
+					if (moveAmount.x != 0)
+					{
 						moveAmount.x = (hit.distance - skinWidth) * directionX;
+					}
+						
 					rayLength = hit.distance;
 
 					// when you are climbing a slope and run into a wall, you need this chunk to adjust y movement to avoid jagging
 					if (collisions.climbingSlope) {
 						moveAmount.y = Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Abs(moveAmount.x);
+						
 					}
 
 					collisions.left = directionX == -1;
@@ -330,6 +321,10 @@ public class Controller2D : RaycastController {
 				if (collisions.climbingSlope) {
 					moveAmount.x = moveAmount.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * collisions.faceDir;
 				}
+				else
+				{
+					collisions.persistentSlopeAngle =  Vector2.Angle(hit.normal,Vector2.up);
+				}
 
 				collisions.below = directionY == -1;
 				collisions.above = directionY == 1;
@@ -361,7 +356,9 @@ public class Controller2D : RaycastController {
 					if (slopeAngle != collisions.slopeAngle) {
 						moveAmount.x = (hit.distance - skinWidth) * directionX;
 						collisions.slopeAngle = slopeAngle;
+						collisions.persistentSlopeAngle = slopeAngle;
 						collisions.slopeNormal = hit.normal;
+						collisions.persistentSlopeNormal = collisions.slopeNormal;
 					}
 					
 
@@ -406,7 +403,9 @@ public class Controller2D : RaycastController {
 			collisions.below = true;
 			collisions.climbingSlope = true;
 			collisions.slopeAngle = slopeAngle;
+			collisions.persistentSlopeAngle = slopeAngle;
 			collisions.slopeNormal = slopeNormal;
+			collisions.persistentSlopeNormal = collisions.slopeNormal;
 		}
 	}
 
@@ -447,9 +446,11 @@ public class Controller2D : RaycastController {
 								moveAmount.y -= descendmoveAmountY;
 
 								collisions.slopeAngle = slopeAngle;
+								collisions.persistentSlopeAngle = slopeAngle;
 								collisions.descendingSlope = true;
 								collisions.below = true;
 								collisions.slopeNormal = hit.normal;
+								collisions.persistentSlopeNormal = collisions.slopeNormal;
 							}
 						}
 					}
@@ -466,8 +467,10 @@ public class Controller2D : RaycastController {
 				moveAmount.x = Mathf.Sign(hit.normal.x) * (Mathf.Abs (moveAmount.y) - hit.distance) / Mathf.Tan (slopeAngle * Mathf.Deg2Rad);
 
 				collisions.slopeAngle = slopeAngle;
+				collisions.persistentSlopeAngle = slopeAngle;
 				collisions.slidingDownMaxSlope = true;
 				collisions.slopeNormal = hit.normal;
+				collisions.persistentSlopeNormal = collisions.slopeNormal;
 			}
 		}
 	}

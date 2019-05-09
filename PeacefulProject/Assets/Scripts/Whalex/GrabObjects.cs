@@ -51,6 +51,10 @@ public class GrabObjects : MonoBehaviour
             if(audioManager)
                 audioManager.PlaySoundEffect(audioManager.Clips.dropItem, pickupAndGrabVolume);
 
+            ObjectSpriteSwapper spriteSwapper = holdingObject.GetComponent<ObjectSpriteSwapper>();
+            if(spriteSwapper)
+                spriteSwapper.SwitchToPlacedSprite();
+
             
             // change its layer so it won't be picked up by player again
             holdingObject.layer = LayerMask.NameToLayer("Placed");

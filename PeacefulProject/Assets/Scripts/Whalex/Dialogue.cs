@@ -22,6 +22,8 @@ namespace Whalex
         public int totalQuestSteps;
         public int numQuestStepsCompleted;
 
+        public int numPhasesComplete;
+
         public float growTime = 1f;
         public Ease growEase;
         public Ease shrinkEase;
@@ -175,7 +177,8 @@ namespace Whalex
         {
             //questItemIcons[itemIndex].color = itemCompleteColor;
             numQuestStepsCompleted++;
-
+            
+            
             if (numQuestStepsCompleted == totalQuestSteps)
             {
                 questComplete = true;

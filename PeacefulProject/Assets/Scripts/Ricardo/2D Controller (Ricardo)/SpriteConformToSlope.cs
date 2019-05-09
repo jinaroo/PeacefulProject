@@ -74,13 +74,12 @@ public class SpriteConformToSlope : MonoBehaviour
     // Update is called once per frame
     void Update()
     {        
-        if (controller.collisions.below && controller.collisions.slopeAngle != 0f)
+        if (controller.collisions.below && controller.collisions.persistentSlopeAngle != 0f)
         {
             if (!controller.collisions.slidingDownMaxSlope)
             {
-                Vector3 slopeDir = Quaternion.AngleAxis(controller.collisions.slopeAngle, Vector3.forward) * Vector3.right;
+                Vector3 slopeDir = Quaternion.AngleAxis(-Mathf.Sign(controller.collisions.persistentSlopeNormal.x) * controller.collisions.persistentSlopeAngle, Vector3.forward) * Vector3.right;
                 Vector3 slopeNormal = Vector3.Cross(slopeDir, Vector3.back).normalized;
-                Debug.Log(slopeNormal);
                 RaycastHit2D[] hits = Physics2D.RaycastAll(controller.transform.position, -slopeNormal, 1.5f, layerMask);
                 foreach (RaycastHit2D hit in hits)
                 {

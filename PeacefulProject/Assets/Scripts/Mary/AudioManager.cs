@@ -12,16 +12,17 @@ public class AudioManager : MonoBehaviour
 
 	private void Awake()
 	{
-		if (Instance == null)
-		{
-			Instance = this;
-			DontDestroyOnLoad(gameObject);
-			Clips = Resources.Load<GameObject>("Clips").GetComponent<AudioClips>();
-		}
-		else
-		{
-			Destroy(gameObject);
-		}
+		Clips = Resources.Load<GameObject>("Clips").GetComponent<AudioClips>();
+//		if (Instance == null)
+//		{
+//			Instance = this;
+//			DontDestroyOnLoad(gameObject);
+//			Clips = Resources.Load<GameObject>("Clips").GetComponent<AudioClips>();
+//		}
+//		else
+//		{
+//			Destroy(gameObject);
+//		}
 	}
 
 	public void Start()

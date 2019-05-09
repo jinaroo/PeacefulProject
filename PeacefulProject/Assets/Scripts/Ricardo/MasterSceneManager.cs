@@ -58,10 +58,13 @@ public class MasterSceneManager : MonoBehaviour
         undergroundAudSrc = audioManager.PlaySoundEffect(audioManager.Clips.underground, 0f, true).GetComponent<AudioSource>();
         undergroundAudSrc.pitch = 0.5f;
 
-        raccoonTransform = GameObject.FindWithTag("Player").transform;
+        if(raccoonTransform == null)
+            raccoonTransform = GameObject.FindWithTag("Player").transform;
         mainCamTransform = Camera.main.transform;
         
         blackScreenSprite = mainCamTransform.GetChild(0).GetComponent<SpriteRenderer>();
+
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -78,6 +81,7 @@ public class MasterSceneManager : MonoBehaviour
         if (isTeleporting)
             return;
         isTeleporting = true;
+        raccoonTransform.GetComponent<PlayerInput>().isFrozen = true;
         TeleportFadeOut();
     }
 
@@ -90,13 +94,14 @@ public class MasterSceneManager : MonoBehaviour
     void TeleportFadeIn()
     {
         blackScreenSprite.DOFade(0f, teleportFadeTime).OnComplete(FinishTeleporting);
+        raccoonTransform.GetComponent<PlayerInput>().isFrozen = false;
         DOTween.To(()=> AudioListener.volume , x=> AudioListener.volume  = x, 1f, teleportFadeTime);
     }
 
     void TranslateRaccoon()
-    {
-        raccoonTransform.position = nextTeleportPosition;
+    {       
         mainCamTransform.position = nextTeleportPosition;
+        raccoonTransform.position = nextTeleportPosition;
         Invoke("TeleportFadeIn", teleportDelay);
     }
 

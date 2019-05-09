@@ -40,6 +40,8 @@ public class Player : MonoBehaviour {
 	public float timeBetweenClimbSteps = 0.5f;
 	private float nextStepSoundTime;
 	private float nextClimbSoundTime;
+
+
 	
 	void Start() {
 		controller = GetComponent<Controller2D> ();
@@ -58,7 +60,10 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void Update() {
+	void Update()
+	{
+		
+		
 		if (controller.isClimbing && !controller.isHolding)
 		{
 			moveSpeed = climbSpeed;
@@ -105,7 +110,7 @@ public class Player : MonoBehaviour {
 		controller.Move (velocity * Time.deltaTime, directionalInput);
 
 		if (controller.collisions.above || controller.collisions.below) {
-			if (controller.collisions.slidingDownMaxSlope) {
+			if (controller.collisions.slidingDownMaxSlope && !controller.collisions.huggingMaxSlope) {
 				velocity.y += controller.collisions.slopeNormal.y * -gravity * Time.deltaTime;
 			} else {
 				velocity.y = 0;
@@ -133,7 +138,7 @@ public class Player : MonoBehaviour {
 //			}
 //		}
 		if (controller.collisions.below) {
-			if (controller.collisions.slidingDownMaxSlope) {
+			if (controller.collisions.slidingDownMaxSlope && !controller.collisions.huggingMaxSlope) {
 				if (directionalInput.x != -Mathf.Sign (controller.collisions.slopeNormal.x)) { // not jumping against max slope
 					velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
 					velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
@@ -181,6 +186,8 @@ public class Player : MonoBehaviour {
 	}
 
 	void CalculateVelocity() {
+		
+			
 		float targetVelocityX = directionalInput.x * moveSpeed;
 		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
 		velocity.y += gravity * Time.deltaTime;

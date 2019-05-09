@@ -17,6 +17,7 @@ public class NodeAttach : MonoBehaviour {
    private bool lastUseNormals;
    private Vector3 lastPosition;
  
+#if UNITY_EDITOR
    void Awake() {
        spline = spriteShapeController.spline;
    }
@@ -61,7 +62,8 @@ public class NodeAttach : MonoBehaviour {
        }
        lastSpritePointCount = spline.GetPointCount();
    }
- 
+ #endif
+    
    private float Angle(Vector3 a, Vector3 b) {
        float dot = Vector3.Dot(a, b);
        float det = (a.x * b.y) - (b.x * a.y);

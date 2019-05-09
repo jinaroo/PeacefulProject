@@ -8,10 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OutdoorScene_Jin.unity
     guid: 63a5c63fc54af41da9e15aee9bfcb538
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/InsideHouse1.unity
     guid: fb1e72ae1df664a63b08e36be574f173
+  - enabled: 1
+    path: Assets/Scenes/MasterScene_Ricardo.unity
+    guid: 962b401e15cd4874ba3f028f24833339
   m_configObjects: {}

@@ -9,23 +9,42 @@ public class SceneTransitionTrigger : MonoBehaviour
     public Vector3 targetPos;
 
     public MasterSceneManager masterSceneManager;
-    
+
+    private bool playerinTrigger;
+
     // Start is called before the first frame update
     void Start()
     {
-        if(masterSceneManager == null)
+        if (masterSceneManager == null)
             masterSceneManager = GameObject.FindWithTag("MasterSceneManager").GetComponent<MasterSceneManager>();
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            playerinTrigger = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            playerinTrigger = false;
+        }
+    }
+
+    void Update()
     {
         if (Input.GetKeyDown(changeSceneKey))
         {
-            if (other.gameObject.CompareTag("Player"))
+            if (playerinTrigger)
             {
                 masterSceneManager.nextTeleportPosition = targetPos;
                 masterSceneManager.TeleportRaccoon();
             }
         }
     }
+
 }
