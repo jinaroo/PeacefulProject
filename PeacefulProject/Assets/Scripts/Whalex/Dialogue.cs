@@ -91,6 +91,21 @@ namespace Whalex
                         else
                         {
                             UpdateStatus(NpcTalkStatus.P2_HAPPY);
+                            switch (charType)
+                            {
+                                case CharacterType.DOG:
+                                    GetComponent<DogRescueEvent>().TriggerBowEvent();
+                                    break;
+                                case CharacterType.SNAKE:
+                                    GetComponent<SnakeRescueEvent>().TriggerSewerEvent();
+                                    break;
+                                case CharacterType.BIRD:
+                                    GetComponent<BirdRescueEvent>().TriggerDirtClumpEvent();
+                                    break;
+                                default:
+                                    Debug.Log("this dialogue has no rescue event!");
+                                    break;
+                            }
                         }
                         break;
                         

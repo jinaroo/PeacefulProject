@@ -115,13 +115,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  verticalOffset: -0.5
+  verticalOffset: 0
   lookAheadDstX: 2
   lookSmoothTimeX: 0.5
   verticalSmoothTime: 0.025
-  focusAreaSize: {x: 3, y: 5}
-  overallSmoothing: 0.1
-  drawAreaGizmo: 1
+  focusAreaSize: {x: 3, y: 3}
+  overallSmoothing: 0.2
+  drawAreaGizmo: 0
 --- !u!1 &1118133333686485188
 GameObject:
   m_ObjectHideFlags: 0
