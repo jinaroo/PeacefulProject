@@ -9,9 +9,9 @@ namespace Whalex
     {
        [SerializeField] private NpcTalkStatus status;
         
-        private GameObject npcIndicator;
-        private GameObject npcHeart;
-        private GameObject npcDialogueCloud;
+        public GameObject npcHeart;
+        public GameObject npcDialogueCloud;
+        public GameObject npcDialogueCloud2;
 
         public float rescueTeleportDelay = 4;
         private MasterSceneManager masterSceneManager;
@@ -28,37 +28,30 @@ namespace Whalex
         public Ease growEase;
         public Ease shrinkEase;
 
-        public SpriteRenderer[] questItemIcons;
-        public Color itemCompleteColor;
+        //public SpriteRenderer[] questItemIcons;
+        //public Color itemCompleteColor;
 
         private bool playerInRange = false;
+
+        public GameObject collectorObj;
         
         private void Start()
         {
             UpdateStatus(NpcTalkStatus.P0_FAR);
             
-            npcIndicator = Instantiate((Resources.Load<GameObject>("heart_prefab_prepare")));
-            npcIndicator.transform.SetParent(transform.Find("Heart"));
-            npcIndicator.transform.localPosition = Vector3.zero;
-            npcIndicator.SetActive(false);
-            
-            npcHeart = Instantiate(Resources.Load<GameObject>("heart_prefab"));
-            npcHeart.transform.SetParent(transform.Find("Heart"));
-            npcHeart.transform.localPosition = Vector3.zero;
-            //npcHeart.SetActive(false);
             npcHeart.transform.localScale = Vector3.zero;
-            
-            npcDialogueCloud = Instantiate(Resources.Load<GameObject>("npc_cloud"));
-            npcDialogueCloud.transform.SetParent(transform.Find("Dialogue"));
-            npcDialogueCloud.transform.localPosition = Vector3.zero;
-            //npcDialogueCloud.SetActive(false);
             npcDialogueCloud.transform.localScale = Vector3.zero;
+            if(npcDialogueCloud2)
+                npcDialogueCloud2.transform.localScale = Vector3.zero;
+
 
             GameObject masterSceneObj = GameObject.FindWithTag("MasterSceneManager");
             if (masterSceneObj)
             {
                 masterSceneManager = masterSceneObj.GetComponent<MasterSceneManager>();
             }
+            
+            collectorObj.SetActive(false);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -98,7 +91,6 @@ namespace Whalex
                                     break;
                                 case CharacterType.SNAKE:
                                     GetComponent<SnakeRescueEvent>().TriggerSewerEvent();
-                                    
                                     break;
                                 case CharacterType.BIRD:
                                     GetComponent<BirdRescueEvent>().TriggerSewerPipeEvent();
@@ -161,16 +153,13 @@ namespace Whalex
                             npcHeart.transform.DOScale(1f, growTime).SetEase(growEase);
                         }
                     }
-                    else
-                    {
-                        // display button prompt
-                    }
                     break;
                     
                 case NpcTalkStatus.P2_HAPPY:
                     if(!hasBeenRescued)
                     {
                         hasBeenRescued = true;
+                        collectorObj.SetActive(true);
                         if(masterSceneManager)
                             Invoke("Teleport", rescueTeleportDelay);
                     }
@@ -182,7 +171,14 @@ namespace Whalex
                 case NpcTalkStatus.P3_QUEST:
                     if (npcDialogueCloud.transform.localScale == Vector3.zero)
                     {
-                        npcDialogueCloud.transform.DOScale(1f, growTime).SetEase(growEase);
+                        if (numPhasesComplete == 0)
+                        {
+                            npcDialogueCloud.transform.DOScale(1f, growTime).SetEase(growEase);
+                        }
+                        else
+                        {
+                            npcDialogueCloud2.transform.DOScale(1f, growTime).SetEase(growEase);
+                        }
                         npcHeart.transform.DOScale(0f, growTime).SetEase(shrinkEase);
                     }
 
@@ -190,16 +186,24 @@ namespace Whalex
             }
         }
 
+        public void SwitchToNextIconSequence()
+        {
+            npcDialogueCloud.transform.DOScale(0f, growTime).SetEase(shrinkEase);
+            npcDialogueCloud = npcDialogueCloud2;
+        }
+        
         public void AcceptItem(int itemIndex)
         {
             //questItemIcons[itemIndex].color = itemCompleteColor;
             numQuestStepsCompleted++;
             
-            
             if (numQuestStepsCompleted == totalQuestSteps)
             {
                 questComplete = true;
                 UpdateStatus(NpcTalkStatus.P2_HAPPY);
+                
+                if(charType == CharacterType.SNAKE)
+                    GetComponent<TurnOnFire>().TurnFireOn();
             }
         }
         

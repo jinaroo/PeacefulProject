@@ -148,7 +148,7 @@ public class SpriteConformToSlope : MonoBehaviour
 
     void SwitchToClimbingOrders(int obstacleLayer)
     {
-        Debug.Log("switching to climbing orders");
+        //Debug.Log("switching to climbing orders");
         bodySprite.sortingOrder = obstacleLayer + bodyClimbingOrderOffset;
         headSprite.sortingOrder = obstacleLayer + headClimbingOrderOffset;
         tailSprite.sortingOrder = obstacleLayer + tailClimbingOrderOffset;

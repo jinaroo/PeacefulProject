@@ -66,6 +66,11 @@ public class MasterSceneManager : MonoBehaviour
         
         blackScreenSprite = mainCamTransform.GetChild(0).GetComponent<SpriteRenderer>();
 
+        Color visCol = blackScreenSprite.color;
+        visCol.a = 1f;
+        blackScreenSprite.color = visCol;
+        blackScreenSprite.DOFade(0f, teleportFadeTime * 2f).SetDelay(teleportFadeTime);
+        
         Cursor.visible = false;
     }
 
@@ -114,12 +119,15 @@ public class MasterSceneManager : MonoBehaviour
         } else if (currentTeleportingTransform == dogTransform)
         {
             dogTransform.position = dogTunnelPosition;
+            dogTransform.localScale = Vector3.Scale(dogTransform.localScale, new Vector3(-1f, 1f, 1f));
         } else if (currentTeleportingTransform == dogTransform)
         {
             birdTransform.position = birdTunnelPosition;
+            birdTransform.localScale = Vector3.Scale(birdTransform.localScale, new Vector3(-1f, 1f, 1f));
         } else if (currentTeleportingTransform == dogTransform)
         {
             snakeTransform.position = snakeTunnelPosition;
+            snakeTransform.localScale = Vector3.Scale(snakeTransform.localScale,  new Vector3(-1f, 1f, 1f));
         }
         
         Invoke("TeleportFadeIn", teleportDelay);

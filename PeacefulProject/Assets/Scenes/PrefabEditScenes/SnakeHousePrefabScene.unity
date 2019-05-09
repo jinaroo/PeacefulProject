@@ -334,40 +334,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3692208044723181599, guid: 0f50983f6b5985243b8e264399ae4ca5,
-        type: 3}
-      propertyPath: m_ShapeTexture
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692208044808342621, guid: 0f50983f6b5985243b8e264399ae4ca5,
-        type: 3}
-      propertyPath: m_ShapeTexture
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692208046116845246, guid: 0f50983f6b5985243b8e264399ae4ca5,
-        type: 3}
-      propertyPath: m_ShapeTexture
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692208044525432561, guid: 0f50983f6b5985243b8e264399ae4ca5,
-        type: 3}
-      propertyPath: m_ShapeTexture
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692208044706867237, guid: 0f50983f6b5985243b8e264399ae4ca5,
-        type: 3}
-      propertyPath: m_ShapeTexture
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3692208045784223089, guid: 0f50983f6b5985243b8e264399ae4ca5,
-        type: 3}
-      propertyPath: m_ShapeTexture
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8501484201961427618, guid: 0f50983f6b5985243b8e264399ae4ca5,
-        type: 3}
-      propertyPath: m_ShapeTexture
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f50983f6b5985243b8e264399ae4ca5, type: 3}

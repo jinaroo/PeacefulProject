@@ -45,6 +45,7 @@ public class Collector : MonoBehaviour
                             numItemsCollected++;
                             if (numItemsCollected == 3)
                                 targetDialogue.numPhasesComplete++;
+                            targetDialogue.SwitchToNextIconSequence();
                         } else if (other.CompareTag("SnakeLighter") && !collectStatus[3])
                         {
                             if (targetDialogue.numPhasesComplete > 0)
@@ -62,6 +63,7 @@ public class Collector : MonoBehaviour
                             targetDialogue.AcceptItem(0);
                             SnapItem(other.gameObject, collectTransforms[0]);
                             targetDialogue.numPhasesComplete++;
+                            targetDialogue.SwitchToNextIconSequence();
                         } else if (other.CompareTag("BirdSquare") && !collectStatus[1])
                         {
                             if (targetDialogue.numPhasesComplete > 0)
