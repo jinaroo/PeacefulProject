@@ -5476,11 +5476,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1615763027}
-    - target: {fileID: 488588372839799166, guid: 9264d8c506661794788aa3d1a87539be,
-        type: 3}
-      propertyPath: drawAreaGizmo
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9264d8c506661794788aa3d1a87539be, type: 3}
 --- !u!1001 &704034254830555167
