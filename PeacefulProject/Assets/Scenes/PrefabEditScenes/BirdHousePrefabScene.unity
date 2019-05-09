@@ -260,6 +260,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7269652152571406986, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7273449925221231042, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093305439183240599, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7700465083823207114, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_SelectedEditorRenderState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7700465083823207114, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327765184445673810, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8832796171282235679, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db8c50b01f2b7284c8b0b715d65029ac, type: 3}
 --- !u!1001 &1571449214
