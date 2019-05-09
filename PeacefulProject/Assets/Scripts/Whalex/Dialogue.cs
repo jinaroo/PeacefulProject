@@ -101,7 +101,7 @@ namespace Whalex
                                     
                                     break;
                                 case CharacterType.BIRD:
-                                    GetComponent<BirdRescueEvent>().TriggerDirtClumpEvent();
+                                    GetComponent<BirdRescueEvent>().TriggerSewerPipeEvent();
                                     break;
                                 default:
                                     Debug.Log("this dialogue has no rescue event!");

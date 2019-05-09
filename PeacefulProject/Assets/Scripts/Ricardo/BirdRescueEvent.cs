@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class BirdRescueEvent : MonoBehaviour
 {
-    public GameObject dirtClumpParentObject;
+    public GameObject tunnelPipeTriggerObject;
+    public GameObject sewerPipeTriggerObject;
 
-    public void TriggerDirtClumpEvent()
+    public void TriggerSewerPipeEvent()
     {
-        dirtClumpParentObject.SetActive(false);
+        tunnelPipeTriggerObject.SetActive(true);
+        sewerPipeTriggerObject.SetActive(true);
     }
 }

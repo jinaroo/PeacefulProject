@@ -17,6 +17,7 @@ public class GrabObjects : MonoBehaviour
         private GameObject holdingObject;
         private RigidbodyType2D previousType;
         private float currentDir, previousDir;
+        [SerializeField] private Transform prevParent;
 
         public float releaseForce = 10f;
         public int holdingSortOrder = 90;
@@ -28,14 +29,32 @@ public class GrabObjects : MonoBehaviour
         {
             //EventManager.Instance.StartListening("ObjCollect",PutDownObj);
             EventManagerNew.Instance.Register<CollectEvent>(PutDownObj);
+            EventManagerNew.Instance.Register<DunkEvent>(Dunk);
         }
 
         private void OnDisable()
         {
             //EventManager.Instance.StopListening("ObjCollect",PutDownObj);
             EventManagerNew.Instance.Unregister<CollectEvent>(PutDownObj);
+            EventManagerNew.Instance.Unregister<DunkEvent>(Dunk);
         }
 
+        private void Dunk(DunkEvent obj)
+        {
+            if (obj.ball == holdingObject.transform)
+            {
+                holdingObject.transform.SetParent(prevParent);
+                holdingObject.GetComponent<Collider2D>().isTrigger = false;
+                Rigidbody2D holdingObjRigidbody = holdingObject.GetComponent<Rigidbody2D>();
+                holdingObjRigidbody.velocity = (controller.collisions.moveAmountOld + new Vector2(0, -0.5f)) * releaseForce;
+                //holdingObjRigidbody.bodyType = previousType;
+                holdingObjRigidbody.bodyType = RigidbodyType2D.Dynamic;
+                holdingObject = null;
+                isHolding = false;
+                controller.isHolding = false;
+            }
+        }
+        
         private void PutDownObj(CollectEvent myEvent)
         {
             if (holdingObject == null)
@@ -68,7 +87,7 @@ public class GrabObjects : MonoBehaviour
             }
 
             holdingObject = null;
-            controller.isHolding = false;
+            controller.isHolding = false;   
         }
 
         private void Start()
