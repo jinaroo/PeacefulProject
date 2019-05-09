@@ -14,6 +14,8 @@ public class Prompt : MonoBehaviour
 
     public Transform cloudTransform;
 
+    public float tgtScale = 1f;
+
     private void Start()
     {
         cloudTransform.localScale *= 0f;
@@ -25,7 +27,7 @@ public class Prompt : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isDiplaying = true;
-            cloudTransform.DOScale(1f, growTime).SetEase(growEase);
+            cloudTransform.DOScale(tgtScale, growTime).SetEase(growEase);
             cloudTransform.GetComponent<SpriteRenderer>().DOFade(1f, growTime);
         }
     }

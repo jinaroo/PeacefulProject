@@ -5,14 +5,20 @@ using UnityEngine;
 public class SnakeRescueEvent : MonoBehaviour
 {
 
-    public GameObject tunnelGrateTriggerObject;
-    public GameObject sewerGrateTriggerObject;
-    public GameObject sewerTopBranch;
+    public SceneTransitionTrigger tunnelGrateTriggerObject;
+    public SceneTransitionTrigger sewerGrateTriggerObject;
+    //public GameObject sewerTopBranch;
+    
+    public Prompt prompt1;
+    public Prompt prompt2;
     
     public void TriggerSewerEvent()
     {
-        tunnelGrateTriggerObject.SetActive(true);
-        sewerGrateTriggerObject.SetActive(true);
-        sewerTopBranch.SetActive(false);
+        tunnelGrateTriggerObject.enabled = true;
+        sewerGrateTriggerObject.enabled = true;
+        //sewerTopBranch.SetActive(false);
+        
+        prompt1.enabled = true;
+        prompt2.enabled = true;
     }
 }

@@ -116,7 +116,7 @@ public class GrabObjects : MonoBehaviour
             previousDir = currentDir;
             currentDir = controller.collisions.faceDir;
 
-            if (Input.GetKeyDown(KeyCode.E) && isHolding == false)
+            if (Input.GetKeyDown(KeyCode.J) && isHolding == false)
             {
                 for (int i = 0; i < controller.horizontalRayCount; i++)
                 {
@@ -160,7 +160,7 @@ public class GrabObjects : MonoBehaviour
                     }
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.E) && isHolding)
+            else if (Input.GetKeyDown(KeyCode.J) && isHolding)
             {
                 holdingObject.transform.SetParent(null);
                 holdingObject.GetComponent<Collider2D>().isTrigger = false;

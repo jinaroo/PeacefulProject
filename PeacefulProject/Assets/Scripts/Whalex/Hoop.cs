@@ -13,7 +13,7 @@ public class Hoop : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Ball"))
+        if (other.CompareTag("BirdCircle"))
         {
             EventManagerNew.Instance.Fire(new DunkEvent(other.transform));
             particle.Play();

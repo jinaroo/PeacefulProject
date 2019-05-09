@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class BirdRescueEvent : MonoBehaviour
 {
-    public GameObject tunnelPipeTriggerObject;
-    public GameObject sewerPipeTriggerObject;
+    public SceneTransitionTrigger tunnelPipeTriggerObject;
+    public SceneTransitionTrigger sewerPipeTriggerObject;
 
+    public Prompt prompt1;
+    public Prompt prompt2;
+    
     public void TriggerSewerPipeEvent()
     {
-        tunnelPipeTriggerObject.SetActive(true);
-        sewerPipeTriggerObject.SetActive(true);
+        tunnelPipeTriggerObject.enabled = true;
+        sewerPipeTriggerObject.enabled = true;
+
+        prompt1.enabled = true;
+        prompt2.enabled = true;
     }
 }

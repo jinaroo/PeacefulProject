@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransitionTrigger : MonoBehaviour
 {
-    public KeyCode changeSceneKey;
+    public KeyCode changeSceneKey = KeyCode.W;
     public Vector3 targetPos;
 
     public MasterSceneManager masterSceneManager;
