@@ -120,11 +120,11 @@ public class MasterSceneManager : MonoBehaviour
         {
             dogTransform.position = dogTunnelPosition;
             dogTransform.localScale = Vector3.Scale(dogTransform.localScale, new Vector3(-1f, 1f, 1f));
-        } else if (currentTeleportingTransform == dogTransform)
+        } else if (currentTeleportingTransform == birdTransform)
         {
             birdTransform.position = birdTunnelPosition;
             birdTransform.localScale = Vector3.Scale(birdTransform.localScale, new Vector3(-1f, 1f, 1f));
-        } else if (currentTeleportingTransform == dogTransform)
+        } else if (currentTeleportingTransform == snakeTransform)
         {
             snakeTransform.position = snakeTunnelPosition;
             snakeTransform.localScale = Vector3.Scale(snakeTransform.localScale,  new Vector3(-1f, 1f, 1f));

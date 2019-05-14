@@ -31,9 +31,11 @@ namespace Whalex
         //public SpriteRenderer[] questItemIcons;
         //public Color itemCompleteColor;
 
-        private bool playerInRange = false;
+        public bool playerInRange = false;
 
         public GameObject collectorObj;
+
+        public GameObject pickupPromptObj;
         
         private void Start()
         {
@@ -65,7 +67,7 @@ namespace Whalex
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.E) && playerInRange)
+            if (Input.GetKeyDown(KeyCode.J) && playerInRange)
             {
                 switch (status)
                 {
@@ -79,6 +81,7 @@ namespace Whalex
                             else
                             {
                                 UpdateStatus(NpcTalkStatus.P3_QUEST);
+                                
                             }
                         }
                         else
@@ -88,12 +91,15 @@ namespace Whalex
                             {
                                 case CharacterType.DOG:
                                     GetComponent<DogRescueEvent>().TriggerBowEvent();
+                                    Invoke("FlipPrompt", 6f);
                                     break;
                                 case CharacterType.SNAKE:
                                     GetComponent<SnakeRescueEvent>().TriggerSewerEvent();
+                                    Invoke("FlipPrompt", 6f);
                                     break;
                                 case CharacterType.BIRD:
                                     GetComponent<BirdRescueEvent>().TriggerSewerPipeEvent();
+                                    Invoke("FlipPrompt", 6f);
                                     break;
                                 default:
                                     Debug.Log("this dialogue has no rescue event!");
@@ -111,6 +117,11 @@ namespace Whalex
                         break;
                 }
             }
+        }
+
+        void FlipPrompt()
+        {
+            pickupPromptObj.transform.localScale = Vector3.Scale(pickupPromptObj.transform.localScale, new Vector3(-1f, 1f, 1f));
         }
 
         private void OnTriggerExit2D(Collider2D other)
@@ -200,6 +211,7 @@ namespace Whalex
             if (numQuestStepsCompleted == totalQuestSteps)
             {
                 questComplete = true;
+                transform.parent.GetComponentInChildren<Prompt>().enabled = false;
                 UpdateStatus(NpcTalkStatus.P2_HAPPY);
                 
                 if(charType == CharacterType.SNAKE)
