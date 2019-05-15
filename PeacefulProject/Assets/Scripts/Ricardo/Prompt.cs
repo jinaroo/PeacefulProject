@@ -49,7 +49,7 @@ public class Prompt : MonoBehaviour
         cloudTransform.DOScale(0f, growTime).SetEase(shrinkEase);
         cloudTransform.GetComponent<SpriteRenderer>().DOFade(0f, growTime / 2f);
         TurnOffPrompt();
-        Invoke("TurnOnPrompt", 5f);
+        Invoke("TurnOnPrompt", 3.5f);
     }
 
     void TurnOffPrompt()

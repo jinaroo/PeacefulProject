@@ -15,6 +15,8 @@ public class SnakeRescueEvent : MonoBehaviour
     public GameObject branchCoverObj;
 
     public GameObject treebranchParent;
+
+    public GameObject snakeHouseExitPrompt;
     
     public void TriggerSewerEvent()
     {
@@ -27,5 +29,7 @@ public class SnakeRescueEvent : MonoBehaviour
 
         branchCoverObj.SetActive(false);
         treebranchParent.SetActive(true);
+        
+        snakeHouseExitPrompt.SetActive(true);
     }
 }

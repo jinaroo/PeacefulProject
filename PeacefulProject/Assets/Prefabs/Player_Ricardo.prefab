@@ -1485,6 +1485,9 @@ MonoBehaviour:
     moveAmountOld: {x: 0, y: 0}
     faceDir: 0
     fallingThroughPlatform: 0
+    huggingMaxSlope: 0
+    persistentSlopeNormal: {x: 0, y: 0}
+    persistentSlopeAngle: 0
     curGroundCollider: {fileID: 0}
   playerInput: {x: 0, y: 0}
 --- !u!114 &486876104978767569
@@ -1514,9 +1517,9 @@ MonoBehaviour:
   wallStickTime: 0.1
   controller: {fileID: 0}
   audioManager: {fileID: 0}
-  footstepVolume: 1
+  footstepVolume: 0.075
   timeBetweenSteps: 0.225
-  climbVolume: 0.5
+  climbVolume: 0.075
   timeBetweenClimbSteps: 0.375
 --- !u!114 &486876104978767575
 MonoBehaviour:
@@ -1550,6 +1553,7 @@ MonoBehaviour:
   grabRightPoint: {fileID: 1943146779}
   grabLeftPoint: {fileID: 524445241}
   audioManager: {fileID: 0}
+  prevParent: {fileID: 0}
   releaseForce: 35
   holdingSortOrder: 50
-  pickupAndGrabVolume: 0.75
+  pickupAndGrabVolume: 0.25

@@ -184,6 +184,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &334063021 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5631165066535874572, guid: 2cf09d8691e5d0047a80abda93b35bba,
+    type: 3}
+  m_PrefabInstance: {fileID: 121264672139038703}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &445770174 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3301123194429210068, guid: 2cf09d8691e5d0047a80abda93b35bba,
@@ -274,16 +280,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 486876104978767569, guid: 5c4b202269c9d394aaf062e86a6c9d21,
-        type: 3}
-      propertyPath: footstepVolume
-      value: 0.075
-      objectReference: {fileID: 0}
-    - target: {fileID: 486876104978767569, guid: 5c4b202269c9d394aaf062e86a6c9d21,
-        type: 3}
-      propertyPath: climbVolume
-      value: 0.075
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c4b202269c9d394aaf062e86a6c9d21, type: 3}
@@ -492,6 +488,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 59.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 5631165066535874572, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cf09d8691e5d0047a80abda93b35bba, type: 3}
@@ -883,6 +884,26 @@ PrefabInstance:
       propertyPath: treebranchParent
       value: 
       objectReference: {fileID: 1903750360}
+    - target: {fileID: 2281748732984214183, guid: 0f50983f6b5985243b8e264399ae4ca5,
+        type: 3}
+      propertyPath: snakeHouseExitPrompt
+      value: 
+      objectReference: {fileID: 334063021}
+    - target: {fileID: 5687842412516447687, guid: 0f50983f6b5985243b8e264399ae4ca5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.656059
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687842412516447687, guid: 0f50983f6b5985243b8e264399ae4ca5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.75470966
+      objectReference: {fileID: 0}
+    - target: {fileID: 5687842412516447687, guid: 0f50983f6b5985243b8e264399ae4ca5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -82
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f50983f6b5985243b8e264399ae4ca5, type: 3}
 --- !u!4 &3692208045202501704 stripped
