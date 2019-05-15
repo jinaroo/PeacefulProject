@@ -223,12 +223,12 @@ PrefabInstance:
     - target: {fileID: 486876104978767574, guid: 5c4b202269c9d394aaf062e86a6c9d21,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 127.3
+      value: -6.78
       objectReference: {fileID: 0}
     - target: {fileID: 486876104978767574, guid: 5c4b202269c9d394aaf062e86a6c9d21,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 118.5
+      value: -32.84
       objectReference: {fileID: 0}
     - target: {fileID: 486876104978767574, guid: 5c4b202269c9d394aaf062e86a6c9d21,
         type: 3}
@@ -275,6 +275,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 486876104978767569, guid: 5c4b202269c9d394aaf062e86a6c9d21,
+        type: 3}
+      propertyPath: footstepVolume
+      value: 0.075
+      objectReference: {fileID: 0}
+    - target: {fileID: 486876104978767569, guid: 5c4b202269c9d394aaf062e86a6c9d21,
+        type: 3}
+      propertyPath: climbVolume
+      value: 0.075
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c4b202269c9d394aaf062e86a6c9d21, type: 3}
 --- !u!1001 &719334342
@@ -292,12 +302,12 @@ PrefabInstance:
     - target: {fileID: 488588372839799167, guid: 9264d8c506661794788aa3d1a87539be,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 127.08001
+      value: -6.78
       objectReference: {fileID: 0}
     - target: {fileID: 488588372839799167, guid: 9264d8c506661794788aa3d1a87539be,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 119.939995
+      value: -32.84
       objectReference: {fileID: 0}
     - target: {fileID: 488588372839799167, guid: 9264d8c506661794788aa3d1a87539be,
         type: 3}
@@ -743,11 +753,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6408139319728870650, guid: 3d18a36fe7239944d991e079fddd46ba,
-        type: 3}
-      propertyPath: rescueTeleportDelay
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2618094200739017311, guid: 3d18a36fe7239944d991e079fddd46ba,
         type: 3}
       propertyPath: oldBow
@@ -763,6 +768,16 @@ PrefabInstance:
       propertyPath: dogHouseExit
       value: 
       objectReference: {fileID: 121264672139038704}
+    - target: {fileID: 1908190160452466739, guid: 3d18a36fe7239944d991e079fddd46ba,
+        type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618094199445148603, guid: 3d18a36fe7239944d991e079fddd46ba,
+        type: 3}
+      propertyPath: m_SelectedEditorRenderState
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d18a36fe7239944d991e079fddd46ba, type: 3}
 --- !u!4 &2618094200739017312 stripped
