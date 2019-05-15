@@ -83,6 +83,10 @@ public class Controller2D : RaycastController {
 				maxSlopeAngle = maxSlopeAngleWalking;
 			}
 		}
+		else
+		{
+			maxSlopeAngle = maxSlopeAngleWalking;
+		}
 
 
 

@@ -223,12 +223,12 @@ PrefabInstance:
     - target: {fileID: 486876104978767574, guid: 5c4b202269c9d394aaf062e86a6c9d21,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.6
+      value: 83.2
       objectReference: {fileID: 0}
     - target: {fileID: 486876104978767574, guid: 5c4b202269c9d394aaf062e86a6c9d21,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 119
+      value: 3.3
       objectReference: {fileID: 0}
     - target: {fileID: 486876104978767574, guid: 5c4b202269c9d394aaf062e86a6c9d21,
         type: 3}
@@ -292,12 +292,12 @@ PrefabInstance:
     - target: {fileID: 488588372839799167, guid: 9264d8c506661794788aa3d1a87539be,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.819992
+      value: 82.98
       objectReference: {fileID: 0}
     - target: {fileID: 488588372839799167, guid: 9264d8c506661794788aa3d1a87539be,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 120.439995
+      value: 4.739994
       objectReference: {fileID: 0}
     - target: {fileID: 488588372839799167, guid: 9264d8c506661794788aa3d1a87539be,
         type: 3}
@@ -600,6 +600,19 @@ PrefabInstance:
         type: 3}
       propertyPath: rescueTeleportDelay
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 358825555, guid: db8c50b01f2b7284c8b0b715d65029ac, type: 3}
+      propertyPath: m_TagString
+      value: Through
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569876253, guid: db8c50b01f2b7284c8b0b715d65029ac, type: 3}
+      propertyPath: m_TagString
+      value: Through
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926994509142959454, guid: db8c50b01f2b7284c8b0b715d65029ac,
+        type: 3}
+      propertyPath: m_TagString
+      value: Through
       objectReference: {fileID: 0}
     - target: {fileID: 8415126483010873802, guid: db8c50b01f2b7284c8b0b715d65029ac,
         type: 3}
