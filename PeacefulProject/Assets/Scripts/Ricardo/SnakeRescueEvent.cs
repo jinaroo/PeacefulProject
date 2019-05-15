@@ -11,6 +11,10 @@ public class SnakeRescueEvent : MonoBehaviour
     
     public Prompt prompt1;
     public Prompt prompt2;
+
+    public GameObject branchCoverObj;
+
+    public GameObject treebranchParent;
     
     public void TriggerSewerEvent()
     {
@@ -20,5 +24,8 @@ public class SnakeRescueEvent : MonoBehaviour
 
         prompt1.gameObject.SetActive(true);
         prompt2.gameObject.SetActive(true);
+
+        branchCoverObj.SetActive(false);
+        treebranchParent.SetActive(true);
     }
 }

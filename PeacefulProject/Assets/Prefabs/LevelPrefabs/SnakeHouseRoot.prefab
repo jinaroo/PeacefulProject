@@ -9538,6 +9538,16 @@ PrefabInstance:
       propertyPath: prompt2
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3692208045202501703, guid: 45ea268502358604892a1cb0b8b6e4d5,
+        type: 3}
+      propertyPath: branchCoverObj
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3692208045202501703, guid: 45ea268502358604892a1cb0b8b6e4d5,
+        type: 3}
+      propertyPath: treebranchParent
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5255285568483224708, guid: 45ea268502358604892a1cb0b8b6e4d5,
         type: 3}
       propertyPath: collectTransforms.Array.data[0]
