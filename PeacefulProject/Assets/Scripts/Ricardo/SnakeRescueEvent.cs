@@ -17,8 +17,8 @@ public class SnakeRescueEvent : MonoBehaviour
         tunnelGrateTriggerObject.enabled = true;
         sewerGrateTriggerObject.enabled = true;
         //sewerTopBranch.SetActive(false);
-        
-        prompt1.enabled = true;
-        prompt2.enabled = true;
+
+        prompt1.gameObject.SetActive(true);
+        prompt2.gameObject.SetActive(true);
     }
 }

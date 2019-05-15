@@ -124,6 +124,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OutdoorLevelRoot
       objectReference: {fileID: 0}
+    - target: {fileID: 121264672403893882, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 121264672403893881, guid: 2cf09d8691e5d0047a80abda93b35bba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -179,16 +184,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 385393229641358447, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3001598402869645677, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8920855570601935307, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2863887998148258060, guid: 2cf09d8691e5d0047a80abda93b35bba,
         type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 3cde896162e8b46bfb150155e73ce777, type: 2}
+    - target: {fileID: 4321509722453275785, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5708689901172237509, guid: 2cf09d8691e5d0047a80abda93b35bba,
         type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 187ed4ffdfa764855a50d3a74108749e, type: 2}
+    - target: {fileID: 6533395072503138858, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2526166013691094104, guid: 2cf09d8691e5d0047a80abda93b35bba,
         type: 3}
       propertyPath: m_Controller
@@ -204,6 +234,61 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: bfd2f581db0ba4fd5b528f3d643e1546, type: 2}
+    - target: {fileID: 7338332613775064713, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338332613775064713, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_SelectedEditorRenderState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338332613775064713, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 6445941669437026433, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3945614314451798844, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1044927743105652206, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2530676799891558104, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695590786169057768, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695590786169057768, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_SelectedEditorRenderState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586249012385114314, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6607635070653935687, guid: 2cf09d8691e5d0047a80abda93b35bba,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cf09d8691e5d0047a80abda93b35bba, type: 3}
 --- !u!1001 &615225918

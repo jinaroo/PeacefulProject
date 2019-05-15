@@ -15,7 +15,7 @@ public class BirdRescueEvent : MonoBehaviour
         tunnelPipeTriggerObject.enabled = true;
         sewerPipeTriggerObject.enabled = true;
 
-        prompt1.enabled = true;
-        prompt2.enabled = true;
+        prompt1.gameObject.SetActive(true);
+        prompt2.gameObject.SetActive(true);
     }
 }

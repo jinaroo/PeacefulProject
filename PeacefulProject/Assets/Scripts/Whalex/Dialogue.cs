@@ -81,7 +81,6 @@ namespace Whalex
                             else
                             {
                                 UpdateStatus(NpcTalkStatus.P3_QUEST);
-                                
                             }
                         }
                         else
@@ -102,7 +101,7 @@ namespace Whalex
                                     Invoke("FlipPrompt", 6f);
                                     break;
                                 default:
-                                    Debug.Log("this dialogue has no rescue event!");
+                                    //Debug.Log("this dialogue has no rescue event!");
                                     break;
                             }
                         }
@@ -113,7 +112,7 @@ namespace Whalex
                         break;
                         
                     default:
-                        print("No behavior specified for this talking status!");
+                        //print("No behavior specified for this talking status!");
                         break;
                 }
             }
@@ -171,6 +170,7 @@ namespace Whalex
                     {
                         hasBeenRescued = true;
                         collectorObj.SetActive(true);
+                        pickupPromptObj.GetComponent<Prompt>().ShrinkPromptTemporary();
                         if(masterSceneManager)
                             Invoke("Teleport", rescueTeleportDelay);
                     }
@@ -212,6 +212,7 @@ namespace Whalex
             {
                 questComplete = true;
                 transform.parent.GetComponentInChildren<Prompt>().enabled = false;
+                pickupPromptObj.GetComponent<Prompt>().DeactivatePrompt();
                 UpdateStatus(NpcTalkStatus.P2_HAPPY);
                 
                 if(charType == CharacterType.SNAKE)

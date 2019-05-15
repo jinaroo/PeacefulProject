@@ -44,8 +44,10 @@ public class Collector : MonoBehaviour
                             SnapItem(other.gameObject, collectTransforms[numItemsCollected]);
                             numItemsCollected++;
                             if (numItemsCollected == 3)
+                            {
                                 targetDialogue.numPhasesComplete++;
-                            targetDialogue.SwitchToNextIconSequence();
+                                targetDialogue.SwitchToNextIconSequence();
+                            }
                         } else if (other.CompareTag("SnakeLighter") && !collectStatus[3])
                         {
                             if (targetDialogue.numPhasesComplete > 0)
